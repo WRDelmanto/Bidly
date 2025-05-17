@@ -1,7 +1,6 @@
 ## Project Info
 #### # ====================================
-#### # App Name:		Bidly
-#### # Description: Bidly – A Minimalist Silent Auction Mobile App
+#### # App Name:		Bidly – A Minimalist Silent Auction Mobile App
 #### # Authors:
 - **Fabricio Gardin**  
   - ID: 300380186  
