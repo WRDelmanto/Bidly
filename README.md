@@ -12,3 +12,40 @@
 
 ## About
 Bidly is a cross-platform mobile application built with React Native, designed for silent auctions. The app enables sellers to list items with images and starting bids, while bidders can browse, place bids, and receive real-time notifications—all within a clean, intuitive interface.
+
+## Initial Setup (Windows)
+
+To start developing this app, you need to follow these steps:
+
+1. Download and install
+- [Visual Studio Code](https://code.visualstudio.com/download)
+- [GitHub Desktop](https://desktop.github.com/)
+- [Node.js](https://nodejs.org/en/)
+
+2. Clone the existing repository Bidly
+
+## Usage
+
+### Setting up the Environment (Windows)
+
+3. Open Command Prompt (cmd) as administrator
+4. Navigate to your project directory:
+   ```
+   cd path\to\Bidly
+   ```
+5. Install all modules:
+   ```
+   npm install
+   ```
+6. Initialize the platform:
+   ```
+   npm run android
+   ```
+
+## Technical Details
+
+### Dependencies
+- [Expo](https://expo.dev/)
+- [Expo Status Bar](https://docs.expo.dev/versions/latest/sdk/status-bar/)
+- [React](https://www.npmjs.com/package/react)
+- [React Native](https://reactnative.dev/)
