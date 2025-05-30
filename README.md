@@ -40,7 +40,7 @@ To start developing this app, you need to follow these steps:
    ```
 6. Initialize the app:
    ```
-   npx expo start --tunnel
+   npm run bidly
    ```
 7. Finally, scan the QR Code with Expo Go app:
 
