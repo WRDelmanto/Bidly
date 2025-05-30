@@ -21,6 +21,7 @@ To start developing this app, you need to follow these steps:
 - [Visual Studio Code](https://code.visualstudio.com/download)
 - [GitHub Desktop](https://desktop.github.com/)
 - [Node.js](https://nodejs.org/en/)
+- [Expo Go](https://play.google.com/store/apps/details?id=host.exp.exponent)
 
 2. Clone the existing repository Bidly
 
@@ -37,10 +38,11 @@ To start developing this app, you need to follow these steps:
    ```
    npm install
    ```
-6. Initialize the platform:
+6. Initialize the app:
    ```
-   npm run android
+   npx expo start --tunnel
    ```
+7. Finally, scan the QR Code with Expo Go app:
 
 ## Technical Details
 
