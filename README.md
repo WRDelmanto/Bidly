@@ -42,7 +42,7 @@ To start developing this app, you need to follow these steps:
    ```
    npm run bidly
    ```
-7. Finally, scan the QR Code with Expo Go app:
+7. Finally, scan the QR Code with Expo Go app or press "a" to open you emulator:
 
 ## Technical Details
 
@@ -51,3 +51,4 @@ To start developing this app, you need to follow these steps:
 - [Expo Status Bar](https://docs.expo.dev/versions/latest/sdk/status-bar/)
 - [React](https://www.npmjs.com/package/react)
 - [React Native](https://reactnative.dev/)
+- [React Native Vector Icons](https://www.npmjs.com/package/react-native-vector-icons)
