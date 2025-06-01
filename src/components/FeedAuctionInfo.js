@@ -1,9 +1,9 @@
 import { StyleSheet, View, Text } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const FeedInfoLeft = () => {
+const FeedAuctionInfo = () => {
     return (
-        <View style={styles.feedInfoLeft}>
+        <View style={styles.feedAuctionInfo}>
             <Icon name="account-circle"
                 size={30}
                 onPress={() => console.log('Profile clicked')}
@@ -16,14 +16,14 @@ const FeedInfoLeft = () => {
                     size={30}
                     onPress={() => console.log('Home clicked')}
                 />
-                <Text style={styles.duedateText}>Duedate</Text>
+                <Text>Duedate</Text>
             </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    feedInfoLeft: {
+    feedAuctionInfo: {
         position: "absolute",
         bottom: 60,
         left: 0,
@@ -40,10 +40,8 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: 'row',
         alignItems: 'center',
-    },
-    duedateText: {
-        marginStart: 6
+        gap: 6
     }
 });
 
-export default FeedInfoLeft;
+export default FeedAuctionInfo;

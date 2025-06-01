@@ -4,16 +4,19 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 const NavBar = () => {
   return (
     <View style={styles.navbar}>
-      <Icon name="home"
+      <Icon
+        name="home"
         size={30}
         onPress={() => console.log('Home clicked')}
       />
       <Icon
-        name="search" size={30}
+        name="search"
+        size={30}
         onPress={() => console.log('Search clicked')}
       />
       <Icon
-        name="add-box" size={30}
+        name="add-box"
+        size={30}
         onPress={() => console.log('Add Auction clicked')}
       />
       <Icon name="gavel"
@@ -39,7 +42,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingBottom: 20,
     alignItems: "center",
     paddingHorizontal: 20
   },

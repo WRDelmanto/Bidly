@@ -1,12 +1,12 @@
 import { View, Image, StyleSheet } from "react-native";
 import NavBar from "../components/Navbar";
-import FeedInfoLeft from "../components/FeedInfoLeft";
+import FeedAuctionInfo from "../components/FeedAuctionInfo";
 
 const Feed = () => {
   return (
     <View style={styles.container}>
       <Image style={styles.mainImage} />
-      <FeedInfoLeft />
+      <FeedAuctionInfo />
       <NavBar />
     </View>
   );
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   mainImage: {
     height: "100%",
-    width: "100%",
+    width: "100%"
   }
 });
 
