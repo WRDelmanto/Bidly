@@ -10,13 +10,11 @@ const Auction = () => {
         <View style={styles.subStatusBar}>
           <Icon
             name="arrow-back"
-            style={styles.backButton}
             size={30}
             onPress={() => console.log('Arrow back clicked')}
           />
           <Icon
             name="delete"
-            style={styles.deleteButton}
             size={30}
             onPress={() => console.log('Delete clicked')}
           />
@@ -40,7 +38,6 @@ const Auction = () => {
       <View style={styles.bid}>
         <Text>Place Bid</Text>
         <TextInput
-          style={styles.input}
           placeholder="$0.00"
           placeholderTextColor="#888"
           onChangeText={(text) => console.log(text)}
