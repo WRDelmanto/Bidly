@@ -4,21 +4,23 @@ import { Colors } from "../constants/colors";
 
 const Auction = () => {
   return (
-    <View style={styles.imageContainer}>
-      <Image style={styles.mainImage} />
-      <View style={styles.subStatusBar}>
-        <Icon
-          name="arrow-back"
-          style={styles.backButton}
-          size={30}
-          onPress={() => console.log('Arrow back clicked')}
-        />
-        <Icon
-          name="delete"
-          style={styles.deleteButton}
-          size={30}
-          onPress={() => console.log('Delete clicked')}
-        />
+    <View>
+      <View style={styles.imageContainer}>
+        <Image style={styles.mainImage} />
+        <View style={styles.subStatusBar}>
+          <Icon
+            name="arrow-back"
+            style={styles.backButton}
+            size={30}
+            onPress={() => console.log('Arrow back clicked')}
+          />
+          <Icon
+            name="delete"
+            style={styles.deleteButton}
+            size={30}
+            onPress={() => console.log('Delete clicked')}
+          />
+        </View>
       </View>
 
       <View style={styles.auctionInfo}>
@@ -51,13 +53,16 @@ const Auction = () => {
           <Text style={styles.bidButtonText}>Place Bid</Text>
         </TouchableOpacity>
       </View>
+
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   imageContainer: {
-    position: "relative"
+    position: "relative",
+    borderBottomWidth: 1,
+    borderBottomColor: '#000000'
   },
   subStatusBar: {
     position: "absolute",
@@ -70,7 +75,8 @@ const styles = StyleSheet.create({
   mainImage: {
     width: "100%",
     height: "350",
-    margintop: 20
+    marginTop: 20,
+
   },
   auctionInfo: {
     display: "flex",
