@@ -1,11 +1,12 @@
 // App.js
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { StyleSheet } from 'react-native';
-import Feed from './src/screens/Feed'
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet } from "react-native";
+import Feed from "./src/screens/Feed";
+import SignIn from "./src/screens/SignIn";
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
+    <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
       <Feed />
     </SafeAreaView>
   );
@@ -13,6 +14,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
   safeArea: {
-    flex: 1
+    flex: 1,
   },
 });

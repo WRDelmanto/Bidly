@@ -1,5 +1,12 @@
-import { Text, View, StyleSheet, TextInput, Button } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { Image } from "react-native";
 
 const SignIn = () => {
   return (
@@ -32,19 +39,24 @@ const SignIn = () => {
       <Text style={styles.forgot}>Forgot Password ?</Text>
 
       <View>
-        <Button title="Login" color="blue" onPress={() => {}} />
+        <TouchableOpacity style={styles.btnLogin} onPress={() => {}}>
+          <Text style={styles.btnLoginText}>Login</Text>
+        </TouchableOpacity>
+        <Text style={styles.newAccount}>
+          Don't have account? <Text> Sign Up</Text>
+        </Text>
+
+        {/* <Icon name="gavel" size={100} color="blue" style={styles.bidIcon} /> */}
+        <Image source={require("../../assets/bid3.jpg")} style={styles.image} />
+
+        {/* <Button
+          style={styles.btnLogin}
+          title="Login"
+          color="blue"
+          onPress={() => {}}
+        /> */}
       </View>
     </View>
-
-    // <Text
-    // style={{
-    //   textAlign: "center",
-    //   textAlignVertical: "center",
-    //   flex: 1,
-    // }}
-    // >
-    //   This is the Sign In Screen
-    // </Text>
   );
 };
 
@@ -52,7 +64,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    margin: 20,
+    marginRight: 20,
+    marginLeft: 20,
     height: "100%",
     width: "100%",
   },
@@ -83,6 +96,39 @@ const styles = StyleSheet.create({
     textAlign: "right",
     marginEnd: 50,
     color: "blue",
+  },
+  btnLogin: {
+    backgroundColor: "blue",
+    color: "white",
+    padding: 10,
+    borderRadius: 15,
+    alignItems: "center",
+    marginTop: 30,
+    width: "90%",
+  },
+  btnLoginText: {
+    color: "white",
+    textAlign: "center",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  newAccount: {
+    textAlign: "center",
+    marginTop: 40,
+    color: "blue",
+  },
+  bidIcon: {
+    alignSelf: "center",
+    marginTop: 50,
+    marginBottom: 20,
+  },
+  image: {
+    width: 250,
+    height: 180,
+    borderRadius: 10,
+    marginTop: 25,
+    marginEnd: 30,
+    alignSelf: "center",
   },
 });
 export default SignIn;
