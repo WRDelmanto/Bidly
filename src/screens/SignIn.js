@@ -11,6 +11,10 @@ import { Image } from "react-native";
 const SignIn = () => {
   return (
     <View style={styles.container}>
+      <Image
+        source={require("../../assets/lamp.jpg")}
+        style={styles.imageLamp}
+      />
       <View style={styles.welcome}>
         <Text style={styles.welcome}>Hello!</Text>
         <Text>Welcome to Bidly!!</Text>
@@ -46,8 +50,8 @@ const SignIn = () => {
           Don't have account? <Text> Sign Up</Text>
         </Text>
 
-        {/* <Icon name="gavel" size={100} color="blue" style={styles.bidIcon} /> */}
-        <Image source={require("../../assets/bid3.jpg")} style={styles.image} />
+        <Icon name="gavel" size={150} color="black" style={styles.bidIcon} />
+        {/* <Image source={require("../../assets/bid3.jpg")} style={styles.image} /> */}
 
         {/* <Button
           style={styles.btnLogin}
@@ -71,13 +75,13 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-
+    marginTop: 20,
     marginVertical: 50,
     color: "blue",
     fontWeight: "bold",
   },
   welcome: {
-    marginTop: 40,
+    marginTop: 15,
     fontSize: 30,
   },
   textInput: { padding: 15 },
@@ -129,6 +133,13 @@ const styles = StyleSheet.create({
     marginTop: 25,
     marginEnd: 30,
     alignSelf: "center",
+  },
+  imageLamp: {
+    width: 70,
+    height: 70,
+    borderRadius: 10,
+    marginTop: 25,
+    alignSelf: "left",
   },
 });
 export default SignIn;

@@ -11,8 +11,15 @@ import { Image } from "react-native";
 const SignUp = () => {
   return (
     <View style={styles.container}>
+      <Image
+        source={require("../../assets/lamp.jpg")}
+        style={styles.imageLamp}
+      />
       {/* Form Sign Up*/}
-
+      <View style={styles.backText}>
+        <Icon name="arrow-left" size={24} color="blue" />
+        <Text style={styles.backLogin}>BACK TO LOGIN</Text>
+      </View>
       <Text style={styles.text}>Sign UP </Text>
       <View style={styles.inputContainer}>
         <Icon name="account" size={24} color="blue" />
@@ -43,11 +50,9 @@ const SignUp = () => {
         />
       </View>
 
-      <Text style={styles.forgot}>Forgot Password ?</Text>
-
       <View>
-        <TouchableOpacity style={styles.btnLogin} onPress={() => {}}>
-          <Text style={styles.btnLoginText}>Sign Up</Text>
+        <TouchableOpacity style={styles.btnSignUp} onPress={() => {}}>
+          <Text style={styles.btnSignUpText}>Sign Up</Text>
         </TouchableOpacity>
 
         {/* <Button
@@ -77,10 +82,7 @@ const styles = StyleSheet.create({
     color: "blue",
     fontWeight: "bold",
   },
-  welcome: {
-    marginTop: 40,
-    fontSize: 30,
-  },
+
   textInput: { padding: 15 },
   inputContainer: {
     flexDirection: "row",
@@ -93,12 +95,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 10,
   },
-  forgot: {
-    textAlign: "right",
-    marginEnd: 50,
+  backLogin: {
+    textAlign: "left",
+    fontSize: 16,
     color: "blue",
+    fontWeight: "bold",
+    marginLeft: 10,
   },
-  btnLogin: {
+  btnSignUp: {
     backgroundColor: "blue",
     color: "white",
     padding: 10,
@@ -107,7 +111,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     width: "90%",
   },
-  btnLoginText: {
+  btnSignUpText: {
     color: "white",
     textAlign: "center",
     fontSize: 18,
@@ -118,18 +122,18 @@ const styles = StyleSheet.create({
     marginTop: 40,
     color: "blue",
   },
-  bidIcon: {
-    alignSelf: "center",
-    marginTop: 50,
-    marginBottom: 20,
+  backText: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 40,
   },
-  image: {
-    width: 250,
-    height: 180,
+  imageLamp: {
+    width: 70,
+    height: 70,
     borderRadius: 10,
     marginTop: 25,
     marginEnd: 30,
-    alignSelf: "center",
+    alignSelf: "left",
   },
 });
 export default SignUp;
