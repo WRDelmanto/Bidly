@@ -4,7 +4,7 @@ import { Colors } from "../constants/colors";
 
 const Auction = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image style={styles.mainImage} />
         <View style={styles.subStatusBar}>
@@ -13,36 +13,19 @@ const Auction = () => {
             size={30}
             onPress={() => console.log('Arrow back clicked')}
           />
-          <Icon
-            name="delete"
-            size={30}
-            onPress={() => console.log('Delete clicked')}
-          />
         </View>
       </View>
-
       <View style={styles.auctionInfo}>
         <Text>Title</Text>
         <Text>Description</Text>
-        <View style={styles.dueDateBid}>
-          <View style={styles.duedate}>
-            <Icon name="event"
-              size={30}
-              onPress={() => console.log('Home clicked')}
-            />
-            <Text>Duedate</Text>
-          </View>
-          <Text>Bid</Text>
-        </View>
       </View>
-      <View style={styles.bid}>
-        <Text>Place Bid</Text>
+      <View style={styles.navbar}>
         <TextInput
+          style={styles.bidInput}
           placeholder="$0.00"
           placeholderTextColor="#888"
           onChangeText={(text) => console.log(text)}
         />
-
         <TouchableOpacity
           style={styles.bidButton}
           onPress={() => console.log('Place bid clicked')}
@@ -50,12 +33,14 @@ const Auction = () => {
           <Text style={styles.bidButtonText}>Place Bid</Text>
         </TouchableOpacity>
       </View>
-
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   imageContainer: {
     position: "relative",
     borderBottomWidth: 1,
@@ -64,10 +49,7 @@ const styles = StyleSheet.create({
   subStatusBar: {
     position: "absolute",
     top: 20,
-    left: 20,
-    right: 20,
-    flexDirection: "row",
-    justifyContent: "space-between"
+    left: 20
   },
   mainImage: {
     width: "100%",
@@ -84,27 +66,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     gap: 8
   },
-  dueDateBid: {
+  navbar: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between"
-  },
-  duedate: {
-    display: "flex",
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6
-  },
-  bid: {
-    display: "flex",
-    flexDirection: "column",
+    justifyContent: "space-between",
     marginTop: 20,
-    marginHorizontal: 20
+    paddingHorizontal: 20
   },
   bidButton: {
     backgroundColor: Colors.PRIMARY,
     paddingVertical: 12,
+    width: "65%",
     borderRadius: 8,
     alignItems: 'center'
   },
@@ -112,6 +88,17 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold'
+  },
+  bidInput: {
+    width: "30%",
+    borderWidth: 1,
+    borderColor: "#000000",
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center'
   }
 });
 
