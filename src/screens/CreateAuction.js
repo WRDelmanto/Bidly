@@ -52,24 +52,6 @@ const CreateAuction = () => {
             multiline={true}
           />
         </View>
-        <View>
-          <Text style={styles.label}>Duedate</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="31 Jun, 2025"
-            placeholderTextColor="#888"
-            onChangeText={(text) => console.log(text)}
-          />
-        </View>
-        <View>
-          <Text style={styles.label}>Starting bid</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="$0.00"
-            placeholderTextColor="#888"
-            onChangeText={(text) => console.log(text)}
-          />
-        </View>
       </View>
     </View>
   );
