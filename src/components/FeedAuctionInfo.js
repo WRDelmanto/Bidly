@@ -11,13 +11,6 @@ const FeedAuctionInfo = () => {
             <Text>Bid</Text>
             <Text>Title</Text>
             <Text>Description</Text>
-            <View style={styles.duedate}>
-                <Icon name="event"
-                    size={30}
-                    onPress={() => console.log('Home clicked')}
-                />
-                <Text>Duedate</Text>
-            </View>
         </View>
     );
 };
@@ -35,12 +28,6 @@ const styles = StyleSheet.create({
         alignItems: "start",
         paddingHorizontal: 20,
         gap: 8
-    },
-    duedate: {
-        display: "flex",
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 6
     }
 });
 
