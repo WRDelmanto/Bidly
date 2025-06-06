@@ -4,11 +4,22 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Pressable,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Image } from "react-native";
+import { useState } from "react";
 
 const SignUp = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleSignUp = () => {
+    console.log("Sign Up");
+  };
+
   return (
     <View style={styles.container}>
       <Image
@@ -20,10 +31,15 @@ const SignUp = () => {
         <Icon name="arrow-left" size={24} color="blue" />
         <Text style={styles.backLogin}>BACK TO LOGIN</Text>
       </View>
-      <Text style={styles.text}>Sign UP </Text>
+      <Text style={styles.text}>Sign UP</Text>
       <View style={styles.inputContainer}>
         <Icon name="account" size={24} color="blue" />
-        <TextInput style={styles.textInput} placeholder="Name" />
+        <TextInput
+          style={styles.textInput}
+          placeholder="Name"
+          value={name}
+          onChangeText={setName}
+        />
       </View>
       <View style={styles.inputContainer}>
         <Icon name="email-outline" size={24} color="blue" />
@@ -31,6 +47,8 @@ const SignUp = () => {
           style={styles.textInput}
           placeholder="Email"
           keyboardType="email-address"
+          value={email}
+          onChangeText={setEmail}
         />
       </View>
       <View style={styles.inputContainer}>
@@ -39,6 +57,8 @@ const SignUp = () => {
           style={styles.textInput}
           placeholder="Password"
           secureTextEntry
+          value={password}
+          onChangeText={setPassword}
         />
       </View>
       <View style={styles.inputContainer}>
@@ -47,20 +67,18 @@ const SignUp = () => {
           style={styles.textInput}
           placeholder="Confirm Password"
           secureTextEntry
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
         />
       </View>
 
       <View>
-        <TouchableOpacity style={styles.btnSignUp} onPress={() => {}}>
+        <Pressable
+          style={styles.btnSignUp}
+          onPress={handleSignUp}
+        >
           <Text style={styles.btnSignUpText}>Sign Up</Text>
-        </TouchableOpacity>
-
-        {/* <Button
-           style={styles.btnLogin}
-           title="Login"
-           color="blue"
-           onPress={() => {}}
-         /> */}
+        </Pressable>
       </View>
     </View>
   );

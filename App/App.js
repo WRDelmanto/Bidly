@@ -1,11 +1,12 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet } from "react-native";
-import Welcome from "./src/screens/Welcome";
+import SignUp from "./src/screens/SignUp";
+import SignIn from "./src/screens/SignIn";
 
 export default function App() {
   return (
     <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
-      <Welcome />
+      <SignUp />
     </SafeAreaView>
   );
 }

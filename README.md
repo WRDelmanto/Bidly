@@ -32,7 +32,7 @@ To start developing this app, you need to follow these steps:
 3. Open Command Prompt (cmd) as administrator
 4. Navigate to your project directory:
    ```
-   cd path\to\Bidly
+   cd path\to\Bidly\App
    ```
 5. Install all modules:
    ```
