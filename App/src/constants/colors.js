@@ -1,5 +1,5 @@
-const Colors = {
+const AppColors = {
   PRIMARY: "#0096FF",
 };
 
-export { Colors };
+export { AppColors };

@@ -8,7 +8,6 @@ import {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Image } from "react-native";
 import { Styles } from "../constants/styles";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
 const SignIn = () => {
   return (
@@ -45,7 +44,7 @@ const SignIn = () => {
       <Text style={Styles.forgot}>Forgot Password ?</Text>
 
       <View>
-        <TouchableOpacity style={Styles.button} onPress={() => {}}>
+        <TouchableOpacity style={Styles.button} onPress={() => { }}>
           <Text style={Styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <Text style={Styles.newAccount}>

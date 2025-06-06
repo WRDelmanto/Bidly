@@ -8,7 +8,7 @@ import {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Image } from "react-native";
 import { Styles } from "../constants/styles";
-import { Colors } from "../constants/colors.js";
+import { AppColors } from "../constants/colors.js";
 
 const ForgotPassword = () => {
   return (
@@ -19,7 +19,7 @@ const ForgotPassword = () => {
       />
       {/* Form Sign Up*/}
       <View style={Styles.backText}>
-        <Icon name="arrow-left" size={24} color={Colors.PRIMARY} />
+        <Icon name="arrow-left" size={24} color={AppColors.PRIMARY} />
         <Text style={Styles.backLogin}>Back To Login</Text>
       </View>
       <Text style={Styles.title}>Forgot Password</Text>

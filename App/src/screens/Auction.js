@@ -1,6 +1,6 @@
 import { Text, Image, View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Colors } from "../constants/colors";
+import { AppColors } from "../constants/colors";
 
 const Auction = () => {
   return (
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20
   },
   bidButton: {
-    backgroundColor: Colors.PRIMARY,
+    backgroundColor: AppColors.PRIMARY,
     paddingVertical: 12,
     width: "65%",
     borderRadius: 8,
