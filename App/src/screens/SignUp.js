@@ -31,9 +31,9 @@ const SignUp = () => {
       {/* Form Sign Up*/}
       <View style={Styles.backText}>
         <Icon name="arrow-left" size={24} color={Colors.PRIMARY} />
-        <Text style={Styles.backLogin}>BACK TO LOGIN</Text>
+        <Text style={Styles.backLogin}>Back To Login</Text>
       </View>
-      <Text style={Styles.text}>Sign UP</Text>
+      <Text style={Styles.title}>Sign UP</Text>
       <View style={Styles.inputContainer}>
         <Icon name="account" size={24} color="blue" />
         <TextInput

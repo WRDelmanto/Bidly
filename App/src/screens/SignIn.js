@@ -18,13 +18,13 @@ const SignIn = () => {
         style={Styles.imageLamp}
       />
       <View style={Styles.welcome}>
-        <Text style={Styles.welcome}>Hello!</Text>
-        <Text>Welcome to Bidly!!</Text>
+        <Text style={Styles.title}>Hello!</Text>
+        <Text style={Styles.subTitle}>Welcome to Bidly!!</Text>
       </View>
 
       {/* Form login*/}
 
-      <Text style={Styles.text}>Sign In </Text>
+      <Text style={Styles.title}>Sign In </Text>
       <View style={Styles.inputContainer}>
         <Icon name="email-outline" size={24} color="blue" />
         <TextInput

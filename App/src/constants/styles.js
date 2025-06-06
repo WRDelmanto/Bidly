@@ -10,11 +10,25 @@ const Styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-  text: {
-    fontSize: 20,
-    marginVertical: 50,
+  title: {
+    fontSize: 30,
+    marginTop: 50,
     color: "Black",
     fontWeight: "bold",
+  },
+  subTitle: {
+    fontSize: 20,
+    marginTop: 10,
+
+    color: "Black",
+    fontWeight: "bold",
+  },
+
+  text: {
+    fontSize: 15,
+    marginBottom: 0,
+    marginTop: 0,
+    color: "Black",
   },
 
   textInput: { padding: 15 },
@@ -25,7 +39,8 @@ const Styles = StyleSheet.create({
     width: "90%",
     borderColor: "gray",
     borderWidth: 1,
-    marginBottom: 20,
+
+    marginTop: 20,
     paddingHorizontal: 10,
     borderRadius: 10,
   },
@@ -55,6 +70,7 @@ const Styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 40,
     color: Colors.PRIMARY,
+    fontSize: 20,
   },
   backText: {
     flexDirection: "row",
@@ -63,15 +79,16 @@ const Styles = StyleSheet.create({
   },
   imageLamp: {
     width: 70,
-    height: 70,
+    height: 80,
     borderRadius: 10,
-    marginTop: 25,
+    marginTop: 35,
     marginEnd: 30,
     alignSelf: "left",
   },
   forgot: {
     textAlign: "right",
     marginEnd: 50,
+    marginTop: 15,
     color: Colors.PRIMARY,
   },
 });
