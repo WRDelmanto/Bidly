@@ -8,7 +8,8 @@ import {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Image } from "react-native";
 import { Styles } from "../constants/styles";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import { Colors } from "../constants/colors.js";
+import EditProfile from "./EditProfile.js";
 
 const SignIn = () => {
   return (
@@ -26,7 +27,7 @@ const SignIn = () => {
 
       <Text style={Styles.title}>Sign In </Text>
       <View style={Styles.inputContainer}>
-        <Icon name="email-outline" size={24} color="blue" />
+        <Icon name="email-outline" size={24} color={Colors.PRIMARY} />
         <TextInput
           style={Styles.textInput}
           placeholder="Email"
