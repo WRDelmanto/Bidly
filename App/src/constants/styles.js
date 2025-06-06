@@ -54,7 +54,7 @@ const Styles = StyleSheet.create({
   newAccount: {
     textAlign: "center",
     marginTop: 40,
-    color: "blue",
+    color: Colors.PRIMARY,
   },
   backText: {
     flexDirection: "row",
@@ -68,6 +68,11 @@ const Styles = StyleSheet.create({
     marginTop: 25,
     marginEnd: 30,
     alignSelf: "left",
+  },
+  forgot: {
+    textAlign: "right",
+    marginEnd: 50,
+    color: Colors.PRIMARY,
   },
 });
 

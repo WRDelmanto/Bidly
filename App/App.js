@@ -6,7 +6,7 @@ import SignIn from "./src/screens/SignIn";
 export default function App() {
   return (
     <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
-      <SignUp />
+      <SignIn />
     </SafeAreaView>
   );
 }
