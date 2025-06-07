@@ -43,13 +43,22 @@ To start developing this app, you need to follow these steps:
    npm run bidly
    ```
 7. Finally, scan the QR Code with Expo Go app or press "a" to open you emulator:
+8. To test the backend, navigate to path\to\Bidly\Server
+   ```
+   npm run bidly
+   ```
 
 ## Technical Details
 
-### Dependencies
+### Dependencies (Frontend)
 - [Expo](https://expo.dev/)
 - [Expo Status Bar](https://docs.expo.dev/versions/latest/sdk/status-bar/)
 - [React](https://www.npmjs.com/package/react)
 - [React Native](https://reactnative.dev/)
 - [React Native Vector Icons](https://www.npmjs.com/package/react-native-vector-icons)
 - [React Native Safe Area Context](https://www.npmjs.com/package/react-native-safe-area-context)
+
+### Dependencies (Backend)
+- [dotenv](https://www.npmjs.com/package/dotenv)
+- [express](https://www.npmjs.com/package/express)
+- [mongoose](https://www.npmjs.com/package/mongoose)
