@@ -1,7 +1,7 @@
-import { Colors } from "./colors.js";
+import { AppColors } from "./colors.js";
 import { StyleSheet } from "react-native";
 
-const Styles = StyleSheet.create({
+const AppStyles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
@@ -23,7 +23,6 @@ const Styles = StyleSheet.create({
     color: "Black",
     fontWeight: "bold",
   },
-
   text: {
     fontSize: 15,
     marginBottom: 0,
@@ -47,12 +46,12 @@ const Styles = StyleSheet.create({
   backLogin: {
     textAlign: "left",
     fontSize: 16,
-    color: Colors.PRIMARY,
+    color: AppColors.PRIMARY,
     fontWeight: "bold",
     marginLeft: 10,
   },
   button: {
-    backgroundColor: Colors.PRIMARY,
+    backgroundColor: AppColors.PRIMARY,
     color: "white",
     padding: 10,
     borderRadius: 15,
@@ -69,7 +68,7 @@ const Styles = StyleSheet.create({
   newAccount: {
     textAlign: "center",
     marginTop: 40,
-    color: Colors.PRIMARY,
+    color: AppColors.PRIMARY,
     fontSize: 20,
   },
   backText: {
@@ -108,8 +107,8 @@ const Styles = StyleSheet.create({
     textAlign: "right",
     marginEnd: 50,
     marginTop: 15,
-    color: Colors.PRIMARY,
+    color: AppColors.PRIMARY,
   },
 });
 
-export { Styles };
+export { AppStyles };

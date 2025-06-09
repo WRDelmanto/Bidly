@@ -8,8 +8,6 @@ import {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Image } from "react-native";
 import { Styles } from "../constants/styles";
-import { Colors } from "../constants/colors.js";
-import EditProfile from "./EditProfile.js";
 
 const SignIn = () => {
   return (
