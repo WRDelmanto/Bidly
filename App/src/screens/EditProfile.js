@@ -56,7 +56,7 @@ const EditProfile = () => {
         <Icon name="lock-outline" size={20} color="blue" />
         <TextInput
           style={Styles.textInput}
-          placeholder="Password"
+          placeholder="New Password"
           secureTextEntry
           value={password}
           onChangeText={setPassword}

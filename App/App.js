@@ -5,7 +5,7 @@ import Welcome from "./src/screens/Welcome";
 export default function App() {
   return (
     <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
-      <ForgotPassword />
+      <Welcome />
     </SafeAreaView>
   );
 }
