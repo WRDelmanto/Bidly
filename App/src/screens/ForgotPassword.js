@@ -1,130 +1,69 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, StyleSheet, TextInput, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Image } from "react-native";
-import { Styles } from "../constants/styles";
+import { AppStyles } from "../constants/styles";
 import { AppColors } from "../constants/colors.js";
 
 const ForgotPassword = () => {
   return (
-    <View style={Styles.container}>
+    <View style={AppStyles.container}>
       <Image
         source={require("../../assets/lampOff.jpg")}
-        style={Styles.imageLamp}
+        style={styles.imageContainer}
       />
       {/* Form Sign Up*/}
-      <View style={Styles.backText}>
+      <View style={styles.backLoginContainer}>
         <Icon name="arrow-left" size={24} color={AppColors.PRIMARY} />
-        <Text style={Styles.backLogin}>Back To Login</Text>
+        <Text style={styles.backLogin}>Back To Login</Text>
       </View>
-      <Text style={Styles.title}>Forgot Password</Text>
-      <Text style={Styles.subTitle}>Don't worry, we're here to help!!</Text>
+      <Text style={AppStyles.title}>Forgot Password</Text>
+      <Text style={AppStyles.subTitle}>Don't worry, we're here to help!!</Text>
 
-      <View style={Styles.inputContainer}>
+      <View style={AppStyles.inputContainer}>
         <Icon name="email-outline" size={24} color="blue" />
         <TextInput
-          style={Styles.textInput}
+          style={AppStyles.textInput}
           placeholder="Email"
           keyboardType="email-address"
         />
       </View>
-      <Text style={Styles.text}>Enter your registered email address</Text>
-
+      <Text style={styles.text}>Enter your registered email address</Text>
       <View>
-        <TouchableOpacity style={Styles.button} onPress={() => {}}>
-          <Text style={Styles.buttonText}>Reset Password</Text>
-        </TouchableOpacity>
-
-        {/* <Button
-              style={styles.btnLogin}
-              title="Login"
-              color="blue"
-              onPress={() => {}}
-            /> */}
+        <Pressable style={AppStyles.button} onPress={() => {}}>
+          <Text style={AppStyles.buttonText}>Reset Password</Text>
+        </Pressable>
       </View>
     </View>
   );
 };
 
-// const localStyles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     padding: 20,
-//     marginRight: 20,
-//     marginLeft: 20,
-//     height: "100%",
-//     width: "100%",
-//   },
-//   text: {
-//     fontSize: 20,
-//     marginVertical: 50,
-//     color: "blue",
+const styles = StyleSheet.create({
+  backLoginContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 40,
+  },
+  backLogin: {
+    textAlign: "left",
+    fontSize: 16,
+    color: AppColors.PRIMARY,
+    fontWeight: "bold",
+    marginLeft: 10,
+  },
+  imageContainer: {
+    width: 70,
+    height: 90,
+    borderRadius: 10,
+    marginTop: 25,
+    marginEnd: 30,
+    alignSelf: "left",
+  },
+  text: {
+    fontSize: 15,
 
-//     marginBottom: 40,
-//     marginTop: 0,
-//   },
-// textForgot: {
-//   fontSize: 30,
-//   marginVertical: 50,
-//   color: "blue",
-//   fontWeight: "bold",
-//   marginBottom: 0,
-//   marginTop: 20,
-// },
-
-//   textInput: { padding: 15 },
-//   inputContainer: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     height: 50,
-//     width: "90%",
-//     borderColor: "gray",
-//     borderWidth: 1,
-//     marginBottom: 20,
-//     paddingHorizontal: 10,
-//     borderRadius: 10,
-//   },
-//   backLogin: {
-//     textAlign: "left",
-//     fontSize: 16,
-//     color: "blue",
-//     fontWeight: "bold",
-//     marginLeft: 10,
-//   },
-//   btnResetPsw: {
-//     backgroundColor: "blue",
-//     color: "white",
-//     padding: 10,
-//     borderRadius: 15,
-//     alignItems: "center",
-//     marginTop: 30,
-//     width: "90%",
-//   },
-//   btnResetPswText: {
-//     color: "white",
-//     textAlign: "center",
-//     fontSize: 18,
-//     fontWeight: "bold",
-//   },
-
-//   backText: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     marginTop: 40,
-//   },
-//   imageLamp: {
-//     width: 80,
-//     height: 100,
-//     borderRadius: 10,
-//     marginTop: 40,
-//     marginEnd: 30,
-//     alignSelf: "left",
-//   },
-// });
+    marginTop: 5,
+    color: "Black",
+  },
+});
 
 export default ForgotPassword;

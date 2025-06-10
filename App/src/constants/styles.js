@@ -22,12 +22,6 @@ const AppStyles = StyleSheet.create({
     color: "Black",
     fontWeight: "bold",
   },
-  // text: {
-  //   fontSize: 15,
-  //   marginBottom: 0,
-  //   marginTop: 0,
-  //   color: "Black",
-  // },
 
   textInput: { padding: 15 },
   inputContainer: {

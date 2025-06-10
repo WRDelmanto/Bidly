@@ -20,10 +20,10 @@ const SignUp = () => {
     <View style={AppStyles.container}>
       <Image
         source={require("../../assets/lamp.jpg")}
-        style={styles.imageLamp}
+        style={styles.imageContainer}
       />
       {/* Form Sign Up*/}
-      <View style={styles.backText}>
+      <View style={styles.backLoginContainer}>
         <Pressable onPress={() => {}}>
           <Icon name="arrow-left" size={24} color={AppColors.PRIMARY} />
         </Pressable>
@@ -87,12 +87,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: 10,
   },
-  backText: {
+  backLoginContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 40,
   },
-  imageLamp: {
+  imageContainer: {
     width: 70,
     height: 70,
     borderRadius: 10,

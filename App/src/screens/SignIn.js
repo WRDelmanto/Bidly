@@ -9,7 +9,7 @@ const SignIn = () => {
     <View style={AppStyles.container}>
       <Image
         source={require("../../assets/lamp.jpg")}
-        style={styles.imageLamp}
+        style={styles.imageContainer}
       />
       <View style={AppStyles.welcome}>
         <Text style={AppStyles.title}>Hello!</Text>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
     color: AppColors.PRIMARY,
   },
-  imageLamp: {
+  imageContainer: {
     width: 70,
     height: 80,
     borderRadius: 10,
