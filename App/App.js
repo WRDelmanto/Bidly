@@ -1,6 +1,6 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet } from "react-native";
-import Welcome from "./src/screens/Welcome"
+import Welcome from "./src/screens/Welcome";
 
 export default function App() {
   return (

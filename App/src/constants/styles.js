@@ -76,6 +76,25 @@ const AppStyles = StyleSheet.create({
     alignItems: "center",
     marginTop: 40,
   },
+  editProfile: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 30,
+
+    marginRight: 20,
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+  },
+  editProfileTitle: {
+    fontSize: 30,
+    fontWeight: "bold",
+    marginHorizontal: 20,
+  },
+  profileIcon: {
+    alignSelf: "center",
+    marginTop: 50,
+    marginBottom: 20,
+  },
   imageLamp: {
     width: 70,
     height: 80,

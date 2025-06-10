@@ -25,7 +25,7 @@ const SignIn = () => {
 
       <Text style={Styles.title}>Sign In </Text>
       <View style={Styles.inputContainer}>
-        <Icon name="email-outline" size={24} color="blue" />
+        <Icon name="email-outline" size={24} color={Colors.PRIMARY} />
         <TextInput
           style={Styles.textInput}
           placeholder="Email"
@@ -44,7 +44,7 @@ const SignIn = () => {
       <Text style={Styles.forgot}>Forgot Password ?</Text>
 
       <View>
-        <TouchableOpacity style={Styles.button} onPress={() => { }}>
+        <TouchableOpacity style={Styles.button} onPress={() => {}}>
           <Text style={Styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <Text style={Styles.newAccount}>
