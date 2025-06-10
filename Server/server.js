@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import router from "./routes/api.js";
 
 dotenv.config();
 
@@ -9,6 +10,8 @@ const app = express();
 app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ limit: "5mb", extended: true }));
 app.use(express.static("public"));
+
+app.use("/api", router);
 
 const main = async () => {
   try {
