@@ -23,12 +23,12 @@ const AppStyles = StyleSheet.create({
     color: "Black",
     fontWeight: "bold",
   },
-  text: {
-    fontSize: 15,
-    marginBottom: 0,
-    marginTop: 0,
-    color: "Black",
-  },
+  // text: {
+  //   fontSize: 15,
+  //   marginBottom: 0,
+  //   marginTop: 0,
+  //   color: "Black",
+  // },
 
   textInput: { padding: 15 },
   inputContainer: {
@@ -38,18 +38,11 @@ const AppStyles = StyleSheet.create({
     width: "90%",
     borderColor: "gray",
     borderWidth: 1,
-
     marginTop: 20,
     paddingHorizontal: 10,
     borderRadius: 10,
   },
-  backLogin: {
-    textAlign: "left",
-    fontSize: 16,
-    color: AppColors.PRIMARY,
-    fontWeight: "bold",
-    marginLeft: 10,
-  },
+
   button: {
     backgroundColor: AppColors.PRIMARY,
     color: "white",
@@ -65,17 +58,7 @@ const AppStyles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  newAccount: {
-    textAlign: "center",
-    marginTop: 40,
-    color: AppColors.PRIMARY,
-    fontSize: 20,
-  },
-  backText: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 40,
-  },
+
   editProfile: {
     flexDirection: "row",
     alignItems: "center",
@@ -94,20 +77,6 @@ const AppStyles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 50,
     marginBottom: 20,
-  },
-  imageLamp: {
-    width: 70,
-    height: 80,
-    borderRadius: 10,
-    marginTop: 35,
-    marginEnd: 30,
-    alignSelf: "left",
-  },
-  forgot: {
-    textAlign: "right",
-    marginEnd: 50,
-    marginTop: 15,
-    color: AppColors.PRIMARY,
   },
 });
 

@@ -1,14 +1,10 @@
-import {
-  Text,
-  View,
-  TextInput,
-  Pressable,
-} from "react-native";
+import { Text, View, TextInput, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Image } from "react-native";
 import { useState } from "react";
 import { AppColors } from "../constants/colors.js";
-import { Styles } from "../constants/styles.js";
+import { AppStyles } from "../constants/styles.js";
+import { StyleSheet } from "react-native";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -21,50 +17,52 @@ const SignUp = () => {
   };
 
   return (
-    <View style={Styles.container}>
+    <View style={AppStyles.container}>
       <Image
         source={require("../../assets/lamp.jpg")}
-        style={Styles.imageLamp}
+        style={styles.imageLamp}
       />
       {/* Form Sign Up*/}
-      <View style={Styles.backText}>
-        <Icon name="arrow-left" size={24} color={AppColors.PRIMARY} />
-        <Text style={Styles.backLogin}>Back To Login</Text>
+      <View style={styles.backText}>
+        <Pressable onPress={() => {}}>
+          <Icon name="arrow-left" size={24} color={AppColors.PRIMARY} />
+        </Pressable>
+        <Text style={styles.backLogin}>Back To Login</Text>
       </View>
-      <Text style={Styles.title}>Sign UP</Text>
-      <View style={Styles.inputContainer}>
-        <Icon name="account" size={24} color="blue" />
+      <Text style={AppStyles.title}>Sign UP</Text>
+      <View style={AppStyles.inputContainer}>
+        <Icon name="account" size={24} color={AppColors.PRIMARY} />
         <TextInput
-          style={Styles.textInput}
+          style={AppStyles.textInput}
           placeholder="Name"
           value={name}
           onChangeText={setName}
         />
       </View>
-      <View style={Styles.inputContainer}>
-        <Icon name="email-outline" size={24} color="blue" />
+      <View style={AppStyles.inputContainer}>
+        <Icon name="email-outline" size={24} color={AppColors.PRIMARY} />
         <TextInput
-          style={Styles.textInput}
+          style={AppStyles.textInput}
           placeholder="Email"
           keyboardType="email-address"
           value={email}
           onChangeText={setEmail}
         />
       </View>
-      <View style={Styles.inputContainer}>
-        <Icon name="lock-outline" size={20} color="blue" />
+      <View style={AppStyles.inputContainer}>
+        <Icon name="lock-outline" size={20} color={AppColors.PRIMARY} />
         <TextInput
-          style={Styles.textInput}
+          style={AppStyles.textInput}
           placeholder="Password"
           secureTextEntry
           value={password}
           onChangeText={setPassword}
         />
       </View>
-      <View style={Styles.inputContainer}>
-        <Icon name="lock-outline" size={20} color="blue" />
+      <View style={AppStyles.inputContainer}>
+        <Icon name="lock-outline" size={20} color={AppColors.PRIMARY} />
         <TextInput
-          style={Styles.textInput}
+          style={AppStyles.textInput}
           placeholder="Confirm Password"
           secureTextEntry
           value={confirmPassword}
@@ -73,82 +71,34 @@ const SignUp = () => {
       </View>
 
       <View>
-        <Pressable style={Styles.button} onPress={handleSignUp}>
-          <Text style={Styles.buttonText}>Sign Up</Text>
+        <Pressable style={AppStyles.button} onPress={handleSignUp}>
+          <Text style={AppStyles.buttonText}>Sign Up</Text>
         </Pressable>
       </View>
     </View>
   );
 };
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     padding: 20,
-//     marginRight: 20,
-//     marginLeft: 20,
-//     height: "100%",
-//     width: "100%",
-//   },
-//   text: {
-//     fontSize: 20,
-
-//     marginVertical: 50,
-//     color: Colors.PRIMARY,
-//     fontWeight: "bold",
-//   },
-
-//   textInput: { padding: 15 },
-//   inputContainer: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     height: 50,
-//     width: "90%",
-//     borderColor: "gray",
-//     borderWidth: 1,
-//     marginBottom: 20,
-//     paddingHorizontal: 10,
-//     borderRadius: 10,
-//   },
-//   backLogin: {
-//     textAlign: "left",
-//     fontSize: 16,
-//     color: Colors.PRIMARY,
-//     fontWeight: "bold",
-//     marginLeft: 10,
-//   },
-//   btnSignUp: {
-//     backgroundColor: Colors.PRIMARY,
-//     color: "white",
-//     padding: 10,
-//     borderRadius: 15,
-//     alignItems: "center",
-//     marginTop: 30,
-//     width: "90%",
-//   },
-//   btnSignUpText: {
-//     color: "white",
-//     textAlign: "center",
-//     fontSize: 18,
-//     fontWeight: "bold",
-//   },
-//   newAccount: {
-//     textAlign: "center",
-//     marginTop: 40,
-//     color: "blue",
-//   },
-//   backText: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     marginTop: 40,
-//   },
-//   imageLamp: {
-//     width: 70,
-//     height: 70,
-//     borderRadius: 10,
-//     marginTop: 25,
-//     marginEnd: 30,
-//     alignSelf: "left",
-//   },
-// });
+const styles = StyleSheet.create({
+  backLogin: {
+    textAlign: "left",
+    fontSize: 16,
+    color: AppColors.PRIMARY,
+    fontWeight: "bold",
+    marginLeft: 10,
+  },
+  backText: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 40,
+  },
+  imageLamp: {
+    width: 70,
+    height: 70,
+    borderRadius: 10,
+    marginTop: 25,
+    marginEnd: 30,
+    alignSelf: "left",
+  },
+});
 export default SignUp;

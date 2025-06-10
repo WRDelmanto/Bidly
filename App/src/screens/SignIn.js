@@ -1,127 +1,80 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, StyleSheet, TextInput, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Image } from "react-native";
-import { Styles } from "../constants/styles";
+import { AppStyles } from "../constants/styles.js";
+import { AppColors } from "../constants/colors.js";
 
 const SignIn = () => {
   return (
-    <View style={Styles.container}>
+    <View style={AppStyles.container}>
       <Image
         source={require("../../assets/lamp.jpg")}
-        style={Styles.imageLamp}
+        style={styles.imageLamp}
       />
-      <View style={Styles.welcome}>
-        <Text style={Styles.title}>Hello!</Text>
-        <Text style={Styles.subTitle}>Welcome to Bidly!!</Text>
+      <View style={AppStyles.welcome}>
+        <Text style={AppStyles.title}>Hello!</Text>
+        <Text style={AppStyles.subTitle}>Welcome to Bidly!!</Text>
       </View>
 
       {/* Form login*/}
-
-      <Text style={Styles.title}>Sign In </Text>
-      <View style={Styles.inputContainer}>
-        <Icon name="email-outline" size={24} color={Colors.PRIMARY} />
+      <Text style={AppStyles.title}>Sign In </Text>
+      <View style={AppStyles.inputContainer}>
+        <Icon name="email-outline" size={24} color={AppColors.PRIMARY} />
         <TextInput
-          style={Styles.textInput}
+          style={AppStyles.textInput}
           placeholder="Email"
           keyboardType="email-address"
         />
       </View>
-      <View style={Styles.inputContainer}>
-        <Icon name="lock-outline" size={20} color="blue" />
+      <View style={AppStyles.inputContainer}>
+        <Icon name="lock-outline" size={20} color={AppColors.PRIMARY} />
         <TextInput
-          style={Styles.textInput}
+          style={AppStyles.textInput}
           placeholder="Password"
           secureTextEntry
         />
       </View>
-
-      <Text style={Styles.forgot}>Forgot Password ?</Text>
-
+      <Pressable onPress={() => {}}>
+        <Text style={styles.forgot}>Forgot Password ?</Text>
+      </Pressable>
       <View>
-        <TouchableOpacity style={Styles.button} onPress={() => {}}>
-          <Text style={Styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <Text style={Styles.newAccount}>
-          Don't have account? <Text> Sign Up</Text>
-        </Text>
+        <Pressable style={AppStyles.button} onPress={() => {}}>
+          <Text style={AppStyles.buttonText}>Login</Text>
+        </Pressable>
+        <Pressable onPress={() => {}}>
+          <Text style={styles.newAccount}>
+            Don't have account? <Text> Sign Up</Text>
+          </Text>
+        </Pressable>
 
+        {/*To decide if use or no the icon*/}
         {/* <Icon name="gavel" size={150} color="black" style={styles.bidIcon} /> */}
         {/* <Image source={require("../../assets/bid3.jpg")} style={styles.image} /> */}
-
-        {/* <Button
-          style={styles.btnLogin}
-          title="Login"
-          color="blue"
-          onPress={() => {}}
-        /> */}
       </View>
     </View>
   );
 };
 
-const stylesLocal = StyleSheet.create({
-  //   container: {
-  //     flex: 1,
-  //     padding: 20,
-  //     marginRight: 20,
-  //     marginLeft: 20,
-  //     height: "100%",
-  //     width: "100%",
-  //   },
-  //   text: {
-  //     fontSize: 20,
-  //     marginTop: 20,
-  //     marginVertical: 50,
-  //     color: "blue",
-  //     fontWeight: "bold",
-  //   },
-  //   welcome: {
-  //     marginTop: 15,
-  //     fontSize: 30,
-  //   },
-  //   textInput: { padding: 15 },
-  //   inputContainer: {
-  //     flexDirection: "row",
-  //     alignItems: "center",
-  //     height: 50,
-  //     width: "90%",
-  //     borderColor: "gray",
-  //     borderWidth: 1,
-  //     marginBottom: 20,
-  //     paddingHorizontal: 10,
-  //     borderRadius: 10,
-  //   },
-  // forgot: {
-  //   textAlign: "right",
-  //   marginEnd: 50,
-  //   color: Colors.PRIMARY,
-  // },
-  //   btnLogin: {
-  //     backgroundColor: "blue",
-  //     color: "white",
-  //     padding: 10,
-  //     borderRadius: 15,
-  //     alignItems: "center",
-  //     marginTop: 30,
-  //     width: "90%",
-  //   },
-  //   btnLoginText: {
-  //     color: "white",
-  //     textAlign: "center",
-  //     fontSize: 18,
-  //     fontWeight: "bold",
-  //   },
-  //   newAccount: {
-  //     textAlign: "center",
-  //     marginTop: 40,
-  //     color: "blue",
-  //   },
+const styles = StyleSheet.create({
+  forgot: {
+    textAlign: "right",
+    marginEnd: 50,
+    marginTop: 15,
+    color: AppColors.PRIMARY,
+  },
+  newAccount: {
+    textAlign: "center",
+    marginTop: 40,
+    color: AppColors.PRIMARY,
+  },
+  imageLamp: {
+    width: 70,
+    height: 80,
+    borderRadius: 10,
+    marginTop: 35,
+    marginEnd: 30,
+    alignSelf: "left",
+  },
   //   bidIcon: {
   //     alignSelf: "center",
   //     marginTop: 50,
@@ -134,13 +87,6 @@ const stylesLocal = StyleSheet.create({
   //     marginTop: 25,
   //     marginEnd: 30,
   //     alignSelf: "center",
-  //   },
-  //   imageLamp: {
-  //     width: 70,
-  //     height: 70,
-  //     borderRadius: 10,
-  //     marginTop: 25,
-  //     alignSelf: "left",
   //   },
 });
 export default SignIn;
