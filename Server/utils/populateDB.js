@@ -1,4 +1,4 @@
-import User from '../models/User.js';
+import User from '../models/user.js';
 import Auction from '../models/auction.js';
 import Bid from '../models/bid.js';
 
