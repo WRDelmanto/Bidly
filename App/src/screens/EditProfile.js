@@ -1,15 +1,8 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  Pressable,
-} from "react-native";
+import { Text, View, StyleSheet, TextInput, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Image } from "react-native";
-import { Styles } from "../constants/styles";
-import { Colors } from "../constants/colors.js";
+import { AppStyles } from "../constants/styles.js";
+import { AppColors } from "../constants/colors.js";
 import { useState } from "react";
 
 const EditProfile = () => {
@@ -19,54 +12,53 @@ const EditProfile = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   return (
-    <View style={Styles.container}>
-      <View style={Styles.editProfile}>
-        <Icon name="arrow-left" size={35} color={Colors.PRIMARY} />
-        <Text style={Styles.editProfileTitle}>Edit Profile</Text>
-        <Icon name="check" size={35} color="green" />
+    <View style={AppStyles.container}>
+      <View style={styles.editProfile}>
+        <Pressable onPress={() => {}}>
+          <Icon name="arrow-left" size={35} color={AppColors.PRIMARY} />
+        </Pressable>
+        <Text style={styles.editProfileTitle}>Edit Profile</Text>
+        <Pressable onPress={() => {}}>
+          <Icon name="check" size={35} color="green" />
+        </Pressable>
       </View>
 
       <Icon
         name="account-circle"
         size={150}
         color="black"
-        style={Styles.profileIcon}
+        style={styles.profileIcon}
       />
-
-      <View style={Styles.inputContainer}>
-        <Icon name="account" size={24} color="blue" />
+      <Text style={styles.text}>Name</Text>
+      <View style={styles.inputContainer}>
         <TextInput
-          style={Styles.textInput}
-          placeholder="Name"
+          style={AppStyles.textInput}
           value={name}
           onChangeText={setName}
         />
       </View>
-      <View style={Styles.inputContainer}>
-        <Icon name="email-outline" size={24} color="blue" />
+      <Text style={styles.text}>Email</Text>
+      <View style={styles.inputContainer}>
         <TextInput
-          style={Styles.textInput}
-          placeholder="Email"
+          style={AppStyles.textInput}
           keyboardType="email-address"
           value={email}
           onChangeText={setEmail}
         />
       </View>
-      <View style={Styles.inputContainer}>
-        <Icon name="lock-outline" size={20} color="blue" />
+      <Text style={styles.text}>New Password</Text>
+      <View style={styles.inputContainer}>
         <TextInput
-          style={Styles.textInput}
-          placeholder="New Password"
+          style={AppStyles.textInput}
           secureTextEntry
           value={password}
           onChangeText={setPassword}
         />
       </View>
-      <View style={Styles.inputContainer}>
-        <Icon name="lock-outline" size={20} color="blue" />
+      <Text style={styles.text}>Confirm Password</Text>
+      <View style={styles.inputContainer}>
         <TextInput
-          style={Styles.textInput}
-          placeholder="Confirm Password"
+          style={AppStyles.textInput}
           secureTextEntry
           value={confirmPassword}
           onChangeText={setConfirmPassword}
@@ -75,5 +67,45 @@ const EditProfile = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  profileIcon: {
+    alignSelf: "center",
+    marginTop: 20,
+    marginBottom: 20,
+    color: AppColors.PRIMARY,
+  },
+  editProfile: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 30,
+    marginRight: 20,
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+  },
+  editProfileTitle: {
+    fontSize: 30,
+    fontWeight: "bold",
+    marginHorizontal: 20,
+  },
+  text: {
+    fontSize: 15,
+    marginBottom: 0,
+    marginTop: 0,
+    color: "Black",
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    height: 50,
+    width: "90%",
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 20,
+    marginTop: 5,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+  },
+});
 
 export default EditProfile;

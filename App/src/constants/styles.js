@@ -19,7 +19,6 @@ const AppStyles = StyleSheet.create({
   subTitle: {
     fontSize: 20,
     marginTop: 10,
-
     color: "Black",
     fontWeight: "bold",
   },
@@ -57,26 +56,6 @@ const AppStyles = StyleSheet.create({
     textAlign: "center",
     fontSize: 18,
     fontWeight: "bold",
-  },
-
-  editProfile: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 30,
-
-    marginRight: 20,
-    justifyContent: "space-between",
-    paddingHorizontal: 10,
-  },
-  editProfileTitle: {
-    fontSize: 30,
-    fontWeight: "bold",
-    marginHorizontal: 20,
-  },
-  profileIcon: {
-    alignSelf: "center",
-    marginTop: 50,
-    marginBottom: 20,
   },
 });
 
