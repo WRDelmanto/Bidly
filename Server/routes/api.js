@@ -12,17 +12,26 @@ router.get('/ping', (req, res) => {
 
 // Signup Route
 router.post('/signup', async (req, res) => {
-    console.log('Signup request received, info:', req.body);
+    console.log('Signup request received, info: ', req.body);
     try {
         const { name, email, password } = req.body;
 
+        // Validate required fields
+        if (!name || !email || !password) {
+            console.log('Missing required fields');
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+
         // Check if user already exists
+        console.log('Checking for existing user with email: ', email);
         const existingUser = await User.findOne({ email });
         if (existingUser) {
+            console.log('User already exists with email: ', email);
             return res.status(400).json({ message: 'Email already in use' });
         }
 
         // Create new user
+        console.log('Creating new user');
         const user = new User({
             name,
             email,
@@ -40,8 +49,11 @@ router.post('/signup', async (req, res) => {
             stats: newUser.stats
         };
 
+        console.log('User saved successfully: ', userResponse);
+
         res.status(201).json(userResponse);
     } catch (error) {
+        console.error('Error in signup: ', error);
         res.status(400).json({ message: error.message });
     }
 });
