@@ -1,8 +1,9 @@
-import { View, Image, StyleSheet } from "react-native";
+import { View } from "react-native";
 import NavBar from "../components/NavBar";
 import FeedAuctionInfo from "../components/FeedAuctionInfo";
 import { useEffect, useState } from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AppStyles } from "../constants/styles";
 
 const Feed = ({ navigation }) => {
   const [user, setUser] = useState(null);
@@ -21,23 +22,11 @@ const Feed = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Image style={styles.mainImage} />
-      <FeedAuctionInfo />
-      <NavBar />
+    <View style={AppStyles.mainContainer}>
+      <FeedAuctionInfo navigation={navigation} />
+      <NavBar navigation={navigation} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-    width: "100%",
-  },
-  mainImage: {
-    height: "100%",
-    width: "100%"
-  }
-});
 
 export default Feed;

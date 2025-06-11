@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
   navbar: {
     position: "absolute",
     bottom: 0,
-    width: "100%",
+    left: 0,
+    right: 0,
     height: 60,
     display: "flex",
     flexDirection: "row",
