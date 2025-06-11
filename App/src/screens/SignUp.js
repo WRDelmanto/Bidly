@@ -67,7 +67,14 @@ const SignUp = () => {
 
       // Signup successful
       Alert.alert("Success", "Account created successfully!");
-      // TODO: Navigate to login or home screen
+
+      try {
+        await AsyncStorage.setItem('user', JSON.stringify(user));
+      } catch (error) {
+        console.error('Error saving user data:', error);
+      }
+
+      // TODO: Navigate to Feed
 
     } catch (error) {
       Alert.alert("Error", error.message || "Something went wrong");

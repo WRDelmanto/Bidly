@@ -57,6 +57,7 @@ To start developing this app, you need to follow these steps:
 - [React Native](https://reactnative.dev/)
 - [React Native Vector Icons](https://www.npmjs.com/package/react-native-vector-icons)
 - [React Native Safe Area Context](https://www.npmjs.com/package/react-native-safe-area-context)
+- [React Native Async Storage](https://www.npmjs.com/package/@react-native-async-storage/async-storage)
 
 ### Dependencies (Backend)
 - [dotenv](https://www.npmjs.com/package/dotenv)

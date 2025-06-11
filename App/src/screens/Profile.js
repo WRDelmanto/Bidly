@@ -5,6 +5,20 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { AppStyles } from "../constants/styles";
 
 const Profile = () => {
+  const handleLogoff = () => {
+    console.log("Logging off...");
+
+    const deleteUserData = async (user) => {
+      try {
+        await AsyncStorage.removeItem('user');
+      } catch (error) {
+        console.error('Error deleting  user data:', error);
+      }
+    };
+
+    deleteUserData()
+  };
+
   return (
     <View style={AppStyles.container}>
       <Image
@@ -26,6 +40,11 @@ const Profile = () => {
 
           <Text>Due Date</Text>
         </View>
+        <Icon
+          name="logout"
+          size={30}
+          onPress={handleLogoff}
+        />
       </View>
       <NavBar />
     </View>
