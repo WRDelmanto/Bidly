@@ -2,7 +2,7 @@ import { Text, Image, View, StyleSheet, TextInput, TouchableOpacity } from "reac
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { AppColors } from "../constants/colors";
 
-const Auction = () => {
+const Auction = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>

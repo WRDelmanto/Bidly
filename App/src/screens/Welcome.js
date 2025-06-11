@@ -4,7 +4,7 @@ import { Image } from "react-native";
 import { AppStyles } from "../constants/styles.js";
 import { AppColors } from "../constants/colors.js";
 
-const Welcome = () => {
+const Welcome = ({ navigation }) => {
   return (
     // <Text
     //   style={{

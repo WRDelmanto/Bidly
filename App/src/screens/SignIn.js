@@ -5,8 +5,9 @@ import { AppStyles } from "../constants/styles.js";
 import { AppColors } from "../constants/colors.js";
 import { ENDPOINTS } from "../constants/api.js";
 import { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const SignIn = () => {
+const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -42,8 +43,13 @@ const SignIn = () => {
       }
 
       // Sign in successful
-      Alert.alert("Success", "Signed in successfully!");
-      // TODO: Store user data and navigate to home screen
+      try {
+        await AsyncStorage.setItem('user', JSON.stringify(data));
+      } catch (error) {
+        console.error('Error saving user data:', error);
+      }
+
+      navigation.navigate('Feed')
 
     } catch (error) {
       Alert.alert("Error", error.message || "Something went wrong");

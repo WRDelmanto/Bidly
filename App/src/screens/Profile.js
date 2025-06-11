@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 
 import { AppStyles } from "../constants/styles";
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
   const handleLogoff = () => {
     console.log("Logging off...");
 

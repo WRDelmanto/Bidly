@@ -1,6 +1,6 @@
 import { Text } from "react-native";
 
-const History = () => {
+const History = ({ navigation }) => {
   return (
     <Text
       style={{

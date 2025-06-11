@@ -1,10 +1,10 @@
 import { View, Image, StyleSheet } from "react-native";
 import NavBar from "../components/Navbar";
 import FeedAuctionInfo from "../components/FeedAuctionInfo";
+import { useEffect, useState } from 'react';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { useEffect } from 'react';
-
-const Feed = () => {
+const Feed = ({ navigation }) => {
   const [user, setUser] = useState(null);
   useEffect(() => {
     const getUserData = async () => {

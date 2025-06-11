@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet, TextInput } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const CreateAuction = () => {
+const CreateAuction = ({ navigation }) => {
   return (
     <View>
       <View style={styles.subStatusBar}>

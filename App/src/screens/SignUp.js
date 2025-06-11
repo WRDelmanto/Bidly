@@ -6,8 +6,9 @@ import { AppColors } from "../constants/colors.js";
 import { AppStyles } from "../constants/styles.js";
 import { ENDPOINTS } from "../constants/api.js";
 import { StyleSheet } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const SignUp = () => {
+const SignUp = ({ navigation }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -66,15 +67,13 @@ const SignUp = () => {
       }
 
       // Signup successful
-      Alert.alert("Success", "Account created successfully!");
-
       try {
-        await AsyncStorage.setItem('user', JSON.stringify(user));
+        await AsyncStorage.setItem('user', JSON.stringify(data));
       } catch (error) {
         console.error('Error saving user data:', error);
       }
 
-      // TODO: Navigate to Feed
+      navigation.navigate('Feed')
 
     } catch (error) {
       Alert.alert("Error", error.message || "Something went wrong");

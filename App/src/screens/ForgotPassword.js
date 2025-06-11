@@ -4,7 +4,7 @@ import { Image } from "react-native";
 import { AppStyles } from "../constants/styles";
 import { AppColors } from "../constants/colors.js";
 
-const ForgotPassword = () => {
+const ForgotPassword = ({ navigation }) => {
   return (
     <View style={AppStyles.container}>
       <Image

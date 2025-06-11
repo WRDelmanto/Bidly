@@ -51,13 +51,19 @@ To start developing this app, you need to follow these steps:
 ## Technical Details
 
 ### Dependencies (Frontend)
+- [React Native Async Storage](https://www.npmjs.com/package/@react-native-async-storage/async-storage)
+- [React Navigation Native](https://www.npmjs.com/package/@react-navigation/native)
 - [Expo](https://expo.dev/)
 - [Expo Status Bar](https://docs.expo.dev/versions/latest/sdk/status-bar/)
 - [React](https://www.npmjs.com/package/react)
 - [React Native](https://reactnative.dev/)
-- [React Native Vector Icons](https://www.npmjs.com/package/react-native-vector-icons)
+- [React Native Stack](https://www.npmjs.com/package/@react-navigation/native-stack)
+- [React Native Gesture handler](https://www.npmjs.com/package/react-native-gesture-handler)
+- [React Native Reanimated](https://www.npmjs.com/package/react-native-reanimated)
 - [React Native Safe Area Context](https://www.npmjs.com/package/react-native-safe-area-context)
-- [React Native Async Storage](https://www.npmjs.com/package/@react-native-async-storage/async-storage)
+- [React Native Screens](https://www.npmjs.com/package/react-native-screens)
+- [React Native Status Bar height](https://www.npmjs.com/package/react-native-status-bar-height)
+- [React Native Vector Icons](https://www.npmjs.com/package/react-native-vector-icons)
 
 ### Dependencies (Backend)
 - [dotenv](https://www.npmjs.com/package/dotenv)

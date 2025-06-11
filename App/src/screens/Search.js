@@ -1,6 +1,6 @@
 import { Text } from "react-native";
 
-const Search = () => {
+const Search = ({ navigation }) => {
   return (
     <Text
       style={{
