@@ -1,10 +1,57 @@
-import { Text, View, StyleSheet, TextInput, Pressable } from "react-native";
+import { Text, View, StyleSheet, TextInput, Pressable, Alert } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Image } from "react-native";
 import { AppStyles } from "../constants/styles.js";
 import { AppColors } from "../constants/colors.js";
+import { ENDPOINTS } from "../constants/api.js";
+import { useState } from "react";
 
 const SignIn = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSignIn = async () => {
+    // Validate inputs
+    if (!email) {
+      Alert.alert("Error", "Email is required");
+      return;
+    }
+    if (!password) {
+      Alert.alert("Error", "Password is required");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const response = await fetch(ENDPOINTS.SIGNIN, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Sign in failed');
+      }
+
+      // Sign in successful
+      Alert.alert("Success", "Signed in successfully!");
+      // TODO: Store user data and navigate to home screen
+
+    } catch (error) {
+      Alert.alert("Error", error.message || "Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <View style={AppStyles.container}>
       <Image
@@ -24,6 +71,9 @@ const SignIn = () => {
           style={AppStyles.textInput}
           placeholder="Email"
           keyboardType="email-address"
+          value={email}
+          onChangeText={setEmail}
+          editable={!isLoading}
         />
       </View>
       <View style={AppStyles.inputContainer}>
@@ -32,16 +82,25 @@ const SignIn = () => {
           style={AppStyles.textInput}
           placeholder="Password"
           secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+          editable={!isLoading}
         />
       </View>
-      <Pressable onPress={() => {}}>
+      <Pressable onPress={() => { }}>
         <Text style={styles.forgot}>Forgot Password ?</Text>
       </Pressable>
       <View>
-        <Pressable style={AppStyles.button} onPress={() => {}}>
-          <Text style={AppStyles.buttonText}>Login</Text>
+        <Pressable
+          style={[AppStyles.button, isLoading && styles.disabledButton]}
+          onPress={handleSignIn}
+          disabled={isLoading}
+        >
+          <Text style={AppStyles.buttonText}>
+            {isLoading ? "Signing In..." : "Login"}
+          </Text>
         </Pressable>
-        <Pressable onPress={() => {}}>
+        <Pressable onPress={() => { }}>
           <Text style={styles.newAccount}>
             Don't have account? <Text> Sign Up</Text>
           </Text>
@@ -74,6 +133,9 @@ const styles = StyleSheet.create({
     marginTop: 35,
     marginEnd: 30,
     alignSelf: "left",
+  },
+  disabledButton: {
+    opacity: 0.7,
   },
   //   bidIcon: {
   //     alignSelf: "center",

@@ -1,9 +1,10 @@
-import { Text, View, TextInput, Pressable } from "react-native";
+import { Text, View, TextInput, Pressable, Alert } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Image } from "react-native";
 import { useState } from "react";
 import { AppColors } from "../constants/colors.js";
 import { AppStyles } from "../constants/styles.js";
+import { ENDPOINTS } from "../constants/api.js";
 import { StyleSheet } from "react-native";
 
 const SignUp = () => {
@@ -11,9 +12,68 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSignUp = () => {
-    console.log("Sign Up");
+  const handleSignUp = async () => {
+    // Validate inputs
+    if (!name || !email || !password || !confirmPassword) {
+      if (!name) {
+        Alert.alert("Error", "Name is required");
+        return;
+      }
+      if (!email) {
+        Alert.alert("Error", "Email is required");
+        return;
+      }
+      if (!password) {
+        Alert.alert("Error", "Password is required");
+        return;
+      }
+      if (!confirmPassword) {
+        Alert.alert("Error", "Confirm Password is required");
+        return;
+      }
+    }
+
+    if (password !== confirmPassword) {
+      Alert.alert("Error", "Passwords do not match");
+      return;
+    }
+
+    if (password.length < 6) {
+      Alert.alert("Error", "Password must be at least 6 characters long");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const response = await fetch(ENDPOINTS.SIGNUP, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Signup failed');
+      }
+
+      // Signup successful
+      Alert.alert("Success", "Account created successfully!");
+      // TODO: Navigate to login or home screen
+
+    } catch (error) {
+      Alert.alert("Error", error.message || "Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -24,7 +84,7 @@ const SignUp = () => {
       />
       {/* Form Sign Up*/}
       <View style={styles.backLoginContainer}>
-        <Pressable onPress={() => {}}>
+        <Pressable onPress={() => { }}>
           <Icon name="arrow-left" size={24} color={AppColors.PRIMARY} />
         </Pressable>
         <Text style={styles.backLogin}>Back To Login</Text>
@@ -37,6 +97,7 @@ const SignUp = () => {
           placeholder="Name"
           value={name}
           onChangeText={setName}
+          editable={!isLoading}
         />
       </View>
       <View style={AppStyles.inputContainer}>
@@ -47,6 +108,7 @@ const SignUp = () => {
           keyboardType="email-address"
           value={email}
           onChangeText={setEmail}
+          editable={!isLoading}
         />
       </View>
       <View style={AppStyles.inputContainer}>
@@ -57,6 +119,7 @@ const SignUp = () => {
           secureTextEntry
           value={password}
           onChangeText={setPassword}
+          editable={!isLoading}
         />
       </View>
       <View style={AppStyles.inputContainer}>
@@ -67,12 +130,19 @@ const SignUp = () => {
           secureTextEntry
           value={confirmPassword}
           onChangeText={setConfirmPassword}
+          editable={!isLoading}
         />
       </View>
 
       <View>
-        <Pressable style={AppStyles.button} onPress={handleSignUp}>
-          <Text style={AppStyles.buttonText}>Sign Up</Text>
+        <Pressable
+          style={[AppStyles.button, isLoading && styles.disabledButton]}
+          onPress={handleSignUp}
+          disabled={isLoading}
+        >
+          <Text style={AppStyles.buttonText}>
+            {isLoading ? "Signing Up..." : "Sign Up"}
+          </Text>
         </Pressable>
       </View>
     </View>
@@ -99,6 +169,9 @@ const styles = StyleSheet.create({
     marginTop: 25,
     marginEnd: 30,
     alignSelf: "left",
+  },
+  disabledButton: {
+    opacity: 0.7,
   },
 });
 export default SignUp;
