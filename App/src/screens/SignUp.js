@@ -85,9 +85,9 @@ const SignUp = () => {
       {/* Form Sign Up*/}
       <View style={styles.backLoginContainer}>
         <Pressable onPress={() => { }}>
-          <Icon name="arrow-left" size={24} color={AppColors.PRIMARY} />
+          <Icon name="arrow-left" size={24} />
         </Pressable>
-        <Text style={styles.backLogin}>Back To Login</Text>
+        <Text style={styles.backLogin}>Back to signin</Text>
       </View>
       <Text style={AppStyles.title}>Sign UP</Text>
       <View style={AppStyles.inputContainer}>
@@ -152,9 +152,7 @@ const SignUp = () => {
 const styles = StyleSheet.create({
   backLogin: {
     textAlign: "left",
-    fontSize: 16,
-    color: AppColors.PRIMARY,
-    fontWeight: "bold",
+    fontSize: 14,
     marginLeft: 10,
   },
   backLoginContainer: {
