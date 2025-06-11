@@ -58,6 +58,48 @@ router.post('/signup', async (req, res) => {
     }
 });
 
+// Signin Route
+router.post('/signin', async (req, res) => {
+    console.log('Signin request received, info: ', req.body);
+    try {
+        const { email, password } = req.body;
+
+        // Validate required fields
+        if (!email || !password) {
+            console.log('Missing required fields');
+            return res.status(400).json({ message: 'Email and password are required' });
+        }
+
+        // Find user by email
+        console.log('Finding user with email: ', email);
+        const user = await User.findOne({ email });
+        if (!user) {
+            console.log('User not found with email: ', email);
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Check password
+        if (user.password !== password) {
+            console.log('Invalid password for user: ', email);
+            return res.status(401).json({ message: 'Invalid password' });
+        }
+
+        // Return user without password
+        const userResponse = {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            stats: user.stats
+        };
+
+        console.log('User signed in successfully: ', userResponse);
+        res.status(200).json(userResponse);
+    } catch (error) {
+        console.error('Error in signin: ', error);
+        res.status(400).json({ message: error.message });
+    }
+});
+
 // Create Auction Route
 router.post('/auction', async (req, res) => {
     console.log('Auction creation request received, info:', req.body);
