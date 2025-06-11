@@ -2,50 +2,36 @@ import { AppColors } from "./colors.js";
 import { StyleSheet } from "react-native";
 
 const AppStyles = StyleSheet.create({
-  container: {
+  mainContainer: {
     flex: 1,
     padding: 20,
-    marginRight: 20,
-    marginLeft: 20,
     height: "100%",
     width: "100%",
+    backgroundColor: "#FFFFFF"
   },
-  title: {
-    fontSize: 30,
-    marginTop: 50,
-    color: "Black",
-    fontWeight: "bold",
-  },
-  subTitle: {
-    fontSize: 20,
-    marginTop: 10,
-    color: "Black",
-    fontWeight: "bold",
-  },
-
-  textInput: { padding: 15 },
-  inputContainer: {
+  mainTextInputContainer: {
     flexDirection: "row",
     alignItems: "center",
     height: 50,
-    width: "90%",
     borderColor: "gray",
-    borderWidth: 1,
     marginTop: 20,
+    borderWidth: 1,
     paddingHorizontal: 10,
-    borderRadius: 10,
+    borderRadius: 12,
   },
-
-  button: {
+  mainTextInputContainerText: {
+    padding: 15
+  },
+  mainButton: {
     backgroundColor: AppColors.PRIMARY,
-    color: "white",
-    padding: 10,
+    color: "#000000",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
     borderRadius: 15,
     alignItems: "center",
     marginTop: 30,
-    width: "90%",
   },
-  buttonText: {
+  mainButtonText: {
     color: "white",
     textAlign: "center",
     fontSize: 18,

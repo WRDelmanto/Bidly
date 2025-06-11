@@ -83,33 +83,33 @@ const SignUp = ({ navigation }) => {
   };
 
   return (
-    <View style={AppStyles.container}>
+    <View style={AppStyles.mainContainer}>
       <Image
         source={require("../../assets/lamp.jpg")}
         style={styles.imageContainer}
       />
       {/* Form Sign Up*/}
-      <View style={styles.backLoginContainer}>
-        <Pressable onPress={() => { }}>
+      <Pressable onPress={() => { navigation.navigate('SignIn') }}>
+        <View style={styles.backToSignInContainer}>
           <Icon name="arrow-left" size={24} />
-        </Pressable>
-        <Text style={styles.backLogin}>Back to signin</Text>
-      </View>
-      <Text style={AppStyles.title}>Sign UP</Text>
-      <View style={AppStyles.inputContainer}>
+          <Text style={styles.backtoSignInText}>Back to SignIn</Text>
+        </View>
+      </Pressable>
+      <Text style={styles.title}>Sign Up</Text>
+      <View style={AppStyles.mainTextInputContainer}>
         <Icon name="account" size={24} color={AppColors.PRIMARY} />
         <TextInput
-          style={AppStyles.textInput}
+          style={AppStyles.mainTextInputContainerText}
           placeholder="Name"
           value={name}
           onChangeText={setName}
           editable={!isLoading}
         />
       </View>
-      <View style={AppStyles.inputContainer}>
+      <View style={AppStyles.mainTextInputContainer}>
         <Icon name="email-outline" size={24} color={AppColors.PRIMARY} />
         <TextInput
-          style={AppStyles.textInput}
+          style={AppStyles.mainTextInputContainerText}
           placeholder="Email"
           keyboardType="email-address"
           value={email}
@@ -117,10 +117,10 @@ const SignUp = ({ navigation }) => {
           editable={!isLoading}
         />
       </View>
-      <View style={AppStyles.inputContainer}>
+      <View style={AppStyles.mainTextInputContainer}>
         <Icon name="lock-outline" size={20} color={AppColors.PRIMARY} />
         <TextInput
-          style={AppStyles.textInput}
+          style={AppStyles.mainTextInputContainerText}
           placeholder="Password"
           secureTextEntry
           value={password}
@@ -128,10 +128,10 @@ const SignUp = ({ navigation }) => {
           editable={!isLoading}
         />
       </View>
-      <View style={AppStyles.inputContainer}>
+      <View style={AppStyles.mainTextInputContainer}>
         <Icon name="lock-outline" size={20} color={AppColors.PRIMARY} />
         <TextInput
-          style={AppStyles.textInput}
+          style={AppStyles.mainTextInputContainerText}
           placeholder="Confirm Password"
           secureTextEntry
           value={confirmPassword}
@@ -142,11 +142,11 @@ const SignUp = ({ navigation }) => {
 
       <View>
         <Pressable
-          style={[AppStyles.button, isLoading && styles.disabledButton]}
+          style={[AppStyles.mainButton, isLoading && styles.disabledButton]}
           onPress={handleSignUp}
           disabled={isLoading}
         >
-          <Text style={AppStyles.buttonText}>
+          <Text style={AppStyles.mainButtonText}>
             {isLoading ? "Signing Up..." : "Sign Up"}
           </Text>
         </Pressable>
@@ -156,23 +156,25 @@ const SignUp = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  backLogin: {
-    textAlign: "left",
-    fontSize: 14,
-    marginLeft: 10,
+  imageContainer: {
+    width: 70,
+    height: 70,
   },
-  backLoginContainer: {
+  backToSignInContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 40,
   },
-  imageContainer: {
-    width: 70,
-    height: 70,
-    borderRadius: 10,
-    marginTop: 25,
-    marginEnd: 30,
-    alignSelf: "left",
+  backtoSignInText: {
+    textAlign: "left",
+    fontSize: 14,
+    marginLeft: 10,
+  },
+  title: {
+    fontSize: 30,
+    marginTop: 50,
+    color: "Black",
+    fontWeight: "bold",
   },
   disabledButton: {
     opacity: 0.7,

@@ -1,5 +1,5 @@
 import { View, Image, StyleSheet, Text } from "react-native";
-import NavBar from "../components/Navbar";
+import NavBar from "../components/NavBar";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import { AppStyles } from "../constants/styles";

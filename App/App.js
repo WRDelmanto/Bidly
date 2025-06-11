@@ -17,6 +17,9 @@ import SignIn from "./src/screens/SignIn";
 import SignUp from "./src/screens/SignUp";
 import Welcome from "./src/screens/Welcome";
 
+import FeedAuctionInfo from "./src/components/FeedAuctionInfo";
+import NavBar from "./src/components/NavBar";
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -35,6 +38,9 @@ export default function App() {
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="Welcome" component={Welcome} />
+
+          <Stack.Screen name="FeedAuctionInfo" component={FeedAuctionInfo} />
+          <Stack.Screen name="NavBar" component={NavBar} />
         </Stack.Navigator>
       </SafeAreaView>
     </NavigationContainer>
@@ -44,5 +50,6 @@ export default function App() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    backgroundColor: "#FFFFFF"
   },
 });

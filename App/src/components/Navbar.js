@@ -1,33 +1,33 @@
 import { StyleSheet, View } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const NavBar = () => {
+const NavBar = ({ navigation }) => {
   return (
     <View style={styles.navbar}>
       <Icon
         name="home"
         size={30}
-        onPress={() => console.log('Home clicked')}
+        onPress={() => navigation.navigate('Feed')}
       />
       <Icon
         name="search"
         size={30}
-        onPress={() => console.log('Search clicked')}
+        onPress={() => navigation.navigate('Search')}
       />
       <Icon
         name="add-box"
         size={30}
-        onPress={() => console.log('Add Auction clicked')}
+        onPress={() => navigation.navigate('CreateAuction')}
       />
       <Icon name="gavel"
         size={30}
         style={{ transform: [{ rotateY: '180deg' }] }}
-        onPress={() => console.log('History clicked')}
+        onPress={() => navigation.navigate('History')}
       />
       <Icon
         name="person"
         size={30}
-        onPress={() => console.log('Profile clicked')}
+        onPress={() => navigation.navigate('Profile')}
       />
     </View>
   );

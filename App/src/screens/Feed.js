@@ -1,5 +1,5 @@
 import { View, Image, StyleSheet } from "react-native";
-import NavBar from "../components/Navbar";
+import NavBar from "../components/NavBar";
 import FeedAuctionInfo from "../components/FeedAuctionInfo";
 import { useEffect, useState } from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage";

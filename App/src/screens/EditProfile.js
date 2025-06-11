@@ -11,14 +11,29 @@ const EditProfile = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const handleEditProfile = () => {
+    // Add logic to handle profile editing
+  };
+
+  const handleCancel = () => {
+    Alert.alert(
+      "Cancel Edit Profile",
+      "Are you sure you want to cancel editing your profile?",
+      [
+        { text: "OK", onPress: () => navigation.goBack() },
+        { text: "Continue", onPress: () => {} }
+      ]
+    );
+  };
+
   return (
     <View style={AppStyles.container}>
       <View style={styles.editProfile}>
-        <Pressable onPress={() => {}}>
+        <Pressable onPress={handleCancel}>
           <Icon name="arrow-left" size={35} color={AppColors.PRIMARY} />
         </Pressable>
         <Text style={styles.editProfileTitle}>Edit Profile</Text>
-        <Pressable onPress={() => {}}>
+        <Pressable onPress={handleEditProfile}>
           <Icon name="check" size={35} color="green" />
         </Pressable>
       </View>
@@ -32,7 +47,7 @@ const EditProfile = ({ navigation }) => {
       <Text style={styles.text}>Name</Text>
       <View style={styles.inputContainer}>
         <TextInput
-          style={AppStyles.textInput}
+          style={AppStyles.mainTextInputContainerText}
           value={name}
           onChangeText={setName}
         />
@@ -40,7 +55,7 @@ const EditProfile = ({ navigation }) => {
       <Text style={styles.text}>Email</Text>
       <View style={styles.inputContainer}>
         <TextInput
-          style={AppStyles.textInput}
+          style={AppStyles.mainTextInputContainerText}
           keyboardType="email-address"
           value={email}
           onChangeText={setEmail}
@@ -49,7 +64,7 @@ const EditProfile = ({ navigation }) => {
       <Text style={styles.text}>New Password</Text>
       <View style={styles.inputContainer}>
         <TextInput
-          style={AppStyles.textInput}
+          style={AppStyles.mainTextInputContainerText}
           secureTextEntry
           value={password}
           onChangeText={setPassword}
@@ -58,7 +73,7 @@ const EditProfile = ({ navigation }) => {
       <Text style={styles.text}>Confirm Password</Text>
       <View style={styles.inputContainer}>
         <TextInput
-          style={AppStyles.textInput}
+          style={AppStyles.mainTextInputContainerText}
           secureTextEntry
           value={confirmPassword}
           onChangeText={setConfirmPassword}
