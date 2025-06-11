@@ -4,13 +4,46 @@ import { Image } from "react-native";
 import { AppStyles } from "../constants/styles.js";
 import { AppColors } from "../constants/colors.js";
 import { ENDPOINTS } from "../constants/api.js";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from '@react-navigation/native';
 
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isServerUp, setIsServerUp] = useState(true);
+
+  useFocusEffect(
+    useCallback(() => {
+      let intervalId;
+
+      const checkServerHealth = async () => {
+        try {
+          const response = await fetch(ENDPOINTS.PING);
+          const isHealthy = response.ok;
+          console.log(`[${new Date().toISOString()}] Server is ${isHealthy ? 'Up' : 'Down'}`);
+          setIsServerUp(isHealthy);
+        } catch (error) {
+          console.error('Failed to check server health:', error);
+          setIsServerUp(false);
+        }
+      };
+
+      // Initial check
+      checkServerHealth();
+
+      // Set up interval for continuous checking
+      intervalId = setInterval(checkServerHealth, 1000);
+
+      // Cleanup function
+      return () => {
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
+      };
+    }, [])
+  );
 
   const handleSignIn = async () => {
     // Validate inputs
@@ -64,6 +97,9 @@ const SignIn = ({ navigation }) => {
         source={require("../../assets/lamp.jpg")}
         style={styles.imageContainer}
       />
+      {!isServerUp && (
+        <Icon style={styles.serverAlert} name="alert" color={"#FF0000"} size={24} />
+      )}
       <View>
         <Text style={styles.title}>Hello</Text>
         <Text>Welcome to Bidly!</Text>
@@ -120,6 +156,11 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: 64,
     height: 64,
+  },
+  serverAlert: {
+    position: "absolute",
+    top: 20,
+    right: 20,
   },
   title: {
     fontSize: 30,
