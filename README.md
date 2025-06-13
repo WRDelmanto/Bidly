@@ -43,10 +43,6 @@ To start developing this app, you need to follow these steps:
    npm run bidly
    ```
 7. Finally, scan the QR Code with Expo Go app or press "a" to open you emulator:
-8. To test the backend, navigate to path\to\Bidly\Server
-   ```
-   npm run bidly
-   ```
 
 ## Technical Details
 
