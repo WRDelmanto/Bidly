@@ -66,6 +66,6 @@ To start developing this app, you need to follow these steps:
 - [React Native Vector Icons](https://www.npmjs.com/package/react-native-vector-icons)
 
 ### Dependencies (Backend)
-- [dotenv](https://www.npmjs.com/package/dotenv)
-- [express](https://www.npmjs.com/package/express)
-- [mongoose](https://www.npmjs.com/package/mongoose)
+- [Dotenv](https://www.npmjs.com/package/dotenv)
+- [Express](https://www.npmjs.com/package/express)
+- [Mongoose](https://www.npmjs.com/package/mongoose)
