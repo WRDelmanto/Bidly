@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 50,
     marginBottom: 20,
+    color: AppColors.PRIMARY,
   }
 });
 
