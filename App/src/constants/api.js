@@ -7,4 +7,5 @@ export const ENDPOINTS = {
     SIGNUP: `${API_URL}/signup`,
     SIGNIN: `${API_URL}/signIn`,
     AUCTION: `${API_URL}/auction`,
+    AUCTIONS: `${API_URL}/auctions`,
 }; 

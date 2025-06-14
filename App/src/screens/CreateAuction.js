@@ -43,6 +43,8 @@ const CreateAuction = ({ navigation }) => {
       });
 
       if (response.ok) {
+        const data = await response.json();
+        await AsyncStorage.setItem('user', JSON.stringify(data.user));
         console.log('Auction created successfully');
         ToastAndroid.show('Auction created successfully', ToastAndroid.SHORT);
         navigation.goBack()
