@@ -156,7 +156,7 @@ router.get('/auctions/:id', async (req, res) => {
     console.log('Auctions fetch request received, info:', req.params.id);
     try {
         const { id } = req.params;
-        const auctions = await Auction.find({ 'seller.id': id });
+        const auctions = await Auction.find({ seller: id });
 
         res.status(200).json(auctions || []);
     } catch (error) {
@@ -165,4 +165,4 @@ router.get('/auctions/:id', async (req, res) => {
     }
 });
 
-export default router; 
+export default router;
