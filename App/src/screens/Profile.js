@@ -4,8 +4,14 @@ import { AppStyles } from "../constants/styles";
 import { AppColors } from "../constants/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import NavBar from "../components/NavBar";
+import { useState } from "react";
 
 const Profile = ({ navigation }) => {
+  const [showDropdown, setShowDropdown] = useState(false); 
+  const handleEditProfile = () => { 
+    setShowDropdown(false);
+  }
+
   const handleSignOff = async () => {
     try {
       await AsyncStorage.removeItem('user');
@@ -35,9 +41,22 @@ const Profile = ({ navigation }) => {
               <Text style={styles.statisticValue}>WON</Text>
             </View>
           </View>
-          <Pressable style={styles.configIcon}>
+          <Pressable style={styles.configIcon} onPress={() => setShowDropdown(!showDropdown)}>
             <Icon name="cog" size={40} color={AppColors.PRIMARY} />
           </Pressable>
+          {showDropdown && (
+          <View style={styles.dropdown}>
+            <Pressable style={styles.dropdownItem} onPress={handleEditProfile}>
+              <Icon name="account-edit" size={20} color={AppColors.PRIMARY} style={styles.dropdownIcon} />
+              <Text style={styles.dropdownText}>Edit Profile</Text>
+            </Pressable>
+            <Pressable style={styles.dropdownItem} onPress={handleSignOff}>
+              <Icon name="logout" size={20} color={AppColors.PRIMARY} style={styles.dropdownIcon} />
+              <Text style={styles.dropdownText}>Logoff</Text>
+            </Pressable>
+          </View>
+        )}
+          
         </View>
         <View>
           <Text style={styles.title}>Name</Text>
@@ -47,53 +66,73 @@ const Profile = ({ navigation }) => {
         <NavBar />
       </View>
     </View>
-  );
-
- 
+  ); 
 };
 
  const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    alignItems: "center",
-  },
-  avatarContainer: {
-    position: "relative",
-  },
-  configIcon: {
-    position: "absolute",
-    top: 5,
-    right: 5,    
-    padding: 5,
-  },
-  statisticInfo:{
-    alignItems: "center",
-  },
-  statisticValue: {
-    fontSize: 20,
-    fontWeight: "bold",
-    
-  },
-  statisticContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    gap:15,
-    marginLeft: 30,
-  },
-  title: {
-    fontSize: 20,
-    color: "Black",
-    fontWeight: "bold",
-    marginLeft: 20,
-  },
-  navBar: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-  
-  },
+    header: {
+      flexDirection: 'row',
+      alignItems: "center",
+    },
+    avatarContainer: {
+      position: "relative",
+    },
+    configIcon: {
+      position: "absolute",
+      top: 5,
+      right: 5,    
+      padding: 5,
+    },
+    statisticInfo:{
+      alignItems: "center",
+    },
+    statisticValue: {
+      fontSize: 20,
+      fontWeight: "bold",
+
+    },
+    statisticContainer: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      gap:15,
+      marginLeft: 30,
+    },
+    title: {
+      fontSize: 20,
+      color: "Black",
+      fontWeight: "bold",
+      marginLeft: 20,
+    },
+    navBar: {
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+      right: 0,
+    },
+      dropdown: {
+      position: "absolute",
+      top: 60,
+      right: 10,
+      backgroundColor: "#fff",
+      borderRadius: 8,
+      elevation: 5,
+      paddingVertical: 10,
+      paddingHorizontal: 12,
+      zIndex: 1000,
+    },
+    dropdownItem: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: 8,
+    },
+    dropdownIcon: {
+      marginRight: 10,
+    },
+    dropdownText: {
+      fontSize: 16,
+      color: AppColors.PRIMARY,
+    },
 
   });
 
