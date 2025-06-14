@@ -9,6 +9,7 @@ import { useState } from "react";
 const Profile = ({ navigation }) => {
   const [showDropdown, setShowDropdown] = useState(false); 
   const handleEditProfile = () => { 
+    navigation.navigate('EditProfile');
     setShowDropdown(false);
   }
 
