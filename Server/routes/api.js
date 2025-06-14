@@ -145,7 +145,10 @@ router.post('/auction', async (req, res) => {
         );
         console.log('Seller stats updated');
 
-        res.status(201).json(updatedUser, newAuction);
+        res.status(201).json({
+            user: updatedUser,
+            auction: newAuction
+        });
     } catch (error) {
         console.error('Error creating auction:', error.message);
         res.status(400).json({ message: error.message });
