@@ -141,7 +141,8 @@ router.post('/auction', async (req, res) => {
         // Update seller's stats
         const updatedUser = await User.findByIdAndUpdate(
             seller,
-            { $inc: { 'stats.createdAuctions': 1 } }
+            { $inc: { 'stats.createdAuctions': 1 } },
+            { new: true }
         );
         console.log('Seller stats updated:', updatedUser);
 
