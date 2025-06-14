@@ -152,12 +152,13 @@ router.post('/auction', async (req, res) => {
     }
 });
 
-router.get('/auctions', async (req, res) => {
-    console.log('Auction fetch request received, info:', req.body);
+router.get('/auctions/:id', async (req, res) => {
+    console.log('Auctions fetch request received, info:', req.params.id);
     try {
-        const { user } = req.body;
-        const auctions = await Auction.find({ seller: user });
-        res.status(200).json(auctions);
+        const { id } = req.params;
+        const auctions = await Auction.find({ 'seller.id': id });
+
+        res.status(200).json(auctions || []);
     } catch (error) {
         console.error('Error fetching auctions:', error.message);
         res.status(500).json({ message: error.message });
