@@ -1,54 +1,74 @@
-import { Text, View, StyleSheet, Pressable } from "react-native";
+import { Text, StyleSheet, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { AppColors } from "../constants/colors.js";
+import { LinearGradient } from 'expo-linear-gradient';
 
 const Welcome = ({ navigation }) => {
   return (
-    <View style={styles.welcomeContainer}>
-      <View>
-        <Text style={styles.title}>BIDLY</Text>
-        <Text style={styles.subTitle}>Smart Bid, Silent Auction!</Text>
-      </View>
-      <View>
-        <Icon name="gavel" size={150} color="black" style={styles.bidIcon} />
-      </View>
-      <Pressable onPress={() => navigation.navigate('SignIn')}>
-        <Icon
-          name="play-circle-outline"
-          size={150}
-          color="#000000"
-          style={styles.bidIcon}
-        />
+    <LinearGradient
+      colors={['#FFFFFF', AppColors.PRIMARY, '#000000']}
+      locations={[0, 0.25, 1]}
+      style={styles.welcomeContainer}
+    >
+      <Text style={styles.title}>BIDLY</Text>
+      <Text style={styles.subTitle}>Smart Bid, Silent Auction!</Text>
+      <Icon
+        name="gavel"
+        size={180}
+        style={styles.gavelIcon}
+      />
+      <Pressable
+        style={styles.buttonContainer}
+        onPress={() => navigation.navigate('SignIn')}
+      >
+        <Text style={styles.buttonText}>Get Started</Text>
       </Pressable>
-    </View>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
   welcomeContainer: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FFFFFF"
   },
   title: {
-    fontSize: 40,
-    fontWeight: "bold",
-    color: AppColors.PRIMARY,
+    fontSize: 48,
+    fontWeight: "800",
+    color: "#FFFFFF",
     textAlign: "center",
+    letterSpacing: 2,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowRadius: 4,
+    marginTop: 128,
   },
   subTitle: {
-    fontSize: 20,
-    marginTop: 10,
-    color: "Black",
-    fontWeight: "bold",
+    fontSize: 22,
+    color: "#FFFFFF",
+    fontWeight: "600",
+    letterSpacing: 0.5,
+    opacity: 0.9,
   },
-  bidIcon: {
-    alignSelf: "center",
-    marginTop: 50,
-    marginBottom: 20,
+  gavelIcon: {
+    color: "#FFFFFF",
+    transform: [{ rotateY: '180deg' }],
+    opacity: 0.9,
+    marginTop: 64,
+  },
+  buttonContainer: {
+    width: "80%",
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    paddingVertical: 16,
+    borderRadius: 50,
+    opacity: 0.95,
+    marginTop: 128
+  },
+  buttonText: {
     color: AppColors.PRIMARY,
-  }
+    fontSize: 18,
+    fontWeight: "600",
+  },
 });
 
 export default Welcome;
