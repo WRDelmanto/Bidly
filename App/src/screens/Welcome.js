@@ -6,8 +6,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 const Welcome = ({ navigation }) => {
   return (
     <LinearGradient
-      colors={['#FFFFFF', AppColors.PRIMARY, '#000000']}
-      locations={[0, 0.25, 1]}
+      colors={['#FFFFFF', "#0096FF99", AppColors.PRIMARY]}
+      locations={[0, 0.25, 0.75]}
       style={styles.welcomeContainer}
     >
       <Text style={styles.title}>BIDLY</Text>
