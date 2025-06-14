@@ -50,6 +50,7 @@ To start developing this app, you need to follow these steps:
 - [React Native Async Storage](https://www.npmjs.com/package/@react-native-async-storage/async-storage)
 - [React Navigation Native](https://www.npmjs.com/package/@react-navigation/native)
 - [Expo](https://expo.dev/)
+- [Expo Linear Gradient](https://www.npmjs.com/package/expo-linear-gradient)
 - [Expo Status Bar](https://docs.expo.dev/versions/latest/sdk/status-bar/)
 - [React](https://www.npmjs.com/package/react)
 - [React Native](https://reactnative.dev/)
