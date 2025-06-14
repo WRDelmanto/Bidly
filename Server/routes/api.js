@@ -139,13 +139,13 @@ router.post('/auction', async (req, res) => {
         console.log('Auction created:', newAuction);
 
         // Update seller's stats
-        await User.findByIdAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
             seller,
             { $inc: { 'stats.createdAuctions': 1 } }
         );
         console.log('Seller stats updated');
 
-        res.status(201).json(newAuction);
+        res.status(201).json(updatedUser);
     } catch (error) {
         console.error('Error creating auction:', error.message);
         res.status(400).json({ message: error.message });
