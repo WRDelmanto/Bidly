@@ -138,11 +138,6 @@ router.post('/auction', async (req, res) => {
         const newAuction = await auction.save();
         console.log('Auction created:', newAuction);
 
-        await User.findByIdAndUpdate(
-            seller,
-            { $inc: { 'stats.createdAuctions': 1 } }
-        );
-
         // Update seller's stats
         await User.findByIdAndUpdate(
             seller,
