@@ -85,7 +85,6 @@ const SignUp = ({ navigation }) => {
   return (
     <View style={AppStyles.mainContainer}>
       <Image
-        source={require("../../assets/lamp.jpg")}
         style={styles.imageContainer}
       />
       {/* Form Sign Up*/}

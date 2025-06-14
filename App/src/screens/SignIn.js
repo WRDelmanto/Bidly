@@ -92,70 +92,68 @@ const SignIn = ({ navigation }) => {
   };
 
   return (
-    <View style={AppStyles.mainContainer}>
-      <Image
-        source={require("../../assets/lamp.jpg")}
-        style={styles.imageContainer}
-      />
+    <View style={styles.mainContainer}>
       {!isServerUp && (
         <Icon style={styles.serverAlert} name="alert" color={"#FF0000"} size={24} />
       )}
       <View>
         <Text style={styles.title}>Hello</Text>
-        <Text>Welcome to Bidly!</Text>
+        <Text style={styles.subTitle}>Welcome to Bidly!</Text>
       </View>
 
-      {/* Form login*/}
-      <Text style={styles.title}>Sign In</Text>
-      <View style={AppStyles.mainTextInputContainer}>
-        <Icon name="email-outline" size={24} color={AppColors.PRIMARY} />
-        <TextInput
-          style={[AppStyles.mainTextInputContainerText]}
-          placeholder="Email"
-          keyboardType="email-address"
-          value={email}
-          onChangeText={setEmail}
-          editable={!isLoading}
-        />
-      </View>
-      <View style={AppStyles.mainTextInputContainer}>
-        <Icon name="lock-outline" size={20} color={AppColors.PRIMARY} />
-        <TextInput
-          style={AppStyles.mainTextInputContainerText}
-          placeholder="Password"
-          secureTextEntry
-          value={password}
-          onChangeText={setPassword}
-          editable={!isLoading}
-        />
-      </View>
-      <Pressable onPress={() => { navigation.navigate('ForgotPassword') }}>
-        <Text style={styles.forgot}>Forgot Password?</Text>
-      </Pressable>
-      <View>
-        <Pressable
-          style={[AppStyles.mainButton, isLoading && styles.disabledButton]}
-          onPress={handleSignIn}
-          disabled={isLoading}
-        >
-          <Text style={AppStyles.mainButtonText}>
-            {isLoading ? "Signing In..." : "Login"}
-          </Text>
+      <View style={styles.cardContainer}>
+        <Text style={styles.titleCard}>Sign In</Text>
+        <View style={AppStyles.mainTextInputContainer}>
+          <Icon name="email-outline" size={24} color={AppColors.PRIMARY} />
+          <TextInput
+            style={[AppStyles.mainTextInputContainerText]}
+            placeholder="Email"
+            keyboardType="email-address"
+            value={email}
+            onChangeText={setEmail}
+            editable={!isLoading}
+          />
+        </View>
+        <View style={AppStyles.mainTextInputContainer}>
+          <Icon name="lock-outline" size={20} color={AppColors.PRIMARY} />
+          <TextInput
+            style={AppStyles.mainTextInputContainerText}
+            placeholder="Password"
+            secureTextEntry
+            value={password}
+            onChangeText={setPassword}
+            editable={!isLoading}
+          />
+        </View>
+        <Pressable onPress={() => { navigation.navigate('ForgotPassword') }}>
+          <Text style={styles.forgot}>Forgot Password?</Text>
         </Pressable>
-        <Pressable onPress={() => { navigation.navigate('SignUp') }}>
-          <Text style={styles.signUp}>
-            Don't have account? <Text style={{ textDecorationLine: 'underline' }}>SignUp</Text>
-          </Text>
-        </Pressable>
+        <View>
+          <Pressable
+            style={[AppStyles.mainButton, isLoading && styles.disabledButton]}
+            onPress={handleSignIn}
+            disabled={isLoading}
+          >
+            <Text style={AppStyles.mainButtonText}>
+              {isLoading ? "Signing In..." : "Login"}
+            </Text>
+          </Pressable>
+          <Pressable onPress={() => { navigation.navigate('SignUp') }}>
+            <Text style={styles.signUp}>
+              Don't have account? <Text style={{ textDecorationLine: 'underline' }}>Sign Up</Text>
+            </Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  imageContainer: {
-    width: 64,
-    height: 64,
+  mainContainer: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#0096FF99",
   },
   serverAlert: {
     position: "absolute",
@@ -163,14 +161,33 @@ const styles = StyleSheet.create({
     right: 20,
   },
   title: {
+    fontSize: 48,
+    marginTop: 84,
+    color: "Black",
+    fontWeight: "bold",
+    marginHorizontal: 32,
+  },
+  subTitle: {
+    fontSize: 20,
+    marginHorizontal: 32,
+  },
+  cardContainer: {
+    height: "100%",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 50,
+    marginTop: 64,
+    paddingHorizontal: 32,
+  },
+  titleCard: {
     fontSize: 30,
-    marginTop: 50,
+    marginTop: 32,
     color: "Black",
     fontWeight: "bold",
   },
   forgot: {
     textAlign: "right",
-    marginTop: 12,
+    marginTop: 10,
+    marginBottom: 32,
   },
   signUp: {
     textAlign: "center",
@@ -180,4 +197,5 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
 });
+
 export default SignIn;
