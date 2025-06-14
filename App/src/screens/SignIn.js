@@ -1,6 +1,5 @@
 import { Text, View, StyleSheet, TextInput, Pressable, Alert } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { Image } from "react-native";
 import { AppStyles } from "../constants/styles.js";
 import { AppColors } from "../constants/colors.js";
 import { ENDPOINTS } from "../constants/api.js";
