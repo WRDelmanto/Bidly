@@ -143,7 +143,7 @@ router.post('/auction', async (req, res) => {
             seller,
             { $inc: { 'stats.createdAuctions': 1 } }
         );
-        console.log('Seller stats updated');
+        console.log('Seller stats updated:', updatedUser);
 
         res.status(201).json({
             user: updatedUser,
