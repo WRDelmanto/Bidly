@@ -9,7 +9,7 @@ const CreateAuction = ({ navigation }) => {
           <Icon
             name="arrow-back"
             size={30}
-            onPress={() => console.log('Arrow back clicked')}
+            onPress={() => navigation.goBack()}
           />
           <Text>New Auction</Text>
         </View>
