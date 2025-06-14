@@ -1,6 +1,5 @@
-import { Text, View, StyleSheet, TextInput, Pressable } from "react-native";
+import { Text, View, StyleSheet, TextInput, Pressable,Alert } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { Image } from "react-native";
 import { AppStyles } from "../constants/styles.js";
 import { AppColors } from "../constants/colors.js";
 import { useState } from "react";
@@ -27,7 +26,7 @@ const EditProfile = ({ navigation }) => {
   };
 
   return (
-    <View style={AppStyles.container}>
+    <View style={AppStyles.mainContainer}>
       <View style={styles.editProfile}>
         <Pressable onPress={handleCancel}>
           <Icon name="arrow-left" size={35} color={AppColors.PRIMARY} />

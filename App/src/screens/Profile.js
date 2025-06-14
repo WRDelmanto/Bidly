@@ -23,7 +23,7 @@ const Profile = ({ navigation }) => {
   };
   return (
     <View style={{ flex: 1 }}>
-      <View style={AppStyles.container}>
+      <View style={AppStyles.mainContainer}>
         <View style={styles.header}>
           <View>
             <Icon style={styles.avatarContainer} name="account-circle" size={80} color={AppColors.PRIMARY} />
