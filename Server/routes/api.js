@@ -152,4 +152,16 @@ router.post('/auction', async (req, res) => {
     }
 });
 
+router.get('/auctions', async (req, res) => {
+    console.log('Auction fetch request received, info:', req.body);
+    try {
+        const { user } = req.body;
+        const auctions = await Auction.find({ seller: user });
+        res.status(200).json(auctions);
+    } catch (error) {
+        console.error('Error fetching auctions:', error.message);
+        res.status(500).json({ message: error.message });
+    }
+});
+
 export default router; 
