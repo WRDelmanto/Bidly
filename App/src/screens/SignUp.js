@@ -83,86 +83,91 @@ const SignUp = ({ navigation }) => {
   };
 
   return (
-    <View style={AppStyles.mainContainer}>
-      <Image
-        style={styles.imageContainer}
-      />
-      {/* Form Sign Up*/}
-      <Pressable onPress={() => { navigation.navigate('SignIn') }}>
-        <View style={styles.backToSignInContainer}>
-          <Icon name="arrow-left" size={24} />
-          <Text style={styles.backtoSignInText}>Back to SignIn</Text>
-        </View>
-      </Pressable>
-      <Text style={styles.title}>Sign Up</Text>
-      <View style={AppStyles.mainTextInputContainer}>
-        <Icon name="account" size={24} color={AppColors.PRIMARY} />
-        <TextInput
-          style={AppStyles.mainTextInputContainerText}
-          placeholder="Name"
-          value={name}
-          onChangeText={setName}
-          editable={!isLoading}
-        />
-      </View>
-      <View style={AppStyles.mainTextInputContainer}>
-        <Icon name="email-outline" size={24} color={AppColors.PRIMARY} />
-        <TextInput
-          style={AppStyles.mainTextInputContainerText}
-          placeholder="Email"
-          keyboardType="email-address"
-          value={email}
-          onChangeText={setEmail}
-          editable={!isLoading}
-        />
-      </View>
-      <View style={AppStyles.mainTextInputContainer}>
-        <Icon name="lock-outline" size={20} color={AppColors.PRIMARY} />
-        <TextInput
-          style={AppStyles.mainTextInputContainerText}
-          placeholder="Password"
-          secureTextEntry
-          value={password}
-          onChangeText={setPassword}
-          editable={!isLoading}
-        />
-      </View>
-      <View style={AppStyles.mainTextInputContainer}>
-        <Icon name="lock-outline" size={20} color={AppColors.PRIMARY} />
-        <TextInput
-          style={AppStyles.mainTextInputContainerText}
-          placeholder="Confirm Password"
-          secureTextEntry
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          editable={!isLoading}
-        />
-      </View>
-
-      <View>
-        <Pressable
-          style={[AppStyles.mainButton, isLoading && styles.disabledButton]}
-          onPress={handleSignUp}
-          disabled={isLoading}
-        >
-          <Text style={AppStyles.mainButtonText}>
-            {isLoading ? "Signing Up..." : "Sign Up"}
-          </Text>
+    <View style={styles.mainContainer}>
+      <View style={styles.cardContainer}>
+        <Pressable onPress={() => { navigation.navigate('SignIn') }}>
+          <View style={styles.backToSignInContainer}>
+            <Icon name="arrow-left" size={24} />
+            <Text style={styles.backtoSignInText}>Back to Sign In</Text>
+          </View>
         </Pressable>
+        <Text style={styles.title}>Sign Up</Text>
+        <View style={AppStyles.mainTextInputContainer}>
+          <Icon name="account" size={24} color={AppColors.PRIMARY} />
+          <TextInput
+            style={AppStyles.mainTextInputContainerText}
+            placeholder="Name"
+            value={name}
+            onChangeText={setName}
+            editable={!isLoading}
+          />
+        </View>
+        <View style={AppStyles.mainTextInputContainer}>
+          <Icon name="email-outline" size={24} color={AppColors.PRIMARY} />
+          <TextInput
+            style={AppStyles.mainTextInputContainerText}
+            placeholder="Email"
+            keyboardType="email-address"
+            value={email}
+            onChangeText={setEmail}
+            editable={!isLoading}
+          />
+        </View>
+        <View style={AppStyles.mainTextInputContainer}>
+          <Icon name="lock-outline" size={20} color={AppColors.PRIMARY} />
+          <TextInput
+            style={AppStyles.mainTextInputContainerText}
+            placeholder="Password"
+            secureTextEntry
+            value={password}
+            onChangeText={setPassword}
+            editable={!isLoading}
+          />
+        </View>
+        <View style={AppStyles.mainTextInputContainer}>
+          <Icon name="lock-outline" size={20} color={AppColors.PRIMARY} />
+          <TextInput
+            style={AppStyles.mainTextInputContainerText}
+            placeholder="Confirm Password"
+            secureTextEntry
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            editable={!isLoading}
+          />
+        </View>
+        <View>
+          <Pressable
+            style={[AppStyles.mainButton, isLoading && styles.disabledButton]}
+            onPress={handleSignUp}
+            disabled={isLoading}
+          >
+            <Text style={AppStyles.mainButtonText}>
+              {isLoading ? "Signing Up..." : "Sign Up"}
+            </Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  imageContainer: {
-    width: 70,
-    height: 70,
+  mainContainer: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#0096FF99",
+  },
+  cardContainer: {
+    height: "100%",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 50,
+    marginTop: 150,
+    paddingHorizontal: 32,
   },
   backToSignInContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 40,
+    marginTop: 24,
   },
   backtoSignInText: {
     textAlign: "left",
