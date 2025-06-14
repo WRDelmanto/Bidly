@@ -63,7 +63,7 @@ const Profile = ({ navigation }) => {
         </View>
       </View>
       <View style={styles.navBar}>
-        <NavBar />
+        <NavBar navigation={navigation}/>
       </View>
     </View>
   ); 
