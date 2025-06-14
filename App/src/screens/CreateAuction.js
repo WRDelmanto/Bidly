@@ -1,7 +1,61 @@
 import { Text, View, StyleSheet, TextInput } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { ENDPOINTS } from "../constants/api.js";
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from "react";
+
+import { ToastAndroid } from 'react-native';
 
 const CreateAuction = ({ navigation }) => {
+  const [user, setUser] = useState()
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [publishing, setPublishing] = useState(false);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem('user');
+        setUser(jsonValue != null ? JSON.parse(jsonValue) : null);
+      } catch (error) {
+        console.error('Error reading user data:', error);
+      }
+    };
+
+    getUserData()
+  }, []);
+
+  const handlePublish = async () => {
+    setPublishing(true);
+
+    try {
+      const response = await fetch(ENDPOINTS.AUCTION, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title,
+          description,
+          seller: user
+        })
+      });
+
+      if (response.ok) {
+        console.log('Auction created successfully');
+        ToastAndroid.show('Auction created successfully', ToastAndroid.SHORT);
+        navigation.goBack()
+      } else {
+        console.log('Failed to create auction');
+      }
+    } catch (error) {
+      console.error('Error creating auction:', error);
+    } finally {
+      setPublishing(false);
+    }
+  };
+
   return (
     <View>
       <View style={styles.subStatusBar}>
@@ -13,7 +67,7 @@ const CreateAuction = ({ navigation }) => {
           />
           <Text>New Auction</Text>
         </View>
-        <Text onPress={() => { console.log('Publish clicked') }}>Publish</Text>
+        <Text onPress={handlePublish}>Publish</Text>
       </View>
       <View style={styles.userInfo}>
         <Icon
@@ -21,7 +75,7 @@ const CreateAuction = ({ navigation }) => {
           size={30}
           onPress={() => console.log('Arrow back clicked')}
         />
-        <Text>Name</Text>
+        <Text>{user?.name}</Text>
       </View>
       <View style={styles.auctionInfo}>
         <View>
@@ -31,6 +85,7 @@ const CreateAuction = ({ navigation }) => {
             placeholder="Add picture"
             placeholderTextColor="#888"
             onChangeText={(text) => console.log(text)}
+            editable={!publishing}
           />
         </View>
         <View>
@@ -39,7 +94,8 @@ const CreateAuction = ({ navigation }) => {
             style={styles.input}
             placeholder="Title"
             placeholderTextColor="#888"
-            onChangeText={(text) => console.log(text)}
+            onChangeText={(text) => setTitle(text)}
+            editable={!publishing}
           />
         </View>
         <View>
@@ -48,11 +104,17 @@ const CreateAuction = ({ navigation }) => {
             style={styles.descriptionInput}
             placeholder="Description"
             placeholderTextColor="#888"
-            onChangeText={(text) => console.log(text)}
+            onChangeText={(text) => setDescription(text)}
             multiline={true}
+            editable={!publishing}
           />
         </View>
       </View>
+      {publishing && (
+        <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.5)', justifyContent: 'center', alignItems: 'center' }}>
+          <Text>Loading...</Text>
+        </View>
+      )}
     </View>
   );
 };
