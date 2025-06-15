@@ -147,7 +147,7 @@ router.get('/auctions/:id', async (req, res) => {
     try {
         const { id } = req.params;
 
-        const auctions = await Auction.find({ seller: id });
+        const auctions = await Auction.find({ seller: new mongoose.Types.ObjectId(id) });
 
         res.status(200).json(auctions || []);
     } catch (error) {
@@ -162,11 +162,10 @@ router.get('/feed/:id', async (req, res) => {
 
     try {
         const { id } = req.params;
-
         const auctions = await Auction.aggregate([
             {
                 $match: {
-                    seller: { $ne: id },
+                    seller: { $ne: new mongoose.Types.ObjectId(id) },
                     isClosed: false
                 }
             },
@@ -188,11 +187,10 @@ router.get('/emptySearch/:id', async (req, res) => {
 
     try {
         const { id } = req.params;
-
         const auctions = await Auction.aggregate([
             {
                 $match: {
-                    seller: { $ne: id },
+                    seller: { $ne: new mongoose.Types.ObjectId(id) },
                     isClosed: false
                 }
             },
@@ -214,11 +212,10 @@ router.get('/search/:id/:searchString', async (req, res) => {
 
     try {
         const { id, searchString } = req.params;
-
         const auctions = await Auction.aggregate([
             {
                 $match: {
-                    seller: { $ne: id },
+                    seller: { $ne: new mongoose.Types.ObjectId(id) },
                     isClosed: false,
                     $or: [
                         { title: { $regex: new RegExp(searchString, 'i') } },
