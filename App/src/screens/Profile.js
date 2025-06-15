@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Pressable, ScrollView } from "react-native";
+import { Text, View, StyleSheet, Pressable, FlatList } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AppStyles } from "../constants/styles";
 import { ENDPOINTS } from "../constants/api.js";
@@ -88,15 +88,17 @@ const Profile = ({ navigation }) => {
           <Text style={styles.userName}>{user?.name}</Text>
         </View>
       </View>
-      <ScrollView style={styles.scrollView}>
-        {auctions.map((auction) => (
+      <FlatList
+        data={auctions}
+        style={styles.flatList}
+        renderItem={({ item: auction }) => (
           <AuctionItem
             key={auction._id}
             auction={auction}
             onPress={() => navigation.navigate('Auction', { auction })}
           />
-        ))}
-      </ScrollView>
+        )}
+      />
       <Pressable
         style={styles.configIcon}
         onPress={() => setShowDropdown(!showDropdown)}>
@@ -162,7 +164,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     marginBottom: 12,
   },
-  scrollView: {
+  flatList: {
     marginBottom: 40,
   },
   configIcon: {
