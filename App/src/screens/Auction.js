@@ -3,9 +3,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { AppColors } from "../constants/colors";
 import { AppStyles } from "../constants/styles";
 
-const Auction = ({ navigation }) => {
+const Auction = ({ navigation, route }) => {
+  const { auction } = route.params;
+
   return (
-    <View style={AppStyles.mainContainer}>
+    <View View style={AppStyles.mainContainer} >
       <View style={styles.imageContainer}>
         <Image style={styles.mainImage} />
         <View style={styles.subStatusBar}>
@@ -17,8 +19,9 @@ const Auction = ({ navigation }) => {
         </View>
       </View>
       <View style={styles.auctionInfo}>
-        <Text>Title</Text>
-        <Text>Description</Text>
+        {console.log('Auction data:', auction)}
+        <Text>{auction.title}</Text>
+        <Text>{auction.description}</Text>
       </View>
       <View style={styles.navbar}>
         <TextInput
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
   subStatusBar: {
     position: "absolute",
     top: 20,
-    left: 20
+    left: 12
   },
   mainImage: {
     width: "100%",
