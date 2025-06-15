@@ -186,11 +186,11 @@ const styles = StyleSheet.create({
   forgot: {
     textAlign: "right",
     marginTop: 10,
-    marginBottom: 32,
+    marginBottom: 20,
   },
   signUp: {
     textAlign: "center",
-    marginTop: 24,
+    marginTop: 14,
   },
   disabledButton: {
     opacity: 0.7,
