@@ -170,7 +170,7 @@ router.get('/auctions/:id', async (req, res) => {
     }
 });
 
-// Get Auction Feed
+// Fetch Auction Feed and Exclude Seller ID
 router.get('/feed/:id', async (req, res) => {
     console.log('Get feed request received, info:', req.params.id);
     try {
@@ -186,6 +186,31 @@ router.get('/feed/:id', async (req, res) => {
         ]);
 
         res.status(200).json(auctions[0] || null);
+    } catch (error) {
+        console.error('Error fetching auctions:', error.message);
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Fetch Auctions by Search String and Exclude Seller ID
+router.get('/search/:id/:searchString', async (req, res) => {
+    console.log('Auctions fetch request received, info:', req.params.id, req.params.searchString);
+    try {
+        const { id, searchString } = req.params;
+        const auctions = await Auction.aggregate([
+            {
+                $match: {
+                    seller: { $ne: id },
+                    isClosed: false,
+                    $or: [
+                        { title: { $regex: new RegExp(searchString, 'i') } },
+                        { description: { $regex: new RegExp(searchString, 'i') } }
+                    ]
+                }
+            }
+        ]);
+
+        res.status(200).json(auctions || []);
     } catch (error) {
         console.error('Error fetching auctions:', error.message);
         res.status(500).json({ message: error.message });
