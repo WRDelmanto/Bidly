@@ -1,11 +1,8 @@
-import { Text, View, StyleSheet, TextInput } from "react-native";
+import { Text, View, StyleSheet, TextInput, Alert, ToastAndroid } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ENDPOINTS } from "../constants/api.js";
-import { Alert } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
-
-import { ToastAndroid } from 'react-native';
 import { AppStyles } from "../constants/styles.js";
 
 const CreateAuction = ({ navigation }) => {
