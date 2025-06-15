@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet, TextInput } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ENDPOINTS } from "../constants/api.js";
-
+import { Alert } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
 
@@ -27,7 +27,33 @@ const CreateAuction = ({ navigation }) => {
     getUserData()
   }, []);
 
+  const handleArrowBack = () => {
+    if (title || description) {
+      Alert.alert(
+        "Warning",
+        "Are you sure you want to go back? Your changes will be lost.",
+        [
+          {
+            text: "Cancel",
+            style: "cancel"
+          },
+          {
+            text: "Go back",
+            onPress: () => navigation.goBack()
+          }
+        ]
+      );
+    } else {
+      navigation.goBack();
+    }
+  }
+
   const handlePublish = async () => {
+    if (!title || !description) {
+      Alert.alert("Error", "Title and Description are required.");
+      return;
+    }
+
     setPublishing(true);
 
     try {
@@ -66,7 +92,7 @@ const CreateAuction = ({ navigation }) => {
           <Icon
             name="arrow-back"
             size={30}
-            onPress={() => navigation.goBack()}
+            onPress={handleArrowBack}
           />
         </View>
         <Text onPress={handlePublish}>Publish</Text>
@@ -75,7 +101,6 @@ const CreateAuction = ({ navigation }) => {
         <Icon
           name="account-circle"
           size={42}
-          onPress={() => console.log('Arrow back clicked')}
         />
         <Text>{user?.name}</Text>
       </View>
