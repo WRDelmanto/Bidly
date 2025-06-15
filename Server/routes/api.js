@@ -90,7 +90,7 @@ router.post('/signIn', async (req, res) => {
 
 // Create Auction
 router.post('/auction', async (req, res) => {
-    console.log('Auction creation request received, info:', req.body);
+    console.log('[POST] Auction request received, info:', req.body);
 
     try {
         const { title, description, seller } = req.body;
@@ -142,7 +142,7 @@ router.post('/auction', async (req, res) => {
 
 // Get Auctions by ID
 router.get('/auctions/:id', async (req, res) => {
-    console.log('Auctions fetch request received, info:', req.params.id);
+    console.log('Auctions by id fetch request received, info:', req.params.id);
 
     try {
         const { id } = req.params;
@@ -158,7 +158,7 @@ router.get('/auctions/:id', async (req, res) => {
 
 // Fetch Auction Feed and Exclude Seller ID
 router.get('/feed/:id', async (req, res) => {
-    console.log('Get feed request received, info:', req.params.id);
+    console.log('Feed request received, info:', req.params.id);
 
     try {
         const { id } = req.params;
@@ -184,7 +184,7 @@ router.get('/feed/:id', async (req, res) => {
 
 // Fetch Auctions without Search String and Exclude Seller ID
 router.get('/emptySearch/:id', async (req, res) => {
-    console.log('Auctions fetch request received, info:', req.params.id);
+    console.log('EmptyString request received, info:', req.params.id);
 
     try {
         const { id } = req.params;
@@ -210,7 +210,7 @@ router.get('/emptySearch/:id', async (req, res) => {
 
 // Fetch Auctions with Search String and Exclude Seller ID
 router.get('/search/:id/:searchString', async (req, res) => {
-    console.log('Auctions fetch request received, info:', req.params.id, req.params.searchString);
+    console.log('Search request received, info:', req.params.id, req.params.searchString);
 
     try {
         const { id, searchString } = req.params;
