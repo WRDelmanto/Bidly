@@ -1,11 +1,8 @@
 import { TextInput, View } from "react-native";
 import { AppStyles } from "../constants/styles";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useState } from "react";
 
-const SearchBar = () => {
-    const [input, setInput] = useState('')
-
+const SearchBar = ({ input, handleSearch }) => {
     return (
         <View style={AppStyles.mainTextInputContainer}>
             <Icon name="search" size={24} />
@@ -13,7 +10,9 @@ const SearchBar = () => {
                 style={[AppStyles.mainTextInputContainerText]}
                 placeholder="Search"
                 value={input}
-                onChangeText={setInput}
+                onChangeText={(text) => {handleSearch(text)}}
+                autoCorrect={false}
+                autoCapitalize="none"
             />
         </View>
     );

@@ -9,4 +9,6 @@ export const ENDPOINTS = {
     AUCTION: `${API_URL}/auction`,
     AUCTIONS: `${API_URL}/auctions`,
     FEED: `${API_URL}/feed`,
-}; 
+    EMPTY_SEARCH: `${API_URL}/emptySearch`,
+    SEARCH: `${API_URL}/search`,
+};
