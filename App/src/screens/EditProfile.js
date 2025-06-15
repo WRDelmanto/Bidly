@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, TextInput, Pressable,Alert } from "react-native";
+import { Text, View, StyleSheet, TextInput, Pressable, Alert } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { AppStyles } from "../constants/styles.js";
 import { AppColors } from "../constants/colors.js";
@@ -19,8 +19,8 @@ const EditProfile = ({ navigation }) => {
       "Cancel Edit Profile",
       "Are you sure you want to cancel editing your profile?",
       [
-        { text: "OK", onPress: () => navigation.goBack() },
-        { text: "Continue", onPress: () => {} }
+        { text: "Go back", onPress: () => navigation.goBack() },
+        { text: "Continue", onPress: () => { } }
       ]
     );
   };
