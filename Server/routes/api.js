@@ -175,12 +175,17 @@ router.get('/feed/:id', async (req, res) => {
     console.log('Get feed request received, info:', req.params.id);
     try {
         const { id } = req.params;
-        const auction = await Auction.findOne({
-            seller: { $ne: id },
-            isClosed: false
-        }).sort({ $random: 1 });
+        const auctions = await Auction.aggregate([
+            {
+                $match: {
+                    seller: { $ne: id },
+                    isClosed: false
+                }
+            },
+            { $sample: { size: 1 } }
+        ]);
 
-        res.status(200).json(auction || null);
+        res.status(200).json(auctions[0] || null);
     } catch (error) {
         console.error('Error fetching auctions:', error.message);
         res.status(500).json({ message: error.message });
