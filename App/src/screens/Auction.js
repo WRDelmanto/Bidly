@@ -6,6 +6,10 @@ import { AppStyles } from "../constants/styles";
 const Auction = ({ navigation, route }) => {
   const { auction } = route.params;
 
+  const handlePlaceBid = () => {
+    console.log('Place bid clicked')
+  };
+
   return (
     <View View style={AppStyles.mainContainer} >
       <View style={styles.imageContainer}>
@@ -32,7 +36,7 @@ const Auction = ({ navigation, route }) => {
         />
         <TouchableOpacity
           style={styles.bidButton}
-          onPress={() => console.log('Place bid clicked')}
+          onPress={handlePlaceBid}
         >
           <Text style={styles.bidButtonText}>Place Bid</Text>
         </TouchableOpacity>
@@ -56,32 +60,31 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "350",
     marginTop: 20,
-
   },
   auctionInfo: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",
-    paddingTop: 12,
+    paddingTop: 20,
     alignItems: "start",
-    paddingHorizontal: 20,
     gap: 8
   },
   navbar: {
     position: "absolute",
-    bottom: 0,
-    width: "100%",
+    bottom: 20,
+    left: 20,
+    right: 20,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    gap: 20,
+    justifyContent: "space-around",
     marginTop: 20,
-    paddingHorizontal: 20
   },
   bidButton: {
+    flexGrow: 3,
     backgroundColor: AppColors.PRIMARY,
     paddingVertical: 12,
-    width: "65%",
     borderRadius: 8,
     alignItems: 'center'
   },
@@ -91,11 +94,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   bidInput: {
-    width: "30%",
+    width: 60,
+    flexGrow: 1,
     borderWidth: 1,
     borderColor: "#000000",
     borderRadius: 8,
-    paddingHorizontal: 12,
     paddingVertical: 12,
     fontSize: 16,
     fontWeight: 'bold',
