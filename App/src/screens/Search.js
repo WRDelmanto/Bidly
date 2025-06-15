@@ -36,7 +36,7 @@ const Search = ({ navigation }) => {
       if (response.ok) {
         const results = await response.json();
         setAuctions(results);
-        console.log('Auctions:', results);
+        console.log('Auctions:', results.length);
       } else {
         console.log('Search failed');
         setAuctions([]);
