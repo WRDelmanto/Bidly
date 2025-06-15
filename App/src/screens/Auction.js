@@ -1,17 +1,18 @@
 import { Text, Image, View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { AppColors } from "../constants/colors";
+import { AppStyles } from "../constants/styles";
 
 const Auction = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <View style={AppStyles.mainContainer}>
       <View style={styles.imageContainer}>
         <Image style={styles.mainImage} />
         <View style={styles.subStatusBar}>
           <Icon
             name="arrow-back"
             size={30}
-            onPress={() => console.log('Arrow back clicked')}
+            onPress={() => navigation.goBack()}
           />
         </View>
       </View>
@@ -38,9 +39,6 @@ const Auction = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
   imageContainer: {
     position: "relative",
     borderBottomWidth: 1,

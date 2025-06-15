@@ -36,6 +36,7 @@ const NavBar = ({ navigation }) => {
 const styles = StyleSheet.create({
   navbar: {
     position: "absolute",
+    backgroundColor: "#FFFFFF",
     bottom: 0,
     left: 0,
     right: 0,
@@ -44,7 +45,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    elevation: 100,
+    borderTopColor: "#000000",
+    borderTopWidth: 0.5,
   },
 });
 

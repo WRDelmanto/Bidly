@@ -1,9 +1,10 @@
-import { Text, View, StyleSheet, Pressable } from "react-native";
+import { Text, View, StyleSheet, Pressable, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AppStyles } from "../constants/styles";
 import { ENDPOINTS } from "../constants/api.js";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import NavBar from "../components/NavBar";
+import AuctionItem from "../components/AuctionItem";
 import { useState, useCallback } from "react";
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -83,37 +84,46 @@ const Profile = ({ navigation }) => {
             </View>
           </View>
         </View>
-        <Pressable
-          style={styles.configIcon}
-          onPress={() => setShowDropdown(!showDropdown)}>
-          <Icon
-            name="cog"
-            size={28}
+        <View>
+          <Text style={styles.userName}>{user?.name}</Text>
+        </View>
+      </View>
+      <ScrollView style={styles.scrollView}>
+        {auctions.map((auction) => (
+          <AuctionItem
+            key={auction._id}
+            auction={auction}
+            onPress={() => navigation.navigate('Auction', { auction })}
           />
-        </Pressable>
-        {showDropdown && (
-          <View style={styles.dropdown}>
-            <Pressable style={styles.dropdownItem} onPress={handleEditProfile}>
-              <Icon
-                name="account-edit"
-                size={20}
-                style={styles.dropdownIcon}
-              />
-              <Text style={styles.dropdownText}>Edit Profile</Text>
-            </Pressable>
-            <Pressable style={styles.dropdownItem} onPress={handleSignOff}>
-              <Icon name="logout"
-                size={20}
-                style={styles.dropdownIcon}
-              />
-              <Text style={styles.dropdownText}>Logoff</Text>
-            </Pressable>
-          </View>
-        )}
-      </View>
-      <View>
-        <Text style={styles.userName}>{user?.name}</Text>
-      </View>
+        ))}
+      </ScrollView>
+      <Pressable
+        style={styles.configIcon}
+        onPress={() => setShowDropdown(!showDropdown)}>
+        <Icon
+          name="cog"
+          size={28}
+        />
+      </Pressable>
+      {showDropdown && (
+        <View style={styles.dropdown}>
+          <Pressable style={styles.dropdownItem} onPress={handleEditProfile}>
+            <Icon
+              name="account-edit"
+              size={20}
+              style={styles.dropdownIcon}
+            />
+            <Text style={styles.dropdownText}>Edit Profile</Text>
+          </Pressable>
+          <Pressable style={styles.dropdownItem} onPress={handleSignOff}>
+            <Icon name="logout"
+              size={20}
+              style={styles.dropdownIcon}
+            />
+            <Text style={styles.dropdownText}>Logoff</Text>
+          </Pressable>
+        </View>
+      )}
       <NavBar navigation={navigation} />
     </View >
   );
@@ -134,32 +144,36 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    gap: 20,
+    gap: 32,
   },
   statsInfo: {
     alignItems: "center",
   },
   statsText: {
-    fontSize: 16,
+    fontSize: 20,
   },
   statsSubText: {
-    fontSize: 14,
+    fontSize: 16,
   },
   userName: {
     fontSize: 20,
     color: "Black",
     fontWeight: "bold",
     marginLeft: 8,
+    marginBottom: 12,
+  },
+  scrollView: {
+    marginBottom: 40,
   },
   configIcon: {
     position: "absolute",
-    top: 0,
-    right: 0,
+    top: 10,
+    right: 20,
   },
   dropdown: {
     position: "absolute",
-    top: 25,
-    right: 25,
+    top: 45,
+    right: 45,
     backgroundColor: "#FFFFFF",
     borderRadius: 8,
     elevation: 5,
