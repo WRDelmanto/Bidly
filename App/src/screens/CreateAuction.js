@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
 
 import { ToastAndroid } from 'react-native';
+import { AppStyles } from "../constants/styles.js";
 
 const CreateAuction = ({ navigation }) => {
   const [user, setUser] = useState()
@@ -59,7 +60,7 @@ const CreateAuction = ({ navigation }) => {
   };
 
   return (
-    <View>
+    <View style={AppStyles.mainContainer}>
       <View style={styles.subStatusBar}>
         <View style={styles.subStatusBarArrowContainer}>
           <Icon
@@ -67,14 +68,13 @@ const CreateAuction = ({ navigation }) => {
             size={30}
             onPress={() => navigation.goBack()}
           />
-          <Text>New Auction</Text>
         </View>
         <Text onPress={handlePublish}>Publish</Text>
       </View>
       <View style={styles.userInfo}>
         <Icon
           name="account-circle"
-          size={30}
+          size={42}
           onPress={() => console.log('Arrow back clicked')}
         />
         <Text>{user?.name}</Text>
