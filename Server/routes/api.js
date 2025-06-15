@@ -193,20 +193,25 @@ router.get('/feed/:id', async (req, res) => {
 });
 
 // Fetch Auctions by Search String and Exclude Seller ID
-router.get('/search/:id/:searchString', async (req, res) => {
+router.get('/search/:id/:searchString?', async (req, res) => {
     console.log('Auctions fetch request received, info:', req.params.id, req.params.searchString);
     try {
         const { id, searchString } = req.params;
+        let matchQuery = {
+            seller: { $ne: id },
+            isClosed: false
+        };
+
+        if (searchString) {
+            matchQuery.$or = [
+                { title: { $regex: new RegExp(searchString, 'i') } },
+                { description: { $regex: new RegExp(searchString, 'i') } }
+            ];
+        }
+
         const auctions = await Auction.aggregate([
             {
-                $match: {
-                    seller: { $ne: id },
-                    isClosed: false,
-                    $or: [
-                        { title: { $regex: new RegExp(searchString, 'i') } },
-                        { description: { $regex: new RegExp(searchString, 'i') } }
-                    ]
-                }
+                $match: matchQuery
             }
         ]);
 
