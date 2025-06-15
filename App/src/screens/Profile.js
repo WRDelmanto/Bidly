@@ -55,6 +55,7 @@ const Profile = ({ navigation }) => {
   const handleSignOff = async () => {
     try {
       await AsyncStorage.removeItem('user');
+      await AsyncStorage.removeItem('currentAuction');
       navigation.navigate('SignIn');
     } catch (error) {
       console.error('Error signing off:', error);
