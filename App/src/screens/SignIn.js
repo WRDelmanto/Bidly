@@ -24,7 +24,7 @@ const SignIn = ({ navigation }) => {
           console.log(`[${new Date().toISOString()}] Server is ${isHealthy ? 'Up' : 'Down'}`);
           setIsServerUp(isHealthy);
         } catch (error) {
-          console.error('Failed to check server health:', error);
+          console.error(`[${new Date().toISOString()}] Failed to check server health:`, error);
           setIsServerUp(false);
         }
       };
