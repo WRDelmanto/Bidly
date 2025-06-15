@@ -11,7 +11,7 @@ router.get('/ping', (req, res) => {
 });
 
 // Signup Route
-router.post('/signup', async (req, res) => {
+router.post('/signUp', async (req, res) => {
     console.log('Signup request received, info: ', req.body);
     try {
         const { name, email, password } = req.body;
@@ -59,7 +59,7 @@ router.post('/signup', async (req, res) => {
 });
 
 // Signin Route
-router.post('/signin', async (req, res) => {
+router.post('/signIn', async (req, res) => {
     console.log('Signin request received, info: ', req.body);
     try {
         const { email, password } = req.body;
