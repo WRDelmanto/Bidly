@@ -227,9 +227,11 @@ router.get('/search/:id/:searchString', async (req, res) => {
                     $or: [
                         { title: { $regex: new RegExp(searchString, 'i') } },
                         { description: { $regex: new RegExp(searchString, 'i') } }
-                    ],
-                    $sample: { size: 50 }
+                    ]
                 }
+            },
+            {
+                $sample: { size: 50 }
             }
         ]);
 
