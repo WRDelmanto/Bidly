@@ -192,26 +192,44 @@ router.get('/feed/:id', async (req, res) => {
     }
 });
 
-// Fetch Auctions by Search String and Exclude Seller ID
-router.get('/search/:id/:searchString?', async (req, res) => {
+// Fetch Auctions without Search String and Exclude Seller ID
+router.get('/emptySearch/:id', async (req, res) => {
+    console.log('Auctions fetch request received, info:', req.params.id);
+    try {
+        const { id } = req.params;
+        const auctions = await Auction.aggregate([
+            {
+                $match: {
+                    seller: { $ne: id },
+                    isClosed: false
+                }
+            },
+            { $sample: { size: 50 } }
+        ]);
+
+        res.status(200).json(auctions || []);
+    } catch (error) {
+        console.error('Error fetching auctions:', error.message);
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Fetch Auctions with Search String and Exclude Seller ID
+router.get('/search/:id/:searchString', async (req, res) => {
     console.log('Auctions fetch request received, info:', req.params.id, req.params.searchString);
     try {
         const { id, searchString } = req.params;
-        let matchQuery = {
-            seller: { $ne: id },
-            isClosed: false
-        };
-
-        if (searchString) {
-            matchQuery.$or = [
-                { title: { $regex: new RegExp(searchString, 'i') } },
-                { description: { $regex: new RegExp(searchString, 'i') } }
-            ];
-        }
-
         const auctions = await Auction.aggregate([
             {
-                $match: matchQuery
+                $match: {
+                    seller: { $ne: id },
+                    isClosed: false,
+                    $or: [
+                        { title: { $regex: new RegExp(searchString, 'i') } },
+                        { description: { $regex: new RegExp(searchString, 'i') } }
+                    ],
+                    $sample: { size: 50 }
+                }
             }
         ]);
 
