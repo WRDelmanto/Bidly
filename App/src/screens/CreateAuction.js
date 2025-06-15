@@ -14,16 +14,16 @@ const CreateAuction = ({ navigation }) => {
   const [description, setDescription] = useState('');
   const [publishing, setPublishing] = useState(false);
 
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const jsonValue = await AsyncStorage.getItem('user');
-        setUser(jsonValue != null ? JSON.parse(jsonValue) : null);
-      } catch (error) {
-        console.error('Error reading user data:', error);
-      }
-    };
+  const getUserData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('user');
+      setUser(jsonValue != null ? JSON.parse(jsonValue) : null);
+    } catch (error) {
+      console.error('Error reading user data:', error);
+    }
+  };
 
+  useEffect(() => {
     getUserData()
   }, []);
 
@@ -48,7 +48,7 @@ const CreateAuction = ({ navigation }) => {
         await AsyncStorage.setItem('user', JSON.stringify(data.user));
         console.log('Auction created successfully');
         ToastAndroid.show('Auction created successfully', ToastAndroid.SHORT);
-        navigation.goBack()
+        navigation.goBack();
       } else {
         console.log('Failed to create auction');
       }
