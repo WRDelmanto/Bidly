@@ -1,16 +1,12 @@
-import { Text } from "react-native";
+import { View } from "react-native";
+import NavBar from "../components/NavBar";
+import { AppStyles } from "../constants/styles";
 
 const Search = ({ navigation }) => {
   return (
-    <Text
-      style={{
-        textAlign: "center",
-        textAlignVertical: "center",
-        flex: 1,
-      }}
-    >
-      This is the Search Screen
-    </Text>
+    <View style={AppStyles.mainContainer}>
+      <NavBar navigation={navigation} />
+    </View>
   );
 };
 
