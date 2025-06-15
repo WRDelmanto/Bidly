@@ -27,7 +27,7 @@ const ForgotPassword = ({ navigation }) => {
         <Pressable onPress={() => navigation.goBack()}>
           <View style={styles.backToSignInContainer}>
             <Icon name="arrow-left" size={24} />
-            <Text style={styles.backToSignInText}>Back to SignIn</Text>
+            <Text style={styles.backToSignInText}>Back to Sign In</Text>
           </View>
         </Pressable>
         <Text style={styles.title}>Forgot Password</Text>
