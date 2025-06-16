@@ -5,13 +5,13 @@ import mongoose from "mongoose";
 
 const router = express.Router();
 
-// Ping Pong endpoint
+// Ping Pong check
 router.get('/ping', (req, res) => {
     console.log('Ping request received');
     res.status(200).json({ message: 'pong' });
 });
 
-// Signup Route
+// Signup
 router.post('/signUp', async (req, res) => {
     console.log('Signup request received, info: ', req.body);
     try {
@@ -50,7 +50,7 @@ router.post('/signUp', async (req, res) => {
     }
 });
 
-// Signin Route
+// Signin
 router.post('/signIn', async (req, res) => {
     console.log('Signin request received, info: ', req.body);
 
@@ -84,6 +84,69 @@ router.post('/signIn', async (req, res) => {
         res.status(200).json(userResponse);
     } catch (error) {
         console.error('Error in signin: ', error);
+        res.status(400).json({ message: error.message });
+    }
+});
+
+// Update User
+router.put('/editProfile/:id', async (req, res) => {
+    console.log('editProfile request received, info: ', req.params, req.body);
+
+    try {
+        const { id } = req.params;
+        const { name, email } = req.body;
+
+        if (!name || !email) {
+            return res.status(400).json({ message: 'Name and email are required' });
+        }
+
+        const user = await User.findById(new mongoose.Types.ObjectId(id));
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        user.name = name;
+        user.email = email;
+
+        const updatedUser = await user.save();
+
+        console.log('User updated successfully: ', updatedUser);
+
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        console.error('Error updating user: ', error);
+        res.status(400).json({ message: error.message });
+    }
+});
+
+// Change Password
+router.put('/changePassword/:id', async (req, res) => {
+    console.log('changePassword request received, info: ', req.body);
+
+    try {
+        const { id } = req.params;
+        const { password } = req.body;
+
+        if (!password) {
+            return res.status(400).json({ message: 'User ID and new password are required' });
+        }
+
+        const user = await User.findById(new mongoose.Types.ObjectId(id));
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        user.password = password;
+
+        const updatedUser = await user.save();
+
+        console.log('Password changed successfully: ', updatedUser);
+
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        console.error('Error changing password: ', error);
         res.status(400).json({ message: error.message });
     }
 });

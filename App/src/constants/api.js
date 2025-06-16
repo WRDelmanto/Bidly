@@ -8,6 +8,8 @@ export const ENDPOINTS = {
     PING: `${API_URL}/ping`,
     SIGNUP: `${API_URL}/signUp`,
     SIGNIN: `${API_URL}/signIn`,
+    EDIT_PROFILE: `${API_URL}/editProfile`,
+    CHANGE_PASSWORD: `${API_URL}/changePassword`,
     AUCTION: `${API_URL}/auction`,
     AUCTIONS: `${API_URL}/auctions`,
     FEED: `${API_URL}/feed`,
