@@ -11,7 +11,7 @@
 #### # ====================================
 
 ## About
-Bidly is a cross-platform mobile application built with React Native, designed for silent auctions. The app enables sellers to list items with images and starting bids, while bidders can browse, place bids, and receive real-time notifications—all within a clean, intuitive interface.
+Bidly is a cross-platform mobile application built with React Native, designed for silent auctions. The app enables sellers to list items with multiple images, while bidders can browse and place bids—all within a clean, intuitive interface.
 
 ## Initial Setup (Windows)
 
