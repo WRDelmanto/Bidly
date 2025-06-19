@@ -16,24 +16,25 @@ const SignUp = ({ navigation }) => {
 
   const handleSignUp = async () => {
     // Validate inputs
-    if (!name || !email || !password || !confirmPassword) {
-      if (!name) {
+    if (!name) {
         Alert.alert("Error", "Name is required");
         return;
       }
-      if (!email) {
+
+    if (!email) {
         Alert.alert("Error", "Email is required");
         return;
       }
+
       if (!password) {
         Alert.alert("Error", "Password is required");
         return;
       }
-      if (!confirmPassword) {
+
+    if (!confirmPassword) {
         Alert.alert("Error", "Confirm Password is required");
         return;
       }
-    }
 
     if (password !== confirmPassword) {
       Alert.alert("Error", "Passwords do not match");
