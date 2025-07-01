@@ -1,6 +1,7 @@
 import express from 'express';
 import User from '../models/user.js';
 import Auction from '../models/auction.js';
+import Bid from '../models/bid.js';
 import mongoose from "mongoose";
 
 const router = express.Router();
@@ -297,6 +298,60 @@ router.get('/search/:id/:searchString', async (req, res) => {
     } catch (error) {
         console.error('Error fetching auctions:', error.message);
         res.status(500).json({ message: error.message });
+    }
+});
+
+// Place Bid
+router.post('/bids', async (req, res) => {
+    console.log('[POST] Bid request received, info:', req.body);
+    try {
+        const { amount, auction, bidder } = req.body;
+
+        if (!amount) {
+            return res.status(400).json({ message: 'Amount is required' });
+        }
+        if (!auction) {
+            return res.status(400).json({ message: 'Auction is required' });
+        }
+        if (!bidder) {
+            return res.status(400).json({ message: 'Bidder is required' });
+        }
+
+        const auctionExists = await Auction.findById(auction);
+        if (!auctionExists) {
+            return res.status(404).json({ message: 'Auction not found' });
+        }
+
+        if (auctionExists.isClosed) {
+            return res.status(400).json({ message: 'Auction is closed' });
+        }
+
+        const bid = new Bid({
+            amount,
+            auction: auctionExists._id,
+            bidder,
+        });
+
+        const newBid = await bid.save();
+
+        const updateAuction = await Auction.findById(auction);
+        if (updateAuction) {
+            updateAuction.latestBid = newBid._id;
+            updateAuction.highestBid = amount;
+            await updateAuction.save();
+        }
+
+
+        console.log('Bid created:', newBid);
+        console.log('Auction updated:', updateAuction);
+
+        res.status(201).json({
+            bid: newBid,
+            auction: updateAuction
+        });
+    } catch (error) {
+        console.error('Error creating bid:', error.message);
+        res.status(400).json({ message: error.message });
     }
 });
 
