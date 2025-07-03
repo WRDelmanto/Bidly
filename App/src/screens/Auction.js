@@ -8,74 +8,55 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Auction = ({ navigation, route }) => {
   const { auction } = route.params;
-
   const [user, setUser] = useState(null);
   const [bidAmount, setBidAmount] = useState('');
-  const [currentAuction, setCurrentAuction] = useState(auction);
 
   const getUserData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem('user');
       const userData = jsonValue != null ? JSON.parse(jsonValue) : null;
-      console.log('User data:', userData);
+      //console.log('User data:', userData);
       setUser(userData);
 
     } catch (error) {
       console.error('Error reading user data:', error);
     }
   };
+
   useEffect(() => {
     getUserData();
   }, []);
 
-
   const handlePlaceBid = async () => {
-    //console.log('Place bid clicked')
     const amount = parseFloat(bidAmount.trim());
-    console.log(amount);
 
-    if (isNaN(amount) || amount <= 0) {
-      console.error('Invalid bid amount');
+    if (!amount || amount <= 0) {
       return Alert.alert('Invalid Bid', 'Please enter a valid bid amount.');
     }
+
     try {
-
-      let endpoint = `${ENDPOINTS.BIDS}`;
-
-
-      const response = await fetch(endpoint, {
+      const response = await fetch(ENDPOINTS.BID, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           amount,
-          auction: currentAuction._id,
-          bidder: user._id
+          auction: auction,
+          bidder: user
         })
-
       });
-      console.log(amount);
-      console.log(auction);
-      console.log('bidder:', user._id);
-      const contentType = response.headers.get('content-type');
-      console.log(' Response Content-Type:', contentType);
 
       if (response.ok) {
         const { bid, auction: updatedAuction } = await response.json();
-        setCurrentAuction(updatedAuction);
+        this.auction = auction;
         setBidAmount('');
         console.log('Bid successful:', bid);
       } else {
         const errorResponse = await response.json();
         console.log('Place bid failed', errorResponse);
-
-
       }
     } catch (error) {
       console.error('Error placing bid:', error);
-
-
     }
-
   };
 
   return (
@@ -91,12 +72,11 @@ const Auction = ({ navigation, route }) => {
         </View>
       </View>
       <View style={styles.auctionInfo}>
-        {console.log('Auction data:', currentAuction)}
-        <Text>{currentAuction.title}</Text>
-        <Text>{currentAuction.description}</Text>
-        {currentAuction.highestBid != null && (
+        <Text>{auction.title}</Text>
+        <Text>{auction.description}</Text>
+        {auction.highestBid != null && (
           <Text style={styles.latestBid}>
-            Highest Bid: R$ {currentAuction.highestBid.toFixed(2)}
+            ${auction.highestBid.amount.toFixed(2)}
           </Text>
         )}
       </View>

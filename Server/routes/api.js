@@ -310,14 +310,21 @@ router.post('/bid', async (req, res) => {
         if (!amount) {
             return res.status(400).json({ message: 'Amount is required' });
         }
+
         if (!auction) {
             return res.status(400).json({ message: 'Auction is required' });
         }
+
         if (!bidder) {
             return res.status(400).json({ message: 'Bidder is required' });
         }
 
-        const auctionExists = await Auction.findById(auction);
+        const userExists = await User.findById(bidder);
+        if (!userExists) {
+            return res.status(404).json({ message: 'User not found' })
+        }
+
+        const auctionExists = await Auction.findById(auction).populate('highestBid');
         if (!auctionExists) {
             return res.status(404).json({ message: 'Auction not found' });
         }
@@ -334,20 +341,17 @@ router.post('/bid', async (req, res) => {
 
         const newBid = await bid.save();
 
-        const updateAuction = await Auction.findById(auction);
-        if (updateAuction) {
-            updateAuction.latestBid = newBid._id;
-            updateAuction.highestBid = amount;
-            await updateAuction.save();
-        }
-
-
         console.log('Bid created:', newBid);
-        console.log('Auction updated:', updateAuction);
+
+        if (!auctionExists.highestBid || auctionExists.highestBid.amount < newBid.amount) {
+            auctionExists.highestBid = newBid._id;
+            const updatedAuction = await auctionExists.save();
+            console.log('Auction updated:', updatedAuction);
+        }
 
         res.status(201).json({
             bid: newBid,
-            auction: updateAuction
+            auction: auctionExists
         });
     } catch (error) {
         console.error('Error creating bid:', error.message);
