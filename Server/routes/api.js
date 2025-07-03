@@ -302,7 +302,7 @@ router.get('/search/:id/:searchString', async (req, res) => {
 });
 
 // Place Bid
-router.post('/bids', async (req, res) => {
+router.post('/bid', async (req, res) => {
     console.log('[POST] Bid request received, info:', req.body);
     try {
         const { amount, auction, bidder } = req.body;
