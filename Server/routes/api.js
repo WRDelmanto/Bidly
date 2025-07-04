@@ -161,7 +161,7 @@ router.post('/auction', async (req, res) => {
     console.log('[POST] Auction request received, info:', req.body);
 
     try {
-        const { title, description, seller } = req.body;
+        const { title, description, seller, images } = req.body;
 
         if (!title) {
             return res.status(400).json({ message: 'Title is required' });
@@ -184,7 +184,8 @@ router.post('/auction', async (req, res) => {
         const auction = new Auction({
             title,
             description,
-            seller
+            seller,
+            images: Array.isArray(images) ? images : []
         });
 
         const newAuction = await auction.save();

@@ -21,7 +21,10 @@ const auctionSchema = new mongoose.Schema({
     highestBid: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Bid'
-    }
+    },
+    images: [{
+        type: String
+    }]
 }, { timestamps: true });
 
 const Auction = mongoose.model('Auction', auctionSchema);

@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Image } from "react-native";
 import { StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -6,11 +6,14 @@ const AuctionItem = ({ auction, onPress }) => {
     return (
         <Pressable onPress={onPress}>
             <View style={styles.auctionItem}>
-                <Icon
-                    name="help-circle-outline"
-                    color="gray"
-                    size={80}
-                />
+                {auction.images[0] ? (
+                    <Image
+                        source={{ uri: auction.images[0] }}
+                        style={{ width: 80, height: 80, borderRadius: 100 }}
+                    />
+                ) : (
+                    <Icon name="account-circle" size={80} />
+                )}
                 <View style={styles.auctionInfo}>
                     <Text>{auction.title}</Text>
                     <Text>{auction.description}</Text>

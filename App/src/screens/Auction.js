@@ -62,7 +62,10 @@ const Auction = ({ navigation, route }) => {
   return (
     <View View style={AppStyles.mainContainer} >
       <View style={styles.imageContainer}>
-        <Image style={styles.mainImage} />
+        <Image
+          source={{ uri: auction.images[0] }}
+          style={styles.mainImage}
+        />
         <View style={styles.subStatusBar}>
           <Icon
             name="arrow-back"

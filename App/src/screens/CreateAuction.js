@@ -1,15 +1,17 @@
-import { Text, View, StyleSheet, TextInput, Alert, ToastAndroid, Image } from "react-native";
+import { Text, View, StyleSheet, TextInput, Alert, ToastAndroid, Image, ScrollView } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ENDPOINTS } from "../constants/api.js";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
 import { AppStyles } from "../constants/styles.js";
+import * as ImagePicker from 'expo-image-picker';
 
 const CreateAuction = ({ navigation }) => {
   const [user, setUser] = useState()
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [publishing, setPublishing] = useState(false);
+  const [images, setImages] = useState([]);
 
   const getUserData = async () => {
     try {
@@ -62,7 +64,8 @@ const CreateAuction = ({ navigation }) => {
         body: JSON.stringify({
           title,
           description,
-          seller: user
+          seller: user,
+          images: images
         })
       });
 
@@ -79,6 +82,18 @@ const CreateAuction = ({ navigation }) => {
       console.error('Error creating auction:', error);
     } finally {
       setPublishing(false);
+    }
+  };
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsMultipleSelection: true,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImages([...images, ...result.assets.map(asset => asset.uri)]);
     }
   };
 
@@ -112,13 +127,18 @@ const CreateAuction = ({ navigation }) => {
       <View style={styles.auctionInfo}>
         <View>
           <Text style={styles.label}>Pictures</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Add picture"
-            placeholderTextColor="#888"
-            onChangeText={(text) => console.log(text)}
-            editable={!publishing}
-          />
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Icon name="add-a-photo" size={30} onPress={pickImage} />
+            <ScrollView horizontal>
+              {images.map((uri, idx) => (
+                <Image
+                  key={idx}
+                  source={{ uri }}
+                  style={{ width: 60, height: 60, borderRadius: 8, marginHorizontal: 4 }}
+                />
+              ))}
+            </ScrollView>
+          </View>
         </View>
         <View>
           <Text style={styles.label}>Title</Text>
@@ -181,7 +201,7 @@ const styles = StyleSheet.create({
     gap: 8
   },
   label: {
-    marginStart: 12
+    marginStart: 4
   },
   input: {
     borderWidth: 1,
