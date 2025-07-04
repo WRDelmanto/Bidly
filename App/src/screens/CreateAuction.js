@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, TextInput, Alert, ToastAndroid } from "react-native";
+import { Text, View, StyleSheet, TextInput, Alert, ToastAndroid, Image } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ENDPOINTS } from "../constants/api.js";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -95,10 +95,18 @@ const CreateAuction = ({ navigation }) => {
         <Text onPress={handlePublish}>Publish</Text>
       </View>
       <View style={styles.userInfo}>
-        <Icon
-          name="account-circle"
-          size={42}
-        />
+        {user?.picture ? (
+          <Image
+            source={{ uri: user?.picture }}
+            style={{ width: 42, height: 42, borderRadius: 100 }}
+          />
+        ) : (
+          <Icon
+            name="account-circle"
+            size={42}
+          />
+        )}
+
         <Text>{user?.name}</Text>
       </View>
       <View style={styles.auctionInfo}>
