@@ -18,19 +18,20 @@ const Search = ({ navigation }) => {
       const userData = jsonValue != null ? JSON.parse(jsonValue) : null;
       console.log('User data:', userData);
       setUser(userData);
-      handleSearch('', userData._id);
     } catch (error) {
       console.error('Error reading user data:', error);
     }
   };
 
-  const handleSearch = async (text, userId = user._id) => {
+  const handleSearch = async (text) => {
+    if (!user) return;
+
     setInput(text)
 
     try {
       let endpoint = text.trim()
-        ? `${ENDPOINTS.SEARCH}/${userId}/${text.trim()}`
-        : `${ENDPOINTS.EMPTY_SEARCH}/${userId}`;
+        ? `${ENDPOINTS.SEARCH}/${user._id}/${text.trim()}`
+        : `${ENDPOINTS.EMPTY_SEARCH}/${user._id}`;
       const response = await fetch(endpoint);
 
       if (response.ok) {
@@ -50,6 +51,10 @@ const Search = ({ navigation }) => {
   useEffect(() => {
     getUserData();
   }, []);
+
+  useEffect(() => {
+    handleSearch('');
+  }, [user]);
 
   return (
     <View style={AppStyles.mainContainer}>

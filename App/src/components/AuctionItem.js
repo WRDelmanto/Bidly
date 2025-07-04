@@ -6,7 +6,7 @@ const AuctionItem = ({ auction, onPress }) => {
     return (
         <Pressable onPress={onPress}>
             <View style={styles.auctionItem}>
-                {auction.images[0] ? (
+                {Array.isArray(auction.images) && auction.images[0] ? (
                     <Image
                         source={{ uri: auction.images[0] }}
                         style={{ width: 80, height: 80, borderRadius: 100 }}
