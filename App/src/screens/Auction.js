@@ -77,11 +77,7 @@ const Auction = ({ navigation, route }) => {
       <View style={styles.auctionInfo}>
         <Text>{auction.title}</Text>
         <Text>{auction.description}</Text>
-        {auction.highestBid != null && (
-          <Text style={styles.latestBid}>
-            ${auction.highestBid.amount.toFixed(2)}
-          </Text>
-        )}
+
       </View>
       <View style={styles.navbar}>
         <TextInput
