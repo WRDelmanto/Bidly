@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Pressable, FlatList } from "react-native";
+import { Text, View, StyleSheet, Pressable, FlatList, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AppStyles } from "../constants/styles";
 import { ENDPOINTS } from "../constants/api.js";
@@ -67,10 +67,14 @@ const Profile = ({ navigation }) => {
     <View style={AppStyles.mainContainer}>
       <View style={styles.profileInfoContainer}>
         <View style={styles.pictureStatsContainer}>
-          <Icon
-            name="account-circle"
-            size={80}
-          />
+          {user?.picture ? (
+            <Image
+              source={{ uri: user.picture }}
+              style={{ width: 80, height: 80, borderRadius: 100 }}
+            />
+          ) : (
+            <Icon name="account-circle" size={80} />
+          )}
           <View style={styles.statsContainer}>
             <View style={styles.statsInfo}>
               <Text style={styles.statsText}>{user?.stats.createdAuctions}</Text>

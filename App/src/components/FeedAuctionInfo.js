@@ -1,13 +1,20 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const FeedAuctionInfo = ({ navigation, auction }) => {
     return (
         <View style={styles.feedAuctionInfo}>
-            <Icon name="account-circle"
-                size={30}
-                onPress={() => console.log('Profile clicked')}
-            />
+            {auction?.seller?.picture ? (
+                <Image
+                    source={{ uri: auction?.seller?.picture }}
+                    style={{ width: 30, height: 30, borderRadius: 100 }}
+                />
+            ) : (
+                <Icon name="account-circle"
+                    size={30}
+                    onPress={() => console.log(auction?.seller + ' clicked')}
+                />
+            )}
             <Text>{auction?.title}</Text>
             <Text>{auction?.description}</Text>
         </View>

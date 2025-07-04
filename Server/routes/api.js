@@ -78,6 +78,7 @@ router.post('/signIn', async (req, res) => {
             _id: user._id,
             name: user.name,
             email: user.email,
+            picture: user.picture,
             stats: user.stats
         };
 
@@ -95,7 +96,7 @@ router.put('/editProfile/:id', async (req, res) => {
 
     try {
         const { id } = req.params;
-        const { name, email } = req.body;
+        const { name, email, picture } = req.body;
 
         if (!name || !email) {
             return res.status(400).json({ message: 'Name and email are required' });
@@ -109,6 +110,9 @@ router.put('/editProfile/:id', async (req, res) => {
 
         user.name = name;
         user.email = email;
+        if (picture !== undefined) {
+            user.picture = picture;
+        }
 
         const updatedUser = await user.save();
 
@@ -233,6 +237,17 @@ router.get('/feed/:id', async (req, res) => {
                     isClosed: false
                 }
             },
+            {
+                $lookup: {
+                    from: 'users',
+                    localField: 'seller',
+                    foreignField: '_id',
+                    as: 'seller'
+                }
+            },
+            {
+                $unwind: '$seller'
+            },
             { $sample: { size: 1 } }
         ]);
 
@@ -257,6 +272,17 @@ router.get('/emptySearch/:id', async (req, res) => {
                     seller: { $ne: new mongoose.Types.ObjectId(id) },
                     isClosed: false
                 }
+            },
+            {
+                $lookup: {
+                    from: 'users',
+                    localField: 'seller',
+                    foreignField: '_id',
+                    as: 'seller'
+                }
+            },
+            {
+                $unwind: '$seller'
             },
             { $sample: { size: 50 } }
         ]);
@@ -286,6 +312,17 @@ router.get('/search/:id/:searchString', async (req, res) => {
                         { description: { $regex: new RegExp(searchString, 'i') } }
                     ]
                 }
+            },
+            {
+                $lookup: {
+                    from: 'users',
+                    localField: 'seller',
+                    foreignField: '_id',
+                    as: 'seller'
+                }
+            },
+            {
+                $unwind: '$seller'
             },
             {
                 $sample: { size: 50 }

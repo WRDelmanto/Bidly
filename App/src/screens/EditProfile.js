@@ -1,10 +1,11 @@
-import { Text, View, StyleSheet, TextInput, Alert } from "react-native";
+import { Text, View, StyleSheet, TextInput, Alert, Image, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { AppStyles } from "../constants/styles.js";
 import { AppColors } from "../constants/colors.js";
 import { useState, useEffect } from "react";
 import { ENDPOINTS } from "../constants/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as ImagePicker from 'expo-image-picker';
 
 const EditProfile = ({ navigation }) => {
   const [user, setUser] = useState()
@@ -13,6 +14,7 @@ const EditProfile = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [picture, setPicture] = useState(null);
 
   const populateUserInfo = async () => {
     try {
@@ -23,6 +25,7 @@ const EditProfile = ({ navigation }) => {
       setUser(userData)
       setName(userData.name)
       setEmail(userData.email)
+      setPicture(userData.picture || null)
     } catch (error) {
       console.error('Error reading user data from AsyncStorage:', error);
     }
@@ -30,6 +33,15 @@ const EditProfile = ({ navigation }) => {
 
   useEffect(() => {
     populateUserInfo();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!');
+      }
+    });
   }, []);
 
   const handleArrowBack = () => {
@@ -61,7 +73,7 @@ const EditProfile = ({ navigation }) => {
   };
 
   const handleSaveUserInfo = async () => {
-    if (name === user.name && email === user.email) {
+    if (name === user.name && email === user.email && picture === (user.picture || null)) {
       return;
     }
 
@@ -86,6 +98,7 @@ const EditProfile = ({ navigation }) => {
         body: JSON.stringify({
           name,
           email,
+          picture,
         }),
       });
 
@@ -146,6 +159,22 @@ const EditProfile = ({ navigation }) => {
     }
   }
 
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.5,
+      base64: true,
+    });
+
+    if (!result.canceled) {
+      setPicture(result.assets[0].base64 ? `data:image/jpeg;base64,${result.assets[0].base64}` : result.assets[0].uri);
+    }
+
+    handleSaveUserInfo();
+  };
+
   return (
     <View style={AppStyles.mainContainer}>
       <View style={styles.subStatusBar}>
@@ -158,12 +187,16 @@ const EditProfile = ({ navigation }) => {
         </View>
         <Text onPress={handleSave}>{isLoading ? 'Saving...' : 'Save'}</Text>
       </View>
-
-      <Icon
-        name="account-circle"
-        size={150}
-        style={styles.profileIcon}
-      />
+      <TouchableOpacity onPress={pickImage} disabled={isLoading} style={{ alignItems: "center" }}>
+        {picture ? (
+          <Image
+            source={{ uri: picture }}
+            style={{ width: 150, height: 150, borderRadius: 100, marginTop: 20, marginBottom: 20 }}
+          />
+        ) : (
+          <Icon name="account-circle" size={150} style={styles.profileIcon} />
+        )}
+      </TouchableOpacity>
       <View style={AppStyles.mainTextInputContainer}>
         <Icon name="account" size={24} color={AppColors.PRIMARY} />
         <TextInput
