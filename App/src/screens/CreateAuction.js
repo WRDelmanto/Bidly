@@ -110,7 +110,7 @@ const CreateAuction = ({ navigation }) => {
         <Text onPress={handlePublish}>Publish</Text>
       </View>
       <View style={styles.userInfo}>
-        {user?.picture ? (
+        {user.picture ? (
           <Image
             source={{ uri: user?.picture }}
             style={{ width: 42, height: 42, borderRadius: 100 }}
@@ -122,7 +122,7 @@ const CreateAuction = ({ navigation }) => {
           />
         )}
 
-        <Text>{user?.name}</Text>
+        <Text>{user.name}</Text>
       </View>
       <View style={styles.auctionInfo}>
         <View>
