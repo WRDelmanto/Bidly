@@ -18,7 +18,7 @@ import SignIn from "./src/screens/SignIn";
 import SignUp from "./src/screens/SignUp";
 import Welcome from "./src/screens/Welcome";
 
-import FeedAuctionInfo from "./src/components/FeedAuctionInfo";
+import FeedAuction from "./src/components/FeedAuction";
 import NavBar from "./src/components/NavBar";
 
 const Stack = createNativeStackNavigator();
@@ -66,7 +66,7 @@ export default function App() {
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="Welcome" component={Welcome} />
-          <Stack.Screen name="FeedAuctionInfo" component={FeedAuctionInfo} />
+          <Stack.Screen name="FeedAuction" component={FeedAuction} />
           <Stack.Screen name="NavBar" component={NavBar} />
         </Stack.Navigator>
       </SafeAreaView>

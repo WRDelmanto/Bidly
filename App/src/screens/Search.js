@@ -16,7 +16,7 @@ const Search = ({ navigation }) => {
     try {
       const jsonValue = await AsyncStorage.getItem('user');
       const userData = jsonValue != null ? JSON.parse(jsonValue) : null;
-      console.log('User data:', userData);
+      // console.log('User data:', userData);
       setUser(userData);
     } catch (error) {
       console.error('Error reading user data:', error);
