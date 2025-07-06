@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
   },
   navbar: {
     position: "absolute",
-    bottom: 20,
+    bottom: 10,
     left: 20,
     right: 20,
     display: "flex",
@@ -241,8 +241,10 @@ const styles = StyleSheet.create({
     color: '#666'
   },
   bidsSection: {
+    flex: 1,
     marginTop: 20,
     paddingHorizontal: 20,
+    marginBottom: 60,
   },
   bidsTitle: {
     fontSize: 18,
@@ -250,7 +252,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   bidsList: {
-    maxHeight: 300,
+    // maxHeight: 300,
+    paddingBottom: 200,
   },
   highestBidText: {
     fontSize: 20,
