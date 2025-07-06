@@ -181,12 +181,17 @@ router.post('/auction', async (req, res) => {
             return res.status(404).json({ message: 'Seller not found' });
         }
 
-        const auction = new Auction({
+        const auctionData = {
             title,
             description,
-            seller,
-            images: Array.isArray(images) ? images : []
-        });
+            seller
+        };
+
+        if (images && Array.isArray(images) && images.length > 0 && images != []) {
+            auctionData.images = images;
+        }
+
+        const auction = new Auction(auctionData);
 
         const newAuction = await auction.save();
 

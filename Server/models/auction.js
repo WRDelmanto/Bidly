@@ -22,9 +22,10 @@ const auctionSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Bid'
     },
-    images: [{
-        type: String
-    }]
+    images: {
+        type: [String],
+        default: undefined
+    }
 }, { timestamps: true });
 
 const Auction = mongoose.model('Auction', auctionSchema);
