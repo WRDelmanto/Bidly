@@ -10,6 +10,7 @@ const Auction = ({ navigation, route }) => {
   const { auction } = route.params;
   const [user, setUser] = useState(null);
   const [bidAmount, setBidAmount] = useState('');
+  const [userBid, setUserBid] = useState(null);
 
   const getUserData = async () => {
     try {
@@ -49,6 +50,7 @@ const Auction = ({ navigation, route }) => {
         const { bid, auction: updatedAuction } = await response.json();
         this.auction = auction;
         setBidAmount('');
+        setUserBid(bid);
         console.log('Bid successful:', bid);
       } else {
         const errorResponse = await response.json();
@@ -77,7 +79,9 @@ const Auction = ({ navigation, route }) => {
       <View style={styles.auctionInfo}>
         <Text>{auction.title}</Text>
         <Text>{auction.description}</Text>
-
+        {userBid && (
+          <Text style={styles.userBidText}>Your last bid: ${userBid.amount.toFixed(2)}</Text>
+        )}
       </View>
       <View style={styles.navbar}>
         <TextInput
@@ -156,6 +160,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center'
+  },
+  userBidText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#000000'
   }
 });
 
