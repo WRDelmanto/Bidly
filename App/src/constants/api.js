@@ -16,4 +16,5 @@ export const ENDPOINTS = {
     EMPTY_SEARCH: `${API_URL}/emptySearch`,
     SEARCH: `${API_URL}/search`,
     BID: `${API_URL}/bid`,
+    BIDS: `${API_URL}/bids`,
 };

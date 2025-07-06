@@ -401,5 +401,20 @@ router.post('/bid', async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 });
+// Get Bids by Auction ID
+router.get('/bids/:auctionId', async (req, res) => {
+    try {
+        const { auctionId } = req.params;
+
+        const bids = await Bid.find({ auction: auctionId })
+            .sort({ createdAt: -1 })
+            .populate('bidder', 'name');
+
+        res.status(200).json(bids);
+    } catch (error) {
+        console.error('Error fetching bids:', error.message);
+        res.status(500).json({ message: error.message });
+    }
+});
 
 export default router;

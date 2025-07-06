@@ -1,4 +1,4 @@
-import { Text, Image, View, StyleSheet, TextInput, Pressable, Alert } from "react-native";
+import { Text, Image, View, StyleSheet, TextInput, Pressable, Alert, FlatList } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { AppColors } from "../constants/colors";
 import { AppStyles } from "../constants/styles";
@@ -11,6 +11,7 @@ const Auction = ({ navigation, route }) => {
   const [user, setUser] = useState(null);
   const [bidAmount, setBidAmount] = useState('');
   const [userBid, setUserBid] = useState(null);
+  const [bids, setBids] = useState([]);
 
   const getUserData = async () => {
     try {
@@ -24,8 +25,22 @@ const Auction = ({ navigation, route }) => {
     }
   };
 
+  const getBids = async () => {
+    try {
+      const response = await fetch(`${ENDPOINTS.BIDS}/${auction._id}`);
+      if (response.ok) {
+        const bidsData = await response.json();
+        setBids(bidsData);
+      }
+    } catch (error) {
+      console.error('Error fetching bids:', error);
+    }
+  };
+  console.log('Bids:', bids);
+
   useEffect(() => {
     getUserData();
+    getBids();
   }, []);
 
   const handlePlaceBid = async () => {
@@ -48,9 +63,9 @@ const Auction = ({ navigation, route }) => {
 
       if (response.ok) {
         const { bid, auction: updatedAuction } = await response.json();
-        this.auction = auction;
         setBidAmount('');
         setUserBid(bid);
+        getBids();
         console.log('Bid successful:', bid);
       } else {
         const errorResponse = await response.json();
@@ -60,6 +75,18 @@ const Auction = ({ navigation, route }) => {
       console.error('Error placing bid:', error);
     }
   };
+
+  const renderBidItem = ({ item }) => (
+    <View style={styles.bidItem}>
+      <Text style={styles.bidderName}>
+        {item.bidder?.name || 'Anonymous'}
+      </Text>
+      <Text style={styles.bidAmount}>${item.amount.toFixed(2)}</Text>
+      <Text style={styles.bidTime}>
+        {new Date(item.createdAt).toLocaleDateString()}
+      </Text>
+    </View>
+  );
 
   return (
     <View View style={AppStyles.mainContainer} >
@@ -83,6 +110,15 @@ const Auction = ({ navigation, route }) => {
           <Text style={styles.userBidText}>Your last bid: ${userBid.amount.toFixed(2)}</Text>
         )}
       </View>
+      <View style={styles.bidsSection}>
+        <Text style={styles.bidsTitle}>All Bids ({bids.length})</Text>
+        <FlatList
+          data={bids}
+          renderItem={renderBidItem}
+          keyExtractor={(item) => item._id}
+          style={styles.bidsList}
+        />
+      </View>
       <View style={styles.navbar}>
         <TextInput
           style={styles.bidInput}
@@ -98,6 +134,7 @@ const Auction = ({ navigation, route }) => {
           <Text style={styles.bidButtonText}>Place Bid</Text>
         </Pressable>
       </View>
+
     </View>
   );
 };
@@ -165,7 +202,42 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     color: '#000000'
-  }
+  },
+  bidItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+    backgroundColor: '#ffffff'
+  },
+  bidderName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  bidAmount: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: AppColors.PRIMARY,
+  },
+  bidTime: {
+    fontSize: 12,
+    color: '#666'
+  },
+  bidsSection: {
+    marginTop: 20,
+    paddingHorizontal: 20,
+  },
+  bidsTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  bidsList: {
+    maxHeight: 300,
+  },
 });
 
 export default Auction;
