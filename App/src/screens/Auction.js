@@ -122,7 +122,7 @@ const Auction = ({ navigation, route }) => {
           <Text style={styles.bidsTitle}>All Bids ({bids.length})</Text>
           {getHighestBid() && (
             <Text style={styles.highestBidText}>
-              Highest: <Text style={styles.highestBidValue}>${getHighestBid().amount.toFixed(2)}</Text>
+              Highest:  <Text style={styles.highestBidValue}>${getHighestBid().amount.toFixed(2)}</Text>
             </Text>
           )}
         </View>
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   bidAmount: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     color: AppColors.PRIMARY,
   },
@@ -252,13 +252,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   bidsList: {
-    // maxHeight: 300,
     paddingBottom: 200,
   },
   highestBidText: {
     fontSize: 20,
     fontWeight: 'bold',
     color: 'black',
+    marginBottom: 10,
+
   },
   highestBidValue: {
     fontSize: 20,
