@@ -90,10 +90,11 @@ const CreateAuction = ({ navigation }) => {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsMultipleSelection: true,
       quality: 1,
+      base64: true
     });
 
     if (!result.canceled) {
-      setImages([...images, ...result.assets.map(asset => asset.uri)]);
+      setImages([...images, ...result.assets.map(asset => `data:image/jpeg;base64,${asset.base64}`)]);
     }
   };
 
@@ -110,9 +111,9 @@ const CreateAuction = ({ navigation }) => {
         <Text onPress={handlePublish}>Publish</Text>
       </View>
       <View style={styles.userInfo}>
-        {user.picture ? (
+        {user?.picture ? (
           <Image
-            source={{ uri: user?.picture }}
+            source={{ uri: user.picture }}
             style={{ width: 42, height: 42, borderRadius: 100 }}
           />
         ) : (
@@ -122,7 +123,7 @@ const CreateAuction = ({ navigation }) => {
           />
         )}
 
-        <Text>{user.name}</Text>
+        <Text>{user?.name || 'Loading...'}</Text>
       </View>
       <View style={styles.auctionInfo}>
         <View>
