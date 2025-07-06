@@ -17,7 +17,7 @@ const Profile = ({ navigation }) => {
     try {
       const jsonValue = await AsyncStorage.getItem('user');
       const userData = jsonValue != null ? JSON.parse(jsonValue) : null;
-      console.log('User data:', userData);
+      // console.log('User data:', userData);
       setUser(userData);
       getAuctions(userData._id);
     } catch (error) {
@@ -56,7 +56,6 @@ const Profile = ({ navigation }) => {
     try {
       await AsyncStorage.removeItem('user');
       await AsyncStorage.removeItem('auctions');
-      await AsyncStorage.removeItem('currentAuctionIndex');
       navigation.navigate('SignIn');
     } catch (error) {
       console.error('Error signing off:', error);
