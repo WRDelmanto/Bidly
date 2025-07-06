@@ -76,13 +76,20 @@ const Auction = ({ navigation, route }) => {
     }
   };
 
+  const getHighestBid = () => {
+    if (bids.length === 0) return null;
+    return bids.reduce((highest, current) =>
+      current.amount > highest.amount ? current : highest
+    );
+  };
+
   const renderBidItem = ({ item }) => (
     <View style={styles.bidItem}>
       <Text style={styles.bidderName}>
-        {item.bidder?.name || 'Anonymous'}
+        {item.bidder?.name}
       </Text>
       <Text style={styles.bidAmount}>${item.amount.toFixed(2)}</Text>
-      <Text style={styles.bidTime}>
+      <Text style={styles.bidDate}>
         {new Date(item.createdAt).toLocaleDateString()}
       </Text>
     </View>
@@ -111,7 +118,14 @@ const Auction = ({ navigation, route }) => {
         )}
       </View>
       <View style={styles.bidsSection}>
-        <Text style={styles.bidsTitle}>All Bids ({bids.length})</Text>
+        <View style={styles.bidsHeader}>
+          <Text style={styles.bidsTitle}>All Bids ({bids.length})</Text>
+          {getHighestBid() && (
+            <Text style={styles.highestBidText}>
+              Highest: <Text style={styles.highestBidValue}>${getHighestBid().amount.toFixed(2)}</Text>
+            </Text>
+          )}
+        </View>
         <FlatList
           data={bids}
           renderItem={renderBidItem}
@@ -222,7 +236,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: AppColors.PRIMARY,
   },
-  bidTime: {
+  bidDate: {
     fontSize: 12,
     color: '#666'
   },
@@ -237,6 +251,22 @@ const styles = StyleSheet.create({
   },
   bidsList: {
     maxHeight: 300,
+  },
+  highestBidText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  highestBidValue: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: AppColors.PRIMARY,
+  },
+  bidsHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
   },
 });
 
