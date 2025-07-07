@@ -1,15 +1,18 @@
-import { StyleSheet, View, Text, Image, Dimensions } from "react-native";
+import { StyleSheet, View, Text, Image, Dimensions, Pressable } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const FeedAuction = ({ navigation, auction }) => {
+const FeedItem = ({ auction, onPress }) => {
     const insets = useSafeAreaInsets();
     let usableScreenHeight = Dimensions.get('window').height - insets.top - insets.bottom;
     usableScreenHeight = usableScreenHeight - 60; // NavBar height
     usableScreenHeight = usableScreenHeight - 74;
 
     return (
-        <View style={{ height: usableScreenHeight }}>
+        <Pressable
+            style={{ height: usableScreenHeight }}
+            onPress={onPress}
+        >
             {auction.images ? (
                 <Image
                     source={{ uri: auction.images[0] }}
@@ -23,7 +26,10 @@ const FeedAuction = ({ navigation, auction }) => {
                     />
                 </View>
             )}
-            <View style={styles.feedAuctionInfo}>
+            <Pressable
+                style={styles.feedAuctionInfo}
+                onPress={() => console.log(auction.seller.name + ' clicked')}
+            >
                 {auction.seller.picture ? (
                     <Image
                         source={{ uri: auction.seller.picture }}
@@ -32,13 +38,12 @@ const FeedAuction = ({ navigation, auction }) => {
                 ) : (
                     <Icon name="account-circle"
                         size={30}
-                        onPress={() => console.log(auction.seller + ' clicked')}
                     />
                 )}
                 <Text>{auction.title}</Text>
                 <Text>{auction.description}</Text>
-            </View>
-        </View>
+            </Pressable>
+        </Pressable>
     );
 };
 
@@ -55,4 +60,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default FeedAuction;
+export default FeedItem;

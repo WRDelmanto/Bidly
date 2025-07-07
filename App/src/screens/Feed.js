@@ -1,6 +1,6 @@
 import { View, FlatList } from "react-native";
 import NavBar from "../components/NavBar";
-import FeedAuction from "../components/FeedAuction";
+import FeedItem from "../components/FeedItem";
 import { useEffect, useState } from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ENDPOINTS } from "../constants/api";
@@ -105,10 +105,13 @@ const Feed = ({ navigation }) => {
       <FlatList
         data={auctions}
         style={{ flex: 1, marginBottom: 60 }}
-        renderItem={({ item }) => (
-          <FeedAuction navigation={navigation} auction={item} />
+        renderItem={({ item: auction }) => (
+          <FeedItem
+            key={auction._id}
+            auction={auction}
+            onPress={() => navigation.navigate('Auction', { auction })}
+          />
         )}
-        keyExtractor={(item, index) => index.toString()}
         pagingEnabled
         showsVerticalScrollIndicator={false}
         onViewableItemsChanged={handleViewableItemsChanged}

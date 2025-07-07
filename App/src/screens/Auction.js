@@ -31,13 +31,13 @@ const Auction = ({ navigation, route }) => {
       const response = await fetch(`${ENDPOINTS.BIDS}/${auction._id}`);
       if (response.ok) {
         const bidsData = await response.json();
+        // console.log('Bids:', bids);
         setBids(bidsData);
       }
     } catch (error) {
       console.error('Error fetching bids:', error);
     }
   };
-  console.log('Bids:', bids);
 
   useEffect(() => {
     getUserData();
@@ -84,15 +84,23 @@ const Auction = ({ navigation, route }) => {
     );
   };
 
-  const renderBidItem = ({ item }) => <BidItem item={item} />;
-
   return (
     <View View style={AppStyles.mainContainer} >
       <View style={styles.imageContainer}>
-        <Image
-          source={{ uri: auction.images[0] }}
-          style={styles.mainImage}
-        />
+        {auction.images ? (
+          <Image
+            source={{ uri: auction.images[0] }}
+            style={styles.mainImage}
+          />
+        ) : (
+          <View style={{ alignItems: 'center', justifyContent: 'center', height: 350 }}>
+            <Icon name="hide-image"
+              size={100}
+              color={"lightgray"}
+            />
+          </View>
+        )}
+
         <View style={styles.subStatusBar}>
           <Icon
             name="arrow-back"
@@ -119,7 +127,7 @@ const Auction = ({ navigation, route }) => {
         </View>
         <FlatList
           data={bids}
-          renderItem={renderBidItem}
+          renderItem={({ item }) => { <BidItem item={item} /> }}
           keyExtractor={(item) => item._id}
           style={styles.bidsList}
         />
