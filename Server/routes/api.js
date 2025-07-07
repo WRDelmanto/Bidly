@@ -409,7 +409,7 @@ router.get('/bids/:auctionId', async (req, res) => {
 
         const bids = await Bid.find({ auction: auctionId })
             .sort({ createdAt: -1 })
-            .populate('bidder', 'name');
+            .populate('bidder', 'name picture');
 
         res.status(200).json(bids);
     } catch (error) {
