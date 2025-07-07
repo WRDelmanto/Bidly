@@ -112,6 +112,7 @@ const Feed = ({ navigation }) => {
             onPress={() => navigation.navigate('Auction', { auction })}
           />
         )}
+        keyExtractor={(item, index) => index.toString()}
         pagingEnabled
         showsVerticalScrollIndicator={false}
         onViewableItemsChanged={handleViewableItemsChanged}
