@@ -127,7 +127,9 @@ const Auction = ({ navigation, route }) => {
         </View>
         <FlatList
           data={bids}
-          renderItem={({ item }) => { <BidItem item={item} /> }}
+          renderItem={({ item: bid }) => {
+            return <BidItem bid={bid} />
+          }}
           keyExtractor={(item) => item._id}
           style={styles.bidsList}
         />

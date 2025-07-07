@@ -1,15 +1,15 @@
 import { View, Text, StyleSheet } from "react-native";
 import { AppColors } from "../constants/colors";
 
-const BidItem = ({ item }) => {
+const BidItem = ({ bid }) => {
     return (
         <View style={styles.bidItem}>
             <Text style={styles.bidderName}>
-                {item.bidder?.name || 'Anonymous'}
+                {bid.bidder?.name || 'Anonymous'}
             </Text>
-            <Text style={styles.bidAmount}>${item.amount.toFixed(2)}</Text>
+            <Text style={styles.bidAmount}>${bid.amount.toFixed(2)}</Text>
             <Text style={styles.bidDate}>
-                {new Date(item.createdAt).toLocaleDateString()}
+                {new Date(bid.createdAt).toLocaleDateString()}
             </Text>
         </View>
     );
