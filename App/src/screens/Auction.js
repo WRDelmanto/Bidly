@@ -11,7 +11,6 @@ const Auction = ({ navigation, route }) => {
   const { auction } = route.params;
   const [user, setUser] = useState(null);
   const [bidAmount, setBidAmount] = useState('');
-  const [userBid, setUserBid] = useState(null);
   const [bids, setBids] = useState([]);
 
   const getUserData = async () => {
@@ -65,7 +64,6 @@ const Auction = ({ navigation, route }) => {
       if (response.ok) {
         const { bid, auction: updatedAuction } = await response.json();
         setBidAmount('');
-        setUserBid(bid);
         getBids();
         console.log('Bid successful:', bid);
       } else {
@@ -75,13 +73,6 @@ const Auction = ({ navigation, route }) => {
     } catch (error) {
       console.error('Error placing bid:', error);
     }
-  };
-
-  const getHighestBid = () => {
-    if (bids.length === 0) return null;
-    return bids.reduce((highest, current) =>
-      current.amount > highest.amount ? current : highest
-    );
   };
 
   return (
@@ -100,7 +91,6 @@ const Auction = ({ navigation, route }) => {
             />
           </View>
         )}
-
         <View style={styles.subStatusBar}>
           <Icon
             name="arrow-back"
@@ -112,28 +102,25 @@ const Auction = ({ navigation, route }) => {
       <View style={styles.auctionInfo}>
         <Text>{auction.title}</Text>
         <Text>{auction.description}</Text>
-        {userBid && (
-          <Text style={styles.userBidText}>Your last bid: ${userBid.amount.toFixed(2)}</Text>
-        )}
       </View>
-      <View style={styles.bidsSection}>
-        <View style={styles.bidsHeader}>
-          <Text style={styles.bidsTitle}>All Bids ({bids.length})</Text>
-          {getHighestBid() && (
-            <Text style={styles.highestBidText}>
-              Highest:  <Text style={styles.highestBidValue}>${getHighestBid().amount.toFixed(2)}</Text>
-            </Text>
-          )}
+      {auction?.highestBid && (
+        <View style={styles.highestBid}>
+          <Text style={styles.bidsTitle}>Highest Bid:</Text>
+          <BidItem bid={auction?.highestBid} />
         </View>
-        <FlatList
-          data={bids}
-          renderItem={({ item: bid }) => (
-            <BidItem bid={bid} />
-          )}
-          keyExtractor={(item) => item._id}
-          style={styles.bidsList}
-        />
-      </View>
+      )}
+      {bids.length > 0 && (
+        <View style={styles.bidsSection}>
+          <Text style={styles.bidsTitle}>Bids: {bids.length}</Text>
+          <FlatList
+            data={bids}
+            renderItem={({ item: bid }) => (
+              <BidItem bid={bid} />
+            )}
+            keyExtractor={(item) => item._id}
+          />
+        </View>
+      )}
       <View style={styles.navbar}>
         <TextInput
           style={styles.bidInput}
@@ -178,6 +165,9 @@ const styles = StyleSheet.create({
     alignItems: "start",
     gap: 8
   },
+  highestBid: {
+    marginTop: 20,
+  },
   navbar: {
     position: "absolute",
     bottom: 10,
@@ -213,24 +203,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center'
   },
-  userBidText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#000000'
-  },
   bidsSection: {
     flex: 1,
     marginTop: 20,
-    paddingHorizontal: 20,
     marginBottom: 60,
   },
   bidsTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  bidsList: {
-    paddingBottom: 200,
+    fontSize: 14,
   },
   highestBidText: {
     fontSize: 20,
@@ -243,12 +222,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: AppColors.PRIMARY,
-  },
-  bidsHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 10,
   },
 });
 
