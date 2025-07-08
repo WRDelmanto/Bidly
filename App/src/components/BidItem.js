@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         borderTopWidth: 1,
         borderTopColor: '#e0e0e0',
+        borderBottomColor: "#e0e0e0",
+        borderBottomWidth: 1,
         backgroundColor: '#ffffff'
     },
     bidderInfo: {
