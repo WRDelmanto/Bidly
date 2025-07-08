@@ -100,6 +100,14 @@ const Feed = ({ navigation }) => {
     }
   };
 
+  const handleAuctionUpdate = (updatedAuction) => {
+    setAuctions(prevAuctions =>
+      prevAuctions.map(auction =>
+        auction._id === updatedAuction._id ? updatedAuction : auction
+      )
+    );
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
       <FlatList
@@ -109,7 +117,10 @@ const Feed = ({ navigation }) => {
           <FeedItem
             key={auction._id}
             auction={auction}
-            onPress={() => navigation.navigate('Auction', { auction })}
+            onPress={() => navigation.navigate('Auction', {
+              auction,
+              onAuctionUpdate: handleAuctionUpdate
+            })}
           />
         )}
         keyExtractor={(item, index) => index.toString()}
