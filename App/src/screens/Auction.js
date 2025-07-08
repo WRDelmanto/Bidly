@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import BidItem from "../components/BidItem";
 
 const Auction = ({ navigation, route }) => {
-  const { auction: initialAuction, onAuctionUpdate } = route.params;
+  const { auction: initialAuction } = route.params;
   const [auction, setAuction] = useState(initialAuction);
   const [user, setUser] = useState(null);
   const [bidAmount, setBidAmount] = useState('');
@@ -23,6 +23,18 @@ const Auction = ({ navigation, route }) => {
 
     } catch (error) {
       console.error('Error reading user data:', error);
+    }
+  };
+
+  const fetchAuction = async () => {
+    try {
+      const response = await fetch(`${ENDPOINTS.AUCTION}/${auction._id}`);
+      if (response.ok) {
+        const updatedAuction = await response.json();
+        setAuction(updatedAuction);
+      }
+    } catch (error) {
+      console.error('Error fetching auction:', error);
     }
   };
 
@@ -41,6 +53,7 @@ const Auction = ({ navigation, route }) => {
 
   useEffect(() => {
     getUserData();
+    fetchAuction();
     getBids();
   }, []);
 
@@ -72,8 +85,6 @@ const Auction = ({ navigation, route }) => {
         AsyncStorage.setItem('user', JSON.stringify(updatedUser));
 
         setBidAmount('');
-
-        onAuctionUpdate(updatedAuction);
 
         // console.log('Bid successful:', bid);
         // console.log('Updated auction:', updatedAuction);
