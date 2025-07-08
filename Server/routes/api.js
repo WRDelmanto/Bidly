@@ -213,8 +213,28 @@ router.post('/auction', async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 });
+// Get Auction by ID
+router.get('/auction/:id', async (req, res) => {
+    console.log('Auction by id fetch request received, info:', req.params.id);
 
-// Get Auctions by ID
+    try {
+        const { id } = req.params;
+
+        const auction = await Auction.findById(id)
+            .populate({ path: 'highestBid', populate: { path: 'bidder' } });
+
+        if (!auction) {
+            return res.status(404).json({ message: 'Auction not found' });
+        }
+
+        res.status(200).json(auction);
+    } catch (error) {
+        console.error('Error fetching auction:', error.message);
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Get Auctions by User ID
 router.get('/auctions/:id', async (req, res) => {
     console.log('Auctions by id fetch request received, info:', req.params.id);
 
