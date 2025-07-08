@@ -57,16 +57,21 @@ const Auction = ({ navigation, route }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           amount,
-          auction: auction,
-          bidder: user
+          auctionId: auction._id,
+          userId: user._id
         })
       });
 
       if (response.ok) {
-        const { bid, auction: updatedAuction } = await response.json();
-        setBidAmount('');
+        const { bid: newBid, auction: updatedAuction, user: updatedUser } = await response.json();
         getBids();
+
         setAuction(updatedAuction);
+        setUser(updatedUser)
+
+        AsyncStorage.setItem('user', JSON.stringify(updatedUser));
+
+        setBidAmount('');
 
         // console.log('Bid successful:', bid);
         // console.log('Updated auction:', updatedAuction);
