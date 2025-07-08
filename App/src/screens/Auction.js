@@ -8,7 +8,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import BidItem from "../components/BidItem";
 
 const Auction = ({ navigation, route }) => {
-  const { auction } = route.params;
+  const { initialAuction } = route.params;
+  const [auction, setAuction] = useState(initialAuction);
   const [user, setUser] = useState(null);
   const [bidAmount, setBidAmount] = useState('');
   const [bids, setBids] = useState([]);
@@ -65,7 +66,10 @@ const Auction = ({ navigation, route }) => {
         const { bid, auction: updatedAuction } = await response.json();
         setBidAmount('');
         getBids();
-        console.log('Bid successful:', bid);
+        setAuction(updatedAuction);
+
+        // console.log('Bid successful:', bid);
+        // console.log('Updated auction:', updatedAuction);
       } else {
         const errorResponse = await response.json();
         console.log('Place bid failed', errorResponse);
