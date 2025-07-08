@@ -221,7 +221,8 @@ router.get('/auctions/:id', async (req, res) => {
     try {
         const { id } = req.params;
 
-        const auctions = await Auction.find({ seller: new mongoose.Types.ObjectId(id) });
+        const auctions = await Auction.find({ seller: new mongoose.Types.ObjectId(id) })
+            .populate({ path: 'highestBid', populate: { path: 'bidder' } });
 
         res.status(200).json(auctions || []);
     } catch (error) {
@@ -236,7 +237,7 @@ router.get('/feed/:id', async (req, res) => {
 
     try {
         const { id } = req.params;
-        const auctions = await Auction.aggregate([
+        let auctions = await Auction.aggregate([
             {
                 $match: {
                     seller: { $ne: new mongoose.Types.ObjectId(id) },
@@ -257,6 +258,10 @@ router.get('/feed/:id', async (req, res) => {
             { $sample: { size: 1 } }
         ]);
 
+        if (auctions.length > 0) {
+            auctions = await Auction.populate(auctions, { path: 'highestBid', populate: { path: 'bidder' } });
+        }
+
         console.log('Auction feed fetched:', auctions.length ? auctions[0] : 'No auctions found');
 
         res.status(200).json(auctions[0] || null);
@@ -272,7 +277,7 @@ router.get('/emptySearch/:id', async (req, res) => {
 
     try {
         const { id } = req.params;
-        const auctions = await Auction.aggregate([
+        let auctions = await Auction.aggregate([
             {
                 $match: {
                     seller: { $ne: new mongoose.Types.ObjectId(id) },
@@ -293,6 +298,10 @@ router.get('/emptySearch/:id', async (req, res) => {
             { $sample: { size: 50 } }
         ]);
 
+        if (auctions.length > 0) {
+            auctions = await Auction.populate(auctions, { path: 'highestBid', populate: { path: 'bidder' } });
+        }
+
         console.log('Auctions fetched:', auctions.length ? auctions.length : 'No auctions found');
 
         res.status(200).json(auctions || []);
@@ -308,7 +317,7 @@ router.get('/search/:id/:searchString', async (req, res) => {
 
     try {
         const { id, searchString } = req.params;
-        const auctions = await Auction.aggregate([
+        let auctions = await Auction.aggregate([
             {
                 $match: {
                     seller: { $ne: new mongoose.Types.ObjectId(id) },
@@ -334,6 +343,10 @@ router.get('/search/:id/:searchString', async (req, res) => {
                 $sample: { size: 50 }
             }
         ]);
+
+        if (auctions.length > 0) {
+            auctions = await Auction.populate(auctions, { path: 'highestBid', populate: { path: 'bidder' } });
+        }
 
         console.log('Auctions fetched with search string:', auctions.length ? auctions.length : 'No auctions found');
 
@@ -367,7 +380,7 @@ router.post('/bid', async (req, res) => {
             return res.status(404).json({ message: 'User not found' })
         }
 
-        const auctionExists = await Auction.findById(auction).populate('highestBid');
+        const auctionExists = await Auction.findById(auction).populate({ path: 'highestBid', populate: { path: 'bidder' } });
         if (!auctionExists) {
             return res.status(404).json({ message: 'Auction not found' });
         }
@@ -389,7 +402,13 @@ router.post('/bid', async (req, res) => {
         if (!auctionExists.highestBid || auctionExists.highestBid.amount < newBid.amount) {
             auctionExists.highestBid = newBid._id;
             const updatedAuction = await auctionExists.save();
+            await updatedAuction.populate({ path: 'highestBid', populate: { path: 'bidder' } });
             console.log('Auction updated:', updatedAuction);
+            res.status(201).json({
+                bid: newBid,
+                auction: updatedAuction
+            });
+            return;
         }
 
         res.status(201).json({
