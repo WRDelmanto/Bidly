@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import BidItem from "../components/BidItem";
 
 const Auction = ({ navigation, route }) => {
-  const { initialAuction } = route.params;
+  const { auction: initialAuction } = route.params;
   const [auction, setAuction] = useState(initialAuction);
   const [user, setUser] = useState(null);
   const [bidAmount, setBidAmount] = useState('');
