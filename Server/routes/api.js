@@ -243,6 +243,7 @@ router.get('/auctions/:id', async (req, res) => {
         const { id } = req.params;
 
         const auctions = await Auction.find({ seller: new mongoose.Types.ObjectId(id) })
+            .sort({ createdAt: -1 })
             .populate({ path: 'highestBid', populate: { path: 'bidder' } });
 
         res.status(200).json(auctions || []);
