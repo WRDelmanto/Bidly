@@ -131,9 +131,9 @@ const CreateAuction = ({ navigation }) => {
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Icon name="add-a-photo" size={30} onPress={pickImage} />
             <ScrollView horizontal>
-              {images.map((uri, idx) => (
+              {images.map((uri, index) => (
                 <Image
-                  key={idx}
+                  key={index}
                   source={{ uri }}
                   style={{ width: 60, height: 60, borderRadius: 8, marginHorizontal: 4 }}
                 />
