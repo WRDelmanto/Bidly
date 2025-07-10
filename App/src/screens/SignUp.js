@@ -48,7 +48,7 @@ const SignUp = ({ navigation }) => {
 
     try {
       setIsLoading(true);
-      const response = await fetch(ENDPOINTS.SIGNUP, {
+      const response = await fetch(ENDPOINTS.SIGNUP(), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

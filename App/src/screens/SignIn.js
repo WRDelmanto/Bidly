@@ -19,7 +19,7 @@ const SignIn = ({ navigation }) => {
 
       const checkServerHealth = async () => {
         try {
-          const response = await fetch(ENDPOINTS.PING);
+          const response = await fetch(ENDPOINTS.PING());
           const isHealthy = response.ok;
           console.log(`[${new Date().toISOString()}] Server is ${isHealthy ? 'Up' : 'Down'}`);
           setIsServerUp(isHealthy);
@@ -57,7 +57,7 @@ const SignIn = ({ navigation }) => {
 
     try {
       setIsLoading(true);
-      const response = await fetch(ENDPOINTS.SIGNIN, {
+      const response = await fetch(ENDPOINTS.SIGNIN(), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

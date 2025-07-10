@@ -66,7 +66,7 @@ const Auction = ({ navigation, route }) => {
     }
 
     try {
-      const response = await fetch(ENDPOINTS.BID, {
+      const response = await fetch(ENDPOINTS.BID(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
