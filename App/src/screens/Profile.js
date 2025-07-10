@@ -20,6 +20,7 @@ const Profile = ({ navigation }) => {
       // console.log('User data:', userData);
       setUser(userData);
       getAuctions(userData._id);
+      refreshUserData(userData._id);
     } catch (error) {
       console.error('Error reading user data:', error);
     }
@@ -38,6 +39,23 @@ const Profile = ({ navigation }) => {
       }
     } catch (error) {
       console.error('Error fetching auctions:', error);
+    }
+  };
+
+  const refreshUserData = async (userId) => {
+    try {
+      const response = await fetch(ENDPOINTS.REFRESH_USER(userId));
+
+      if (response.ok) {
+        const refreshedUser = await response.json();
+        setUser(refreshedUser);
+        await AsyncStorage.setItem('user', JSON.stringify(refreshedUser));
+        // console.log('User refreshed:', refreshedUser);
+      } else {
+        console.log('Failed to refresh user data');
+      }
+    } catch (error) {
+      console.error('Error refreshing user data:', error);
     }
   };
 

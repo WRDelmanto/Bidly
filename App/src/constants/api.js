@@ -20,4 +20,5 @@ export const ENDPOINTS = {
     BIDS: (id) => `${API_URL}/bids/${id}`,
     EMPTY_HISTORY: (id) => `${API_URL}/emptyHistory/${id}`,
     HISTORY: (id, input) => `${API_URL}/history/${id}/${input}`,
+    REFRESH_USER: (id) => `${API_URL}/refreshUser/${id}`,
 };
