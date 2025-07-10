@@ -56,7 +56,7 @@ const CreateAuction = ({ navigation }) => {
     setPublishing(true);
 
     try {
-      const response = await fetch(ENDPOINTS.AUCTION, {
+      const response = await fetch(ENDPOINTS.AUCTION(), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
