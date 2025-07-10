@@ -30,8 +30,8 @@ const Search = ({ navigation }) => {
 
     try {
       let endpoint = text.trim()
-        ? `${ENDPOINTS.SEARCH}/${user._id}/${text.trim()}`
-        : `${ENDPOINTS.EMPTY_SEARCH}/${user._id}`;
+        ? ENDPOINTS.SEARCH(user._id, text.trim())
+        : ENDPOINTS.EMPTY_SEARCH(user._id);
       const response = await fetch(endpoint);
 
       if (response.ok) {

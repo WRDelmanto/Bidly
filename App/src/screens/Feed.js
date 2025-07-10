@@ -63,7 +63,7 @@ const Feed = ({ navigation }) => {
 
     try {
       setIsLoading(true);
-      const response = await fetch(`${ENDPOINTS.FEED}/${user._id}`);
+      const response = await fetch(ENDPOINTS.FEED(user._id));
 
       if (response.ok) {
         const auction = await response.json();

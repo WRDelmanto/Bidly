@@ -27,7 +27,7 @@ const Profile = ({ navigation }) => {
 
   const getAuctions = async (userId) => {
     try {
-      const response = await fetch(`${ENDPOINTS.AUCTIONS}/${userId}`);
+      const response = await fetch(ENDPOINTS.AUCTIONS(userId));
 
       if (response.ok) {
         const auctions = await response.json();

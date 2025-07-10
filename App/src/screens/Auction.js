@@ -28,7 +28,7 @@ const Auction = ({ navigation, route }) => {
 
   const fetchAuction = async () => {
     try {
-      const response = await fetch(`${ENDPOINTS.AUCTION}/${auction._id}`);
+      const response = await fetch(ENDPOINTS.AUCTION(auction._id));
       if (response.ok) {
         const updatedAuction = await response.json();
         // console.log("Auction:", updatedAuction);
@@ -41,7 +41,7 @@ const Auction = ({ navigation, route }) => {
 
   const getBids = async () => {
     try {
-      const response = await fetch(`${ENDPOINTS.BIDS}/${auction._id}`);
+      const response = await fetch(ENDPOINTS.BIDS(auction._id));
       if (response.ok) {
         const bidsData = await response.json();
         // console.log('Bids:', bids);
@@ -100,7 +100,7 @@ const Auction = ({ navigation, route }) => {
 
   const handleCloseAuction = async () => {
     try {
-      const response = await fetch(`${ENDPOINTS.CLOSE_AUCTION}/${auction._id}`, {
+      const response = await fetch(ENDPOINTS.CLOSE_AUCTION(auction._id), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' }
       });

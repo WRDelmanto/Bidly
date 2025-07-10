@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, TextInput, Alert, Image, TouchableOpacity } fro
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { AppStyles } from "../constants/styles.js";
 import { AppColors } from "../constants/colors.js";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { ENDPOINTS } from "../constants/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as ImagePicker from 'expo-image-picker';
@@ -90,7 +90,7 @@ const EditProfile = ({ navigation }) => {
     try {
       setIsLoading(true);
 
-      const response = await fetch(`${ENDPOINTS.EDIT_PROFILE}/${user._id}`, {
+      const response = await fetch(ENDPOINTS.EDIT_PROFILE(user._id), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ const EditProfile = ({ navigation }) => {
     try {
       setIsLoading(true);
 
-      const response = await fetch(`${ENDPOINTS.CHANGE_PASSWORD}/${user._id}`, {
+      const response = await fetch(ENDPOINTS.CHANGE_PASSWORD(user._id), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
