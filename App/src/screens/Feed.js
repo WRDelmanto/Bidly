@@ -24,27 +24,17 @@ const Feed = ({ navigation }) => {
   const getAuctions = async () => {
     if (!user) return;
     try {
-      const cachedAuctions = await AsyncStorage.getItem('auctions');
+      let auctionsArray = [];
 
-      if (cachedAuctions) {
-        const parsedAuctions = JSON.parse(cachedAuctions)
-        setAuctions(parsedAuctions);
-        console.log('Auctions loaded from cache:', parsedAuctions.length);
-      } else {
-        let auctionsArray = [];
+      const [currentAuction, nextAuction] = await Promise.all([
+        getNextAuction(user._id),
+        getNextAuction(user._id)
+      ]);
 
-        const [currentAuction, nextAuction] = await Promise.all([
-          getNextAuction(user._id),
-          getNextAuction(user._id)
-        ]);
+      if (currentAuction) auctionsArray.push(currentAuction);
+      if (nextAuction) auctionsArray.push(nextAuction);
 
-        if (currentAuction) auctionsArray.push(currentAuction);
-        if (nextAuction) auctionsArray.push(nextAuction);
-
-        await AsyncStorage.setItem('auctions', JSON.stringify(auctionsArray));
-
-        setAuctions(auctionsArray);
-      }
+      setAuctions(auctionsArray);
     } catch (error) {
       console.error('Error loading auctions:', error);
     }
@@ -95,7 +85,6 @@ const Feed = ({ navigation }) => {
     if (nextAuction) {
       const updatedAuctions = [...auctions, nextAuction];
       setAuctions(updatedAuctions);
-      await AsyncStorage.setItem('auctions', JSON.stringify(updatedAuctions));
       console.log('Auctions loaded:', updatedAuctions.length);
     }
   };
