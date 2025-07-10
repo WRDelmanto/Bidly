@@ -18,7 +18,7 @@ const Auction = ({ navigation, route }) => {
     try {
       const jsonValue = await AsyncStorage.getItem('user');
       const userData = jsonValue != null ? JSON.parse(jsonValue) : null;
-      //console.log('User data:', userData);
+      // console.log('User data:', userData);
       setUser(userData);
 
     } catch (error) {
@@ -31,6 +31,7 @@ const Auction = ({ navigation, route }) => {
       const response = await fetch(`${ENDPOINTS.AUCTION}/${auction._id}`);
       if (response.ok) {
         const updatedAuction = await response.json();
+        // console.log("Auction:", updatedAuction);
         setAuction(updatedAuction);
       }
     } catch (error) {
@@ -97,6 +98,26 @@ const Auction = ({ navigation, route }) => {
     }
   };
 
+  const handleCloseAuction = async () => {
+    try {
+      const response = await fetch(`${ENDPOINTS.CLOSE_AUCTION}/${auction._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      if (response.ok) {
+        const updatedAuction = await response.json();
+        setAuction(updatedAuction);
+        console.log('Auction closed successfully:', updatedAuction);
+      } else {
+        const errorResponse = await response.json();
+        console.log('Close auction failed', errorResponse);
+      }
+    } catch (error) {
+      console.error('Error closing auction:', error);
+    }
+  }
+
   return (
     <View View style={AppStyles.mainContainer} >
       <View style={styles.imageContainer}>
@@ -143,22 +164,38 @@ const Auction = ({ navigation, route }) => {
           />
         </View>
       )}
-      <View style={styles.navbar}>
-        <TextInput
-          style={styles.bidInput}
-          placeholder="$0.00"
-          placeholderTextColor="#888"
-          value={bidAmount}
-          onChangeText={setBidAmount}
-        />
-        <Pressable
-          style={styles.bidButton}
-          onPress={handlePlaceBid}
-        >
-          <Text style={styles.bidButtonText}>Place Bid</Text>
-        </Pressable>
-      </View>
-
+      {auction.isClosed ? (
+        <View style={styles.navbar}>
+          <Text style={styles.bidClosed}>Bids Closed</Text>
+        </View>
+      )
+        : auction.seller === user?._id ? (
+          <View style={styles.navbar}>
+            <Pressable
+              style={styles.bidButton}
+              onPress={handleCloseAuction}
+            >
+              <Text style={styles.bidButtonText}>Close Auction</Text>
+            </Pressable>
+          </View>
+        ) : (
+          <View style={styles.navbar}>
+            <TextInput
+              style={styles.bidInput}
+              placeholder="$0.00"
+              placeholderTextColor="#888"
+              value={bidAmount}
+              onChangeText={setBidAmount}
+            />
+            <Pressable
+              style={styles.bidButton}
+              onPress={handlePlaceBid}
+            >
+              <Text style={styles.bidButtonText}>Place Bid</Text>
+            </Pressable>
+          </View>
+        )
+      }
     </View>
   );
 };
@@ -201,6 +238,9 @@ const styles = StyleSheet.create({
     gap: 20,
     justifyContent: "space-around",
     marginTop: 20,
+  },
+  bidClosed: {
+    fontSize: 16,
   },
   bidButton: {
     flexGrow: 3,

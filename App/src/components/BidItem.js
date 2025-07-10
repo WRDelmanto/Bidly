@@ -18,7 +18,7 @@ const BidItem = ({ bid }) => {
                     {bid.bidder?.name}
                 </Text>
             </View>
-            <Text style={styles.bidAmount}>${bid.amount.toFixed(2)}</Text>
+            <Text style={styles.bidAmount}>${bid?.amount?.toFixed(2)}</Text>
         </View>
     );
 };

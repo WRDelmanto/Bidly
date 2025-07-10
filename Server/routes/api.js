@@ -213,6 +213,7 @@ router.post('/auction', async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 });
+
 // Get Auction by ID
 router.get('/auction/:id', async (req, res) => {
     console.log('Auction by id fetch request received, info:', req.params.id);
@@ -465,6 +466,43 @@ router.get('/bids/:auctionId', async (req, res) => {
     } catch (error) {
         console.error('Error fetching bids:', error.message);
         res.status(500).json({ message: error.message });
+    }
+});
+
+// Close Auction
+router.put('/auction/close/:id', async (req, res) => {
+    console.log('Close auction request received, info:', req.params.id);
+
+    try {
+        const { id } = req.params;
+
+        const auction = await Auction.findById(id);
+
+        if (!auction) {
+            return res.status(404).json({ message: 'Auction not found' });
+        }
+
+        const updatedAuction = await Auction.findByIdAndUpdate(
+            id,
+            { isClosed: true },
+            { new: true }
+        ).populate({ path: 'highestBid', populate: { path: 'bidder' } });
+
+        if (updatedAuction.highestBid && updatedAuction.highestBid.bidder) {
+            const updatedWinner = await User.findByIdAndUpdate(
+                updatedAuction.highestBid.bidder._id,
+                { $inc: { 'stats.wonAuctions': 1 } },
+                { new: true }
+            );
+            console.log('Winner stats updated:', updatedWinner);
+        }
+
+        console.log('Auction closed successfully: ', updatedAuction);
+
+        res.status(200).json(updatedAuction);
+    } catch (error) {
+        console.error('Error closing auction: ', error);
+        res.status(400).json({ message: error.message });
     }
 });
 

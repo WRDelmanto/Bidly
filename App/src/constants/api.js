@@ -11,6 +11,7 @@ export const ENDPOINTS = {
     EDIT_PROFILE: `${API_URL}/editProfile`,
     CHANGE_PASSWORD: `${API_URL}/changePassword`,
     AUCTION: `${API_URL}/auction`,
+    CLOSE_AUCTION: `${API_URL}/auction/close`,
     AUCTIONS: `${API_URL}/auctions`,
     FEED: `${API_URL}/feed`,
     EMPTY_SEARCH: `${API_URL}/emptySearch`,
