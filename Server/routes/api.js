@@ -507,4 +507,91 @@ router.put('/auction/close/:id', async (req, res) => {
     }
 });
 
+// Get Auctions where the User has placed a Bid
+router.get('/emptyHistory/:id', async (req, res) => {
+    console.log('Empty History request received, info:', req.params.id);
+
+    try {
+        const { id } = req.params;
+        const bids = await Bid.find({ bidder: id });
+        const auctionIds = [...new Set(bids.map(bid => bid.auction.toString()))];
+
+        let auctions = await Auction.find({ _id: { $in: auctionIds } })
+            .populate({ path: 'highestBid', populate: { path: 'bidder' } });
+
+        // Sort auctions: open first, then closed+won, then closed+not won
+        const open = [];
+        const closedWon = [];
+        const closedLost = [];
+
+        for (const auction of auctions) {
+            if (!auction.isClosed) {
+                open.push(auction);
+            } else if (
+                auction.highestBid &&
+                auction.highestBid.bidder &&
+                auction.highestBid.bidder._id &&
+                auction.highestBid.bidder._id.toString() === id
+            ) {
+                closedWon.push(auction);
+            } else {
+                closedLost.push(auction);
+            }
+        }
+
+        const sortedAuctions = [...open, ...closedWon, ...closedLost];
+
+        res.status(200).json(sortedAuctions);
+    } catch (error) {
+        console.error('Error fetching user bid auctions:', error.message);
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Get Auctions where the User has placed a Bid and match a search string
+router.get('/history/:id/:searchString', async (req, res) => {
+    console.log('History request received, info:', req.params.id, req.params.searchString);
+
+    try {
+        const { id, searchString } = req.params;
+        const bids = await Bid.find({ bidder: id });
+        const auctionIds = [...new Set(bids.map(bid => bid.auction.toString()))];
+
+        let auctions = await Auction.find({
+            _id: { $in: auctionIds },
+            $or: [
+                { title: { $regex: new RegExp(searchString, 'i') } },
+                { description: { $regex: new RegExp(searchString, 'i') } }
+            ]
+        }).populate({ path: 'highestBid', populate: { path: 'bidder' } });
+
+        // Sort auctions: open first, then closed+won, then closed+not won
+        const open = [];
+        const closedWon = [];
+        const closedLost = [];
+
+        for (const auction of auctions) {
+            if (!auction.isClosed) {
+                open.push(auction);
+            } else if (
+                auction.highestBid &&
+                auction.highestBid.bidder &&
+                auction.highestBid.bidder._id &&
+                auction.highestBid.bidder._id.toString() === id
+            ) {
+                closedWon.push(auction);
+            } else {
+                closedLost.push(auction);
+            }
+        }
+
+        const sortedAuctions = [...open, ...closedWon, ...closedLost];
+
+        res.status(200).json(sortedAuctions);
+    } catch (error) {
+        console.error('Error fetching user bid auctions with search:', error.message);
+        res.status(500).json({ message: error.message });
+    }
+});
+
 export default router;

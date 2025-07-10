@@ -18,4 +18,6 @@ export const ENDPOINTS = {
     SEARCH: (id, input) => `${API_URL}/search/${id}/${input}`,
     BID: () => `${API_URL}/bid`,
     BIDS: (id) => `${API_URL}/bids/${id}`,
+    EMPTY_HISTORY: (id) => `${API_URL}/emptyHistory/${id}`,
+    HISTORY: (id, input) => `${API_URL}/history/${id}/${input}`,
 };
