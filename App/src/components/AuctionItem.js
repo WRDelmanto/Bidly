@@ -2,7 +2,7 @@ import { View, Text, Pressable, Image } from "react-native";
 import { StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
-const AuctionItem = ({ auction, onPress }) => {
+const AuctionItem = ({ auction, onPress, won }) => {
     return (
         <Pressable onPress={onPress}>
             <View style={styles.auctionItem}>
@@ -19,6 +19,11 @@ const AuctionItem = ({ auction, onPress }) => {
                     <Text>{auction.description}</Text>
                 </View>
             </View>
+            {won && (
+                <View style={{ position: 'absolute', top: 20, right: 0 }}>
+                    <Icon name="star" size={20} color={"#FFD700"} />
+                </View>
+            )}
         </Pressable>
     );
 }

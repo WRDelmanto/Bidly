@@ -66,6 +66,7 @@ const History = ({ navigation }) => {
             key={auction._id}
             auction={auction}
             onPress={() => navigation.navigate('Auction', { auction })}
+            won={auction.isClosed && auction.highestBid && auction.highestBid.bidder._id === user._id}
           />
         )}
       />
