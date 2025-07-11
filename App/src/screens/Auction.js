@@ -121,10 +121,25 @@ const Auction = ({ navigation, route }) => {
   return (
     <View View style={AppStyles.mainContainer} >
       <View style={styles.imageContainer}>
-        {auction.images ? (
+        {auction.images && auction.images.length > 1 ? (
+          <FlatList
+            horizontal
+            data={auction.images}
+            renderItem={({ item }) => (
+              <Image
+                source={{ uri: item }}
+                style={styles.mainImage}
+                resizeMode="cover"
+              />
+            )}
+            keyExtractor={(item, index) => index.toString()}
+            showsHorizontalScrollIndicator={false}
+          />
+        ) : auction.images ? (
           <Image
             source={{ uri: auction.images[0] }}
             style={styles.mainImage}
+            resizeMode="cover"
           />
         ) : (
           <View style={{ alignItems: 'center', justifyContent: 'center', height: 350 }}>
@@ -212,9 +227,10 @@ const styles = StyleSheet.create({
     left: 12
   },
   mainImage: {
-    width: "100%",
-    height: "350",
+    width: 400,
+    height: 350,
     marginTop: 20,
+    marginHorizontal: 4,
   },
   auctionInfo: {
     display: "flex",
