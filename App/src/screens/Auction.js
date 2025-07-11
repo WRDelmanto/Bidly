@@ -128,7 +128,7 @@ const Auction = ({ navigation, route }) => {
             renderItem={({ item }) => (
               <Image
                 source={{ uri: item }}
-                style={styles.mainImage}
+                style={styles.mainMultipleImages}
                 resizeMode="cover"
               />
             )}
@@ -138,7 +138,7 @@ const Auction = ({ navigation, route }) => {
         ) : auction.images ? (
           <Image
             source={{ uri: auction.images[0] }}
-            style={styles.mainImage}
+            style={styles.mainSingleImage}
             resizeMode="cover"
           />
         ) : (
@@ -226,11 +226,16 @@ const styles = StyleSheet.create({
     top: 20,
     left: 12
   },
-  mainImage: {
+  mainMultipleImages: {
     width: 400,
     height: 350,
     marginTop: 20,
     marginHorizontal: 4,
+  },
+  mainSingleImage: {
+    width: "100%",
+    height: 350,
+    marginTop: 20,
   },
   auctionInfo: {
     display: "flex",
